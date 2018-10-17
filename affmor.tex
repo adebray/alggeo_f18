@@ -1,0 +1,86 @@
+Last time, we defined affine morphisms $Y\to X$, which are those such that if you pull back by an affine scheme
+$\Spec A\to X$, $Y\times_X\Spec A$ is also affine. We claimed these are equivalent to commutative algebras in
+$\QCoh(X)$, akin to how affine schemes are commutative rings, but working relatively (i.e.\ over a scheme).
+\begin{defn}
+Let $X$ be a scheme. A \term{commutative algebra} in $\QCoh(X)$ is a quasicoherent sheaf together with an
+associative, commutative multiplication map $m\colon\sA\otimes_{\sO_X}\sA\to\sA$ with a unit $\e\colon\sO_X\to\sA$.
+\end{defn}
+\begin{defn}
+Given a commutative algebra $\sA\in\QCoh(X)$, we can define a scheme $\Spec_X(\sA)$ together with an affine map to
+$X$. If $B$ is a commutative ring, we let $(\Spec_X(\sA))(B)$ be the set of pairs $x\colon\Spec B\to X$ together
+with maps $\rho\colon\Spec B\to\Spec x^*(\sA)$ which are sections of the canonical map arising from the $B$-algebra
+structure on $x^*(\sA)$.
+\end{defn}
+Forgetting the section defines a map to $X$. This map is affine because if $x\colon \Spec B\to X$ is a map, then
+\begin{equation}
+	\Spec_X(\sA)\times_X \Spec B = \Spec(x^*(\sA)).
+\end{equation}
+\begin{defn}
+Let $\pi\colon Y\to X$ be an affine map of schemes and $\sF\in\QCoh(Y)$. We will define a \term{pushforward}
+$\pi_*\sF\in\QCoh(X)$ as follows: given any map $x\colon\Spec B\to X$, the pullback $Y\times_X\Spec B$ is affine,
+isomorphic to $y\colon \Spec C\to Y$ for some $C$. Then we define $x^*(\pi_*(\sF)) \coloneqq y^*(\sF)$: this is
+\latin{a priori} a $C$-module, but picks up a $B$-module structure by the map $B\to C$.
+\end{defn}
+\begin{ex}
+\label{pulladj}
+$\pi^*$ and $\pi_*$ are adjoint functors, i.e.\ for any affine map $\pi\colon X\to Y$, $\sF\in\QCoh(Y)$, and
+$\sG\in\QCoh(X)$, there's a canonical isomorphism
+\[\Hom_{\QCoh(X)}(\sG, \pi_*(\sF)) \cong \Hom_{\QCoh(Y)}(\pi^*(\sG), \sF).\]
+\end{ex}
+\begin{prop}
+If $\pi\colon Y\to X$ is affine, then $Y = \Spec_X(\sA)$ for some algebra $\sA$ in $\QCoh(X)$.
+\end{prop}
+\begin{proof}[Proof sketch]
+The key is that $\pi_*(\sO_Y)$ is a commutative algebra in $\QCoh(X)$: by \cref{pulladj}, the multiplication map is
+equivalent data to a map
+\begin{equation}
+	\pi^*(\pi_*(\sO_Y)\otimes_{\sO_X}\pi_*(\sO_Y)) = \pi^*\pi_*\sO_Y\otimes_{\sO_Y}\pi^*\pi_*\sO_Y\longrightarrow
+	\sO_Y.
+\end{equation}
+The unit of the adjunction is a map $\pi^*\pi_*\sO_Y\to\sO_Y$, so we can pass to $\sO_Y$ and then multiply.
+
+We then claim that as schemes over $X$ (i.e.\ with a map to $X$), $Y\to X$ is isomorphic to
+$\Spec_X(\pi_*(\sO_Y))\to X$, which one has to check.
+\end{proof}
+\begin{ex}
+Let $X$ be a scheme. Show that closed subschemes $Z\subseteq X$ are equivalent to \term{ideal sheaves}
+$\sI\to\sO_X$, i.e.\ quasicoherent sheaves $\sI$ with vanishing kernel.
+\end{ex}
+\subsection*{Projective space.}
+Projective space $\P^n$ is a scheme designed to parametrize lines in $\A^{n+1}$. IF you try this in $\A_\R^2$, you
+notice that you get a circle; if you do this in $\A_\C^2$, you get a sphere (harder). But in general it looks
+different.
+
+We'll describe $\P^n$ via its functor of points. The idea is that a map $S = \Spec A\to\P^n$ should be a line $\sL$
+together with an embedding $\sL\to\A^{n+1}$, but we have to make this precise.
+\begin{defn}
+Let $S$ be a scheme. A \term{line bundle} on $S$ is a vector bundle of rank 1, i.e.\ a quasicoherent sheaf $\sL$ on
+$S$ locally isomorphic to $\sO_S$.
+\end{defn}
+When $S$ is affine, these correspond to rank-1 projective $A$-modules. If $S = \Spec k$, this exactly covers
+1-dimensional $k$-vector spaces, and this is the right generalization to commutative rings (or even to schemes).
+
+Now we want to embed the line in $\A^{n+1}$, which we can think of as a map $i\colon\sL\to\sO_S^{\oplus (n+1)}$;
+``embedding'' means we want $i\ne 0$.
+\begin{prop}
+\label{stronglynonzero}
+\TFAE{} for a vector bundle $\sE\to S$ and a map $i\colon\sL\to\sE$ where $\sL$ is a line bundle.
+\begin{enumerate}
+	\item For all affine schemes $T$ and maps $f\colon T\to S$, $f^*(\sL)\to f^*(\sE)$ is nonzero.
+	\item (Will be done Monday)
+	\item (Will be done Monday)
+\end{enumerate}
+\end{prop}
+\begin{defn}
+If the conditions in \cref{stronglynonzero} hold, $i$ is called \term{everywhere nonvanishing}.
+\end{defn}
+\begin{defn}
+\term{Projective $n$-space} $\P^n$ is the space whose functor of points sends an affine scheme $S$ to the set of
+isomorphism classes of data $(\sL,i)$ where $\sL$ is a line bundle on $S$ and $i\colon\sL\to\sO_S^{\oplus(n+1)}$ is
+everywhere nonvanishing.
+\end{defn}
+There's something to be said about morphisms, but given a map $f\colon T\to S$, we can pull back $\sL$ and $i$, and
+obtain a line bundle with an everywhere nonvanishing embedding.
+
+We need to take isomorphism classes to ensure we get a set, not a category. This also ensures that we've modded out
+by rescaling (since that's an isomorphism $\sL\to\sL$). We'll show this is a scheme, but is usually not affine.

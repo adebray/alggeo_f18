@@ -1,0 +1,90 @@
+We've been talking about functors as if they were honest geometric objects. And they \emph{are}: the crucial reason
+is that we're defining open and closed subspaces of affine schemes. You can picture these as akin to open or closed
+sets in a topological space, and they will allow us to make sense of geometry by giving us notions of locality.
+
+Recall that $Z\inj X = \Spec A$ is a closed embedding means that this embedding is of the form $\Spec(A/I)\to\Spec
+A$ induced by the map $A\surj A/I$, and that open embeddings are complements of closed ones. You might think of the
+complement as $(X\setminus Z)(B) = X(B)\setminus Z(B)$, but \textbf{this is wrong}: it's not even functorial!
+Instead, we want to say $(X\setminus Z)(B) = \set{\Spec B\to X\setminus Z}$. What this means is maps $\Spec B\to X$
+such that the pullback $\Spec B\times_X Z = \varnothing$. Geometrically, this fiber product is telling you the
+intersection of the image of $\Spec B$ with $X$.
+
+Last time, we also talked about $\A^1$ (also $\A_\Z^1$ if you want to specify the base), which is by definition
+$\Spec\Z[t]$. It would be nice to think of this as a line, in the sense you can draw; but it behaves more like a
+complex line (that is, a plane). For example, $\A^1$ minus a point is connected. So thinking of it as a complex
+line is good, but for drawing pictures you'll run out of dimensions, so the picture of a real line is also helpful.
+
+If $B$ is a commutative ring, $\A^1(B) = \set{\Spec B\to\A^1}$, i.e.\ $\Hom(\Z[t], B) = B$, because the map is
+determined by where it sends $t$. This makes precise the notion that the ring of functions on $\Spec B$ is $B$.
+This is another avatar of geometry as we know it: functions on a geometric object (say, a complex manifold) are
+functions to a complex line, and in this setting we replace the complex line by $\A^1$.
+
+Consider the embedding $0\inj\A_\Z^1$, where $0$ denotes the locus where $t = 0$, i.e.\ $\Spec\Z[t]/(t)$. As an
+affine scheme, this is isomorphic to $\Spec\Z$, because $\Z[t]/(t)\cong\Z$, but this defines a particular closed
+embedding $0\inj\A_\Z^1$. Last time, we discussed $\A^1\setminus 0$. A map $\Spec B\to\A^1\setminus 0$ is a
+function that avoids zero, which means that it's invertible.
+\begin{ex}
+Show that $(\A^1\setminus 0)(B) = B^\times$, and therefore that $\A^1\setminus 0 \cong \Spec\Z[t,t^{-1}]$.
+\end{ex}
+If we did this with $\A^2\setminus 0$ instead of $\A^1\setminus 0$, we'd obtain a nonaffine scheme.
+
+Open coverings are another important geometric notion, and they exist in this setting too.
+\begin{defn}
+\label{zariskicover}
+If $X = \Spec A$ is an affine scheme, a \term{(Zariski) open covering} of $X$ is a collection of open embeddings
+$\fU = \set{(U, i_U\colon U\inj X)}$ such that for every nonempty $S = \Spec B$ and $f\colon S\to X$, there's some
+$(U,i_U)\in\fU$ such that $U\times_X S\ne \varnothing$.
+\end{defn}
+This is the first notion of open covering in algebraic geometry; there are some others around.
+
+The intuition behind open coverings is that points of $X$ are given by maps $\Spec B\to X$, and we want every point
+in $X$ to intersect some open embedding in the cover.
+\begin{prop}
+\label{qc}
+Let $X = \Spec A$ and $\fU = \set{(U, i_U\colon U\to X)}$ be a collection of open embeddings. \TFAE:
+\begin{enumerate}
+	\item\label{isopen} $\fU$ is an open covering.
+	\item\label{qcopen} $\fU$ has a finite subset $\mathfrak V\subset\fU$ which is also an open covering of $X$.
+	\item\label{speck} For all fields $k$ and maps $x\colon\Spec k\to X$, there's some $(U,i_U)\in\fU$ such that
+	$x$ factors through $i_U$.
+	\item\label{open_irl} Letting $U = X\setminus Z_U$ for each $U\in\fU$, and writing $Z_U = \Spec(A/I_U)$, then
+	\[\sum_{U\in\fU} I_U = A.\]
+\end{enumerate}
+\end{prop}
+Point~\eqref{qcopen} is very weird coming from topology, where the open covering $\set{(i-1,i+1)\mid i\in\Z}$ is an
+open cover of $\R$ with no finite subcover. In other words, affine schemes feel like compact spaces from the
+perspective of open coverings!
+
+The idea behind~\eqref{speck} is that points are affine schemes of the form $\Spec k$ for $k$ a field. There are
+different fields, and therefore different kinds of points. The reason for including~\eqref{open_irl} is that it's
+very useful for checking in practice. It has a similar feel to partitions of unity in manifold topology, but if you
+don't know what that is, that's OK.
+\begin{proof}
+We'll first show $\eqref{isopen} \implies \eqref{open_irl}$. Suppose $\fU$ is an embedding for
+which~\eqref{open_irl} does not hold. Then let
+\begin{equation}
+\label{Bdefn}
+	B\coloneqq A/\sum_{U\in\fU} I_U.
+\end{equation}
+By hypothesis, $B\ne 0$, and we have a closed embedding $\Spec B\inj\Spec A$. We'll show that $\Spec B\times_X U =
+\varnothing$ for all $U\in\fU$.
+\begin{lem}
+Let $Z = \Spec A/I\inj\Spec A = X$ be a closed embedding and $f\colon\Spec B\to X$ be a map. Then
+\[(\Spec B)\setminus f^{-1}(Z) = \Spec B\times_X (X\setminus Z).\]
+\end{lem}
+This is more or less a tautology.
+
+Returning to the claim, $\Spec B\times_X U$ is the complement of $Z_U\times_X\Spec B = \Spec(B/BI_U)$. But $B/BI_U
+= B$, so the complement of $Z_U\times_X\Spec B$ is the empty set.
+
+Next, we'll show $\eqref{open_irl} \implies \eqref{speck}$. Let $k$ be a field, and $x\colon\Spec k\to X$ be a map.
+We want to show this map factors through some $U$. Since $X = \Spec A$, $x$ corresponds to a map $\vp\colon A\to
+k$. We claim there's a $U\in\fU$ with $\vp(I_U)\ne 0$; otherwise $\vp\paren{\sum I_U} = 0$, and therefore $\vp(A) =
+0$. However, $\vp(1) = 1$, so this is impossible. By \cref{factors_through}, since $\vp(I_U)\ne 0$, $k\cdot
+\vp(I_U) = k$, and therefore $x\colon\Spec k\to X$ factors through $U$.
+
+Next we'll show $\eqref{speck} \implies \eqref{isopen}$. Let $B$ be as in~\eqref{Bdefn} and $f\colon S =
+\Spec B\to X$ be a map. We want to show that $S\times_X U\ne 0$ for some $U\in\fU$. Since $B\ne 0$, it has a
+maximal ideal $\m$, and $B/\m$ is a field $k$ (\TODO: to be continued\dots)
+
+\end{proof}

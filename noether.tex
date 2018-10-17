@@ -1,0 +1,81 @@
+Last time, we discussed finite morphisms and Noether normalization. The following exercise might provide some
+useful intuition about finite morphisms.
+\begin{ex}
+Let $f\colon X\to Y$ be a finite, dominant map. Then for all field-valued points $x\in X$, $f^{-1}(x)$ is nonempty
+and zero-dimensional. Also show that $\dim X = \dim Y$.
+\end{ex}
+Hint: Nakayama's lemma.
+
+We then discussd \cref{1overx}, about $\set{xy = 1}\subset\A^2$. It doesn't project onto every line through the
+origin in $\A^1$, but everything but the $x$- and $y$-axes is good. One interesting way to think about this is that
+there's a $\P^1$ ``at infinity'' of $\A^2$, where, imprecisely speaking, we think of $\P^1$ as a circle of very
+large radiyus (though we need to identify antipodal points); a line is sent to its point of intersection with the
+circle. Then, we have an open subset of $\P^1$ (again, everything except the $x$- and $y$-axes) where the
+projection is finite and dominant.
+
+More generally, suppose $X\subseteq\A^{n+1}$. We can embed $\A^{n+1}\subset\P^{n+1}$ as an open subscheme; let
+$\overline X$ be the closure of $X$ in $\P^{n+1}$. The complement of $\A^{n+1}$ inside $\P^{n+1}$ is a $\P^n$, and
+we let $\Asym(X)\coloneqq\overline X\cap\P^n$; we can think of this as where $X$ is going ``at infinity.''
+
+If $X\ne \A^{n+1}$, then $\Asym(X)\ne\P^n$. We claim there exists a finite extension $k\inj k'$ and a $k'$-point of
+$\P^n$ not in $\Asym(X)$, and that projecting away from this line $\ell$, the map is finite. By ``projecting away
+from the line,'' we mean that there's a projection $\pi\colon \A^{n+1}_{k'}\to\A_{k'}^n$ such that $\ker(\pi) =
+\ell$.
+\begin{proof}[Proof of \cref{dimthm}]
+More explicitly, first we can reduce to the case where $X = \set{f = 0}$, for some nonzero and nonconstant $f$.
+Since $X\subsetneq\A^1$, so we can choose such an $f$ vanishing on $X$. Then $X\inj\set{f = 0}$ is a closed
+embedding, hence a finite morphism. It's easy to see that finite maps are closed under compositions, so the map
+$\set{f = 0}\inj\A^{n+1}\surj\A^n$ is finite, and therefore the theorem for $\set{f= 0}$ implies the theorem for
+$X$.
+
+Now we have $f\in k[x,y_1,\dotsc,y_n]$ and $X = \set{f = 0}$, which in particular is nonempty. Write
+\begin{equation}
+	f = \sum_{i=0}^d f_i,
+\end{equation}
+such that each $f_i$ is homogeneous of degree $i$ and $f_d$ is nonzero.
+\begin{exm}
+If $f(x) = x^3 + 2x^2y$, then $f$ is homogeneous of degree 3. For $f(x) = x^3+1$, we'd let $f_0 = 1$, $f_1 = f_2 =
+0$, and $f_3 = x^3$.
+\end{exm}
+\begin{ex}
+Show that if $X = \set{f = 0}$, $\Asym(X) = \set{f_d = 0}\subseteq\P^n$. Here we're thinking of $f_d$ as a section
+of $\sO_{\P^n}(d)$.
+\end{ex}
+\begin{ex}
+Show that there exists a finite extension $k\inj k'$ and some $v\in (k')^{n+1}$ such that $f_d(v)\ne 0$. Moreover,
+if $k$ is infinite, we can choose $k' = k$.
+\end{ex}
+This is a general fact about nonconstant polynomials. We will now write $k = k'$ for ease of notation. Moreover, up
+to a linear change of coordinates, we can assume $v = (1,0,\dotsc,0)$, which doesn't affect homogeneity.
+
+If
+\begin{equation}
+	f_d = ax^d + bx^{d_1}y_1 + cx^{d-1}y_2 + \dotsb,
+\end{equation}
+then $f_d(1,0,\dotsc,0) = a$, and up to scaling, we can assume $a = 1$. (We know $a\ne 0$ because $f_d(v)\ne 0$).
+
+We can write $f = \sum_{i=0}^d g_ix^i$ for $g_i\in k[y_1,\dotsc,y_n]$; by construction, $g_d = 1$. Therefore, as a
+polynomial in $x$, $f$ is monic, and therefore by last time, $k[y_1,\dotsc,y_n][x]/(f)$ is finite over
+$k[y_1,\dotsc,y_n]$ (specifically, $1,x,\dotsc,x^{d-1}$ generate it). And since $d > 0$, $k[y_1,\dotsc,y_n]\inj
+k[y_1,\dotsc,y_n][x]/(f)$, which implies dominance. Therefore we've proven the theorem.
+\end{proof}
+\begin{cor}[Nullstellensatz]
+Let $X$ be a finite-type affine scheme over $k$. Then there's a finite extension $k\inj k'$ and a finite dominant
+map $X_{k'}\to\A_{k'}^n$ for some $n$. If $k$ is infinite, we can take $k' = k$.
+\end{cor}
+There are other theorems called the Nullstellensatz, but they're all related to each other and to this one.
+\begin{proof}
+We know $X_{k'}\subsetneq \A_{k'}^n$ for some $n$, and we have a finite dominant map
+$\pi\colon\A_{k'}^n\to\A_{k'}^{n-1}$; if $\overline{\pi(X)} = \A_{k'}^{n+1}$, we're done; otherwise we can repeat.
+
+\TODO: then something else happened, which I didn't quite follow.
+\end{proof}
+In particular, the ring of functions on $X_{k'}$ is finite-dimensional over $k'$.
+\begin{cor}
+$\dim_k \A_k^n = n$.
+\end{cor}
+\begin{proof}
+We can induct: $n = 0$ is clear, so assume it for $\A_k^n$, and we'll show it for $\A_k^{n+1}$. Let $Z\subsetneq
+\A^{n+1}$ be a closed, irreducible NTS; then $\dim Z\le n$. Since $Z\subset\set{f = 0}$ for some $f$, then it
+admits a finite dominant map to $\A_k^n$, so $\dim\set{f = 0} = n\ge\dim Z$ by induction.
+\end{proof}

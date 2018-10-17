@@ -1,0 +1,78 @@
+\begin{quote}\textit{
+	``These scare quotes should be less scary than those scare quotes.''
+}\end{quote}
+Last time, we defined projective $n$-space, $\P^n$, whose functor of points sends $A$ to the set of isomorphism
+classes of data $(\sL,i)$, where $\sL\to\Spec A$ is a line bundle and $i\colon\sL\to\sO_{\Spec A}^{\oplus(n+1)}$ is
+an everywhere nonvanishing map.
+\begin{defn}
+More generally, if $X$ is a scheme and $\sE$ is a vector bundle on $X$, then we can define a space $\P(\sE)$, the
+\term{projectivization} of $\sE$: if $A$ is a commutative ring, $\P(\sE)(A)$ is the set of isomorphism classes of
+data $(\sL,x, i)$, where $\sL$ is a line bundle on $\Spec A$, $x\colon\Spec A\to X$ is a map (``an $A$-valued
+point''), and $i\colon\sL\to x^*(\sE)$ is everywhere nonvanishing.
+\end{defn}
+To recover $\P^n$, let $X = \Spec\Z$ and $\sE = \Z^{\oplus(n+1)}$.
+\begin{rem}
+Right now, schemes and line and vector bundles probably feel very abstract. That's OK; soon enough we will see
+many, many examples of line bundles over curves, and make them very concrete.
+\end{rem}
+\begin{exm}
+Consider the quasicoherent sheaf given by $k[t]/(t)$ over $\A_k^1\coloneqq\Spec k[t]$. This is not a vector bundle:
+it's not locally free, because in a sense it's nonzero over the point $0$ (a one-dimensional vector space) but
+vanishes everywhere else.
+\end{exm}
+\begin{prop}
+\label{totsp}
+Let $S$ be a scheme, $\sL$ be a line bundle on $S$, $\sE$ be a vector bundle on $S$, and $i\colon\sL\to\sE$. \TFAE:
+\begin{enumerate}
+	\item\label{thetaclosed} The induced map $\Theta(i)\colon\Theta(\sL)\to\Theta(\sE)$ is a closed embedding.
+	\item\label{Talpha} For all affine schemes $T$ and maps $\alpha\colon T\to S$, $\alpha^*(i)$ is nonzero.
+	\item\label{ptalpha} For all fields $k$ and maps $\alpha\colon\Spec k\to S$, $\alpha^*(i)$ is nonzero.
+	\item\label{genuniti} For all affine open subschemes $U\subseteq S$ such that $\sL|_U\cong\sO_U$ and
+	$\sE|_U\cong\sO_U^{\oplus r}$, if the induced map $\sO_U\to\sO_U^{\oplus r}$ sends $1\mapsto (f_1,\dotsc,f_r)$,
+	then $(f_1,\dotsc,f_r)$ generates the unit ideal in $\Fun(U)$.
+	\item\label{cokerepi} The dual map $i^\vee\colon\sE^\vee\to\sL^\vee$ is an epimorphism (i.e.\ its cokernel is
+	zero).\footnote{In many situations, ``epimorphism'' means ``surjective,'' but these are quasicoherent sheaves,
+	so we don't have elements to ask about preimages of.}
+	\item\label{cokervb} $\coker(\sL\to\sE)$ is a vector bundle.
+\end{enumerate}
+\end{prop}
+To make sense of this, we have to define $\Theta$, a way of turning vector bundles into schemes. If $P^\vee$ is
+unfamiliar for an $A$-module $P$, it simply means $\Hom_A(P, A)$.
+\begin{ex}
+\label{duallinalg}
+Let $P$ be a finitely generated, projective $A$-module.
+\begin{enumerate}
+	\item\label{PPproj} Show that for all $A$-modules $M$, $\Hom_A(P,M)\cong P^\vee\otimes_A M$.
+	\item Show that $P^\vee$ is projective.
+	\item Describe a natural isomorphism $P\to P^{\vee\vee}$.
+\end{enumerate}
+\end{ex}
+\begin{defn}
+If $\sE$ is a vector bundle over a scheme $S$, its \term{dual vector bundle} $\sE^\vee$ (sometimes also written
+$\sE^*$) is the quasicoherent sheaf attaching to every affine open $i\colon U\to S$ the dual projective module of
+$i^*\sE$.
+\end{defn}
+By \cref{duallinalg}, part~\eqref{PPproj}, $\sE^\vee$ is indeed a quasicoherent sheaf.
+\begin{exm}
+If $\sE = \sO_X^{\oplus r}$, then $\sE^\vee\cong\sO_X^{\oplus r}$ as well, albeit not canonically.
+\end{exm}
+Duality is contravariantly functorial: a map $f\colon\sF\to\sE$ of vector bundles induces a dual map
+$f^\vee\colon\sE^\vee\to\sF^\vee$ (do this on affines, where it's precomposition for the corresponding modules).
+\begin{defn}
+Let $\sE$ be a vector bundle on $X$. Its \term{total space} is the scheme
+\begin{equation}
+	\Theta(\sE)\coloneqq\Spec_X(\Sym_{\sO_X}(\sE^\vee)).
+\end{equation}
+Here, $\Sym_{\sO_X}(\sE)$ is the $\sO_X$-module
+\begin{equation}
+	\Sym_{\sO_X}(\sE)\coloneqq \bigoplus_{n\ge 0} \Sym^n_{\sO_X}(\sE),
+\end{equation}
+where $\Sym_{\sO_X}^n(\sE) \coloneqq (\sE^{\otimes_{\sO_X} n})_{S_n}$, where the symmetric group $S_n$ acts by
+permuting the elements; more explicitly, we allow the elements in an $n$-tensor to be arbitrarily shuffled, which
+you can do with a quotient.
+\end{defn}
+\begin{exm}
+Let $X = \Spec k$ and $\sE = k^{\oplus n}$ be a $k$-vector space with basis $e_1,\dotsc,e_n$. Let $e^1,\dotsc,e^n$
+denote the dual basis. Then $\Sym^n V$ is the vector space of degree-$n$ homogeneous polynomials in
+$e^1,\dotsc,e^r$, and $\Sym V = k[e^1,\dotsc,e^r]$.
+\end{exm}

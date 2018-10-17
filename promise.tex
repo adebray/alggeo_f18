@@ -1,0 +1,90 @@
+\begin{quote}\textit{
+	``You know when you're looking for your phone and it was in your hand the whole time? This proof was like
+	that.''
+}\end{quote}
+Here are two exercises we've been sort of implicitly using, and are good to do to get some comfort with this
+language.
+\begin{comp}{ex}{enumerate}
+	\item Let $U\to X$ be a map of schemes and $U$ has an open cover $\mathfrak V$ such that for all $V\in\mathfrak
+	V$, $V\to X$ is an open embedding. Then $U\to X$ is an open embedding.
+	\item If $V\to U$ and $U\to X$ are open embeddings, their composition $V\to U$ is an open embedding.
+\end{comp}
+Now back to quasicoherent sheaves. On an affine scheme $X = \Spec A$, these are a lot like $A$-modules (in fact,
+exactly like $A$-modules, according to \cref{QCequiv}).
+\begin{defn}
+Let $f\colon X\to Y$ be a map of schemes and $\sF\in\QCoh(Y)$. The \term{pullback} of $\sF$, denoted
+$f^*\sF\in\QCoh(X)$, is the quasicoherent sheaf given by the following data: for every map $g\colon\Spec A\to X$,
+$(f^*\sF)_g\coloneqq \sF_{f\circ g}$.
+\end{defn}
+One must check the compatibility conditions, but these aren't so bad.
+
+If $S = \Spec A$ is affine, then an $A$-module $M$ defines a quasicoherent sheaf $\mathscr M$ by sending
+$f\colon\Spec B\to\Spec A$ to $\mathscr M_f\coloneqq M\otimes_A B$. The pullback of $\mathscr M$ along $f$ is
+exactly the quasicoherent sheaf defined by the module $M\otimes_A B$.
+
+Since we understand quasicoherent sheaves on affine schemes, let's next see how they behave on open covers. We'll
+start with a different-looking definition, then show it's equivalent. This second definition will be useful because
+it involves substantially less data.
+\begin{defn}
+Let $X$ be a scheme and $\fU$ be an open cover of $X$. Let $\QCoh(X;\fU)$ denote the category of tuples of
+$\sF_U\in\QCoh(U)$ for all $U\in\fU$ together with, for all intersecting $U,V\in\fU$, isomorphisms
+\begin{equation}
+	\alpha_{UV}\colon\sF_U|_{U\cap V}\overset\cong\longrightarrow \sF_V|_{U\cap V}
+\end{equation}
+satisfying a cocycle condition on triple intersections.
+\end{defn}
+This is what's sheafy about quasicoherent sheaves: they are determined from compatible local data.
+
+There's a functor $\Phi\colon \QCoh(X)\to\QCoh(X;\fU)$ which takes a quasicoherent sheaf and produces its pullback
+on all $U\in\fU$.
+\begin{thm}[Serre]
+\label{cechQC}
+The functor $\Phi$ is an equivalence of categories.
+\end{thm}
+\begin{proof}[Proof sketch]
+This will look a lot like what we did before. The first step is to reduce to the case where $X = \Spec A$ is affine
+and $\fU$ is a basic open cover, using a similar argument to the one from two lectures ago. The second step is
+similar to the proof that $\A^1$ is a Zariski sheaf.
+
+Explicitly, after we've reduced to $X = \Spec A$ and $\fU = \set{D(f_i)\mid (f_1,\dotsc,f_n) = A}$, then a
+quasicoherent sheaf on $D(f_i)$ is (equivalent data to) an $A[f_i^{-1}]$-module $M_i$, together with the natural
+isomorphisms $\alpha_{ij}\colon M_i[f_j^{-1}]\overset\cong\to M_j[f_i^{-1}]$ as $A[(f_if_j)^{-1}]$-modules.
+
+Given this data, we want to functorially build an $A$-module. The answer will be
+\begin{equation}
+	M\coloneqq \set{s_i\in M_i, 1\le i\le n\mid \text{in $M_i[f_j^{-1}]\cong M_j[f_i^{-1}]$, $s_i = s_j$}}.
+\end{equation}
+Now the proof is the same as in the $\A^1$-setting, though there we only worried about functions, not sections. The
+other way is simple once one invokes the flatness of $A[f_i^{-1}]$.
+\end{proof}
+We might not have defined it yet, but for a field $k$, $\A_k^2 = \Spec k[x,y]$. This is slightly nicer to work with
+for some applications than $\A_\Z^2$. Let $X \coloneqq \A^2_k\setminus 0$, our favorite non-affine scheme, with its
+open cover $U\coloneqq \A^1\times(\A^1\setminus 0)$ and $V\coloneqq (\A^1\setminus 0)\times\A^1$. Then
+\cref{cechQC} says a quasicoherent sheaf on $\A^2_k\setminus 0$ is the data of
+\begin{itemize}
+	\item a $k[x,x^{-1},y]$-module $M$,
+	\item a $k[x, y, y^{-1}]$-module $N$, and
+	\item an isomorphism $\alpha\colon M[y^{-1}]\cong N[x^{-1}]$ of $k[x,x^{-1},y,y^{-1}]$-modules.
+\end{itemize}
+Modules can be big, so it will be useful to have some finiteness hypotheses.
+\begin{defn}
+Let $X$ be a scheme and $\sF\in\QCoh(X)$. Then $\sF$ is \term{locally finitely generated} (l.f.g.) if for all open
+embeddings $j\colon\Spec A\to X$, $j^*\sF$ is a finitely generated $A$-module.
+\end{defn}
+\begin{thm}[Nakayama's lemma]
+\label{nakayama}
+Let $\sF$ be a locally finitely generated QC sheaf on a scheme $X$, $k$ be a field, and $x\colon \Spec k\to X$ be
+such that $x^*\sF = 0$. Then there's an open $j\colon U\inj X$ containing $x$ (i.e.\ $x$ factors through $j$) and
+such that $j^*\sF = 0$.
+\end{thm}
+Geometrically, this is saying that if an l.f.g.\ sheaf vanishes at a point, it also vanishes in a neighborhood of
+that point.
+\begin{proof}
+First we'll reduce to the affine case: we know there's an affine open $V\subseteq X$ such that $x$ factors through
+$V$ (geometrically, the point $x$ lies in $V$), so we'll replace $X$ by $V$ (and call it $X$). Let $X = \Spec A$,
+so that $\sF$ corresponds to a finitely generated $A$-module $M$, and $x$ corresponds to a map $\vp\colon A\to k$.
+Our hypothesis means that $M\otimes_A k = 0$.
+
+Let's induct on the number of generators of $M$. If $M$ is generated by zero elements, we're done, so assume we
+know it for all modules generated by $n$ elements\dots we'll finish this Monday.
+\end{proof}

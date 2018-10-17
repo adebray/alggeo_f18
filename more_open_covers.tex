@@ -1,0 +1,142 @@
+\begin{quote}\textit{
+	``I'll let $\mathrm{Fun}(Y)$, which is such a fun notation, denote\dots''
+}\end{quote}
+Last time, we talked about open embeddings and open covers for affine schemes; today, we'll generalize this to
+spaces.
+\begin{defn}
+Let $X$ be a space.
+\begin{enumerate}
+	\item A map $U\to X$ of spaces is an \term{open embedding} if for all affine schemes $S = \Spec A$ and maps
+	$f\colon S\to X$ of spaces, the pullback $g\colon U\times_X S\to S$ arising in the diagram
+	\[\xymatrix{
+		U\times_X S\ar[r]\ar[d]^g & U\ar[d]\\
+		S\ar[r]^f &X
+	}\]
+	is an open embedding (since we've already define open embeddings where the target is affine).
+	\item A \term{Zariski open covering} of $X$ is the same as in \cref{zariskicover}, but for open embeddings of
+	spaces, rather than affine schemes.
+\end{enumerate}
+\end{defn}
+In this case, \cref{qc} need not hold: there are open coverings of some spaces $X$ (such as an infinite disjoint
+union of points) which have no finite subcoverings.
+\begin{defn}
+A space $X$ is a \term{Zariski sheaf} if for all $S = \Spec A$ and open coverings $\fU$ of $S$, the map
+\[\Hom(S, X)\longrightarrow \set{(f_U\colon U\to X\text{ for all } U)\in\fU\mid f_U|_{U\cap V} = f_V|_{U\cap
+V}\text{ for all } U,V\in\fU}\]
+is an isomorphism. (Here $U\cap V = U\times_X V$.)
+\end{defn}
+Not everything is a Zariski sheaf, but the things that aren't are terrible, and you shouldn't worry too much about
+them.
+
+Now we have all the definitions at hand to define schemes!
+\begin{defn}
+A \term{scheme} is a space which is a Zariski sheaf and admits an open cover $\fU$ such that all $U\in\fU$ are
+affine schemes.
+\end{defn}
+\begin{ex}
+Let $X$ be the space with
+\[X(A) = \set{t\in A\mid t\in A^\times\text{ or } (1-t)\in A^\times}.\]
+Show that $X$ is \emph{not} a Zariski sheaf. Also, if you know what sheafification is, show that the sheafification
+of $X$ is $\A^1$.
+\end{ex}
+\begin{prop}
+\label{ASisS}
+If $X$ is an affine scheme, then it's a scheme.
+\end{prop}
+Obviously $X$ admits an open cover by affines, given by $\id\colon S\to S$; the meat of the proof (or, if you
+prefer, tofu) is that it's a Zariski sheaf. Unlike EGA, we will start with a special case and use it to bootstrap
+to the general case.
+
+Let $X = \A^1$.
+\begin{defn}
+A \term{function} on a space $Y$ is a map to $\A^1$. We'll let $\Fun(Y)\coloneqq\Hom(Y, \A^1)$.
+\end{defn}
+We're explicitly trending towards geometric notation and intuition for things: one of the key processes of learning
+scheme theory is to start thinking geometrically rather than with commutative algebra -- except when you need to
+prove something.
+
+We want to show that for all affine schemes $S$ and open coverings $\fU$ of $S$, the map
+\begin{equation}
+\label{fun(S)}
+	\Fun(S)\longrightarrow \set{(f_U\in\Fun(U))\mid f_U|_{U\cap V} = f_V|_{U\cap V}}
+\end{equation}
+is an isomorphism.
+
+First we'll prove this for a nice class of open covers.
+\begin{lem}
+\label{basiclem}
+Let $A$ be a commutative ring and $f_1,\dotsc,f_n\in A$. Let $D(f_i)\coloneqq \Spec
+A\setminus\Spec(A/(f_i))$. Then
+\begin{enumerate}
+	\item $D(f_i) = \Spec A[f_i^{-1}]$, and
+	\item\label{genunit} $\set{D(f_i)}$ is an open cover iff $\set{f_i}$ generates the unit ideal.
+\end{enumerate}
+\end{lem}
+The proof will be left as an exercise.
+
+In the case~\eqref{genunit} holds, the open cover $\set{D(f_i)}$ is called a \term{basic open cover}. It's really
+nice because it's an affine open cover; we'll see that there are a lot of these coverings, and enough that we will
+eventually be able to reduce to this case.
+
+One can alternately characterize $D(f_i)$ as the pullback
+\begin{equation}
+\gathxy{
+	D(f_i)\ar[r]\ar[d] & \Spec A\ar[d]\\
+	\A^1\setminus 0\ar[r] & \A^1.
+}
+\end{equation}
+\begin{lem}
+\label{injsurjloc}
+Let $f\colon M\to N$ be a map of $A$-modules. Then $f$ is injective (resp.\ surjective, resp.\ bijective) iff for
+all $i$, the map $M[f_i^{-1}]\to N[f_i^{-1}]$ is injective (resp.\ surjective, resp.\ bijective).
+\end{lem}
+Recall that $M[f_i^{-1}]\coloneqq M\otimes_A A[f_i^{-1}]$.
+\begin{rem}
+\label{locrem}
+Let's review some facts about localization. If $M$ is a $\Z[t]$-module, which is equivalent data to an abelian
+group with an endomorphism $t\colon M\to M$, then we can form $M[t^{-1}]\coloneqq M\otimes_{\Z[t]} \Z[t, t^{-1}]$.
+Then:
+\begin{itemize}
+	\item This construction is \term{exact}; that is, it preserves kernels and cokernels.
+	\item There's a natural map $M\to M[t^{-1}]$, and its kernel is the submodule of $m\in M$ with $t^nm = 0$ for
+	some $n$.
+\end{itemize}
+The way you prove all of this is to write $\Z[t, t^{-1}]$ as the union of $t^{-n}\Z[t]$ for all $n$, or as the
+colimit of the multiplication-by-$t$ map on $\Z[t]$. These are all free modules, hence flat, and one can prove that
+filtered colimits of flat modules are flat without too much angst.
+\end{rem}
+Now we can get back to the lemma.
+\begin{proof}[Proof of \cref{injsurjloc}]
+For injectivity, let's compare $\ker\vp$ with $\ker(\vp[f_i^{-1}])$. By \cref{locrem}, $(\ker\vp)[f_i^{-1}] =
+\ker(\vp[f_i^{-1}])$, so we can reduce to showing that $M = 0$ iff $M[f_i^{-1}] = 0$ for all $i$. One direction is
+immediate, of course; conversely, if $M[f_i^{-1}] = 0$ for all $i$, then for all $m\in M$ and all $f_i$, then
+$f_i^{n_i}m = 0$ for some $n_i\gg 0$. There are finitely many $f_i$, so we can let $N$ be the biggest one, and then
+$f_i^Nm = 0$ for all $i$.
+\begin{lem}
+\label{Ngen}
+$(f_1,\dotsc,f_n) = A$ iff $(f_1^N,\dotsc,f_n^N) = A$.
+\end{lem}
+\begin{proof}There's a naïve argument which isn't too bad,
+but the geometric reason is that $f_i$ is a function, and $f_i$ vanishes on the same locus where $f_i^N$ vanishes,
+and therefore $D(f_i^N) = D(f_i)$. Therefore $\set{D(f_i^N)}$ is also an open cover, which by \eqref{basiclem}
+means $(f_1^N,\dotsc,f_n^N) = A$.
+
+If this proof feels sketchy, here's a more careful one (which unfortunately masks the geometry): if
+$(f_1^N,\dotsc,f_n^N)\subsetneq A$, then it's contained in some maximal ideal $\m$. Therefore for all $i$, $f_i^N =
+0$ in $A/\m$, and therefore $f_i = 0$ in $\m$, because $A/\m$ is a field; hence $f_i\in\m$, which is a
+contradiction.
+\end{proof}
+Now, using \cref{Ngen}, there are some $g_1,\dotsc,g_n$ with $\sum_i g_if_i^N = 1$, and therefore
+\begin{equation}
+	M = \sum_i f_if_i^N\cdot M = 0.
+\end{equation}
+The proof of surjectivity is similar, but using cokernels instead of kernels.
+\end{proof}
+This lemma is a bridge between the geometry of schemes and the linear algebra of modules. You should think of
+inverting $f_i$ as restricting to $D(f_i)$; we will return to this idea.
+\begin{proof}[Proof of \cref{ASisS}, special case]
+Now we'll prove that an affine scheme is a Zariski sheaf for basic open covers $\set{D(f_i)}$. We want to show
+that~\eqref{fun(S)} is an isomorphism, and by \cref{injsurjloc} it suffices to show this after inverting $f_i$.
+
+Let $g_i\in\Fun(D(f_i))$ be a collection of functions that agree on overlaps\dots \TODO: I missed the last part.
+\end{proof}

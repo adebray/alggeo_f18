@@ -1,0 +1,78 @@
+\begin{quote}\textit{
+	``It's not a good exercise; it's an exercise.''
+}\end{quote}
+Today we're going to continue talking about vector bundles, which are an absolutely crucial concept in algebraic
+geometry. First we'll prove \cref{2vb}, equating two definitions of vector bundles: quasicoherent sheaves which are
+locally projective and those which are locally free of finite rank, i.e.\ locally isomorphic to $\sO_{U}^{\oplus
+r}$. This $r$ is called the \term{rank} of the vector bundle over $U$.
+\begin{rem}
+The rank of a vector bundle is locally constant, but doesn't have to be constant.
+\end{rem}
+\begin{lem}
+Let $X = \Spec A$ and $\fU$ be a collection of open subsets of $X$. Then $\fU$ is an open cover of $X$ iff for all
+maximal ideals $\m$ of $A$, there's a $U\in\fU$ such that $\Spec(A/\m)\inj\Spec A$ factors through $U$.
+\end{lem}
+The idea is that a \term{closed point} is an embedding $\Spec k\inj X$, where $k$ is a field. So a collection of
+opens is an open cover if it contains every closed point, which is nice. Affineness is important here: there are
+general schemes with no closed points!
+\begin{proof}[Proof of \cref{2vb}]
+The thing we want to prove is local, so we can immediately reduce to the case where $X = \Spec A$ is affine, and
+therefore $\sE$ corresponds to an $A$-module, which we also denote $\sE$. For the forward direction, we assume
+$\sE$ is finitely generated and projective.
+
+Let $\m$ be a maximal idea of $A$. Then $\sE/\m$ is a finitely-generated $A/\m$-module; since $A/\m$ is a field,
+$\sE/\m$ is free, so it has a basis $\overline s_1,\dotsc,\overline s_n$. We lift this to $s_1,\dotsc,s_n\in\sE$,
+which define a map $\tau\colon A^{\oplus n}\to \sE$ which is surjective mod $\m$. We'd like to show this is an
+isomorphism on some open $U$ containing $\Spec(A/\m)$.
+
+Since $\sE$ is a finitely generated $A$-module, so too is $\coker(\tau) = \sE/\tau(A^{\oplus n})$, and since
+modding out by $\m$ is right exact, $\coker(\tau)|_{\Spec(A/\m)} = 0$. Therefore by \cref{nakayama}, there is some
+$U_0\subset X$ containing $\Spec(A/\m)$ such that $\coker(\tau)|_{U_0} = 0$; without loss of generality, we can
+take $U_0$ to be affine, i.e.\ $\tau$ is surjective on $U_0$. Let's replace $X$ by $U_0$ and continue.
+
+Because $\sE$ is projective, the map $\tau\colon A^{\oplus n}\surj\sE$ splits; let $\sigma\colon\sE\to A^{\oplus
+n}$ be a section. This means $\ker(\tau)$ is finitely generated, and therefore $\ker(\tau)|_{\Spec(A/\m)} = 0$. Now
+we use Nakayama's lemma again and conclude that $\tau$ is an isomorphism on some open $U_1$ containing
+$\Spec(A/\m)$.
+
+The converse isn't immediately trivial: if $\fU$ is an affine cover of $\Spec A$ and $M$ is an $A$-module such that
+$M|_U$ is projective for all $U\in\fU$, why is $M$ necessarily projective? Since $A$ need not be
+Noetherian, we also need to show $M$ is finitely generated and presented given that its localizations are. This is
+not a super important point, so it's left as an exercise. Once $M$ is finitely presented, you can show that for
+any $f\in A$,
+\begin{equation}
+	\Hom_A(M, N)[f^{-1}] = \Hom_{A[f^{-1}]}(M[f^{-1}], N[f^{-1}]).
+\end{equation}
+This is definitely false if you don't assume finite presentation of $M$! Anyways, using this, you can recover
+projectivity on $\Spec A$ from projectivity on a basic affine open cover.
+\end{proof}
+Next we'll turn to constructions with quasicoherent sheaves, and something not quite as related, affine morphisms.
+\begin{defn}
+Let $\sF$ and $\sG$ be quasicoherent sheaves on a scheme $X$ and $\tau\colon\sF\to\sG$ be a morphism. Then we can
+define sheaves $\ker(\tau),\coker(\tau)\in\QCoh(X)$, such that for all affine opens $U\subset X$, $\ker(\tau)|_U
+= \ker(\tau|_U)$ and $\coker(\tau)|_U = \coker(\tau|_U)$.
+\end{defn}
+For this to make sense, we need to invoke Serre's theorem that this data actually defines a quasicoherent sheaf,
+along with the fact that $A\to A[f^{-1}]$ is flat, which means kernels and cokernels are preserved under
+pullback by an open embedding, so that gluing works.
+\begin{defn}
+With notation as before, there is a quasicoherent sheaf $\sF\otimes_{\sO_X}\sG$ such that on every affine open $U =
+\Spec A\inj X$, $(\sF\otimes_{\sO_X}\sG)|_U = \sF|_U\otimes_A \sG|_U$, and on any open $V\inj X$,
+$(\sF\otimes_{\sO_X}\sG)|_V = \sF|_V\otimes_{\sO_V}\sG|_V$.
+\end{defn}
+Checking that this is well-defined is easier than for the kernel and cokernel; you don't have to invoke Serre's
+theorem.
+\begin{defn}
+Let $X$ be a space. A map $f\colon Y\to X$ is \term{affine} if for all affine schemes $S$ and maps $S\to X$, the
+pullback $S\times_X Y$ is affine.
+\end{defn}
+\begin{comp}{exm}{enumerate}
+	\item Any map of affine schemes is affine, which is a rebranding of the theorem that fiber products preserve
+	affine schemes.
+	\item Closed embeddings are also affine.
+	\item Not all open embeddings are affne: the standard counterexample is $\A^2\setminus 0\to\A^2$, because its
+	fiber product with the identity map $\A^2\to\A^2$ gives us back $\A^2\setminus 0$, which isn't affine.
+	\qedhere
+\end{comp}
+Affine morphisms are nice because they have nice algebraic descriptions. Specifically, affine maps $Y\to X$, where
+$X$ is a scheme, correspond to commutative algebras in $\QCoh(X)$. \TODO: I had to head out

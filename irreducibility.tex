@@ -1,0 +1,95 @@
+Today we're going to discuss a way to describe schemes as decomposed into simpler parts. One way to do this is to
+use connected components, but there's another notion, called reducibility, which is more general, and which we'll
+use more frequently. The idea is that $\Spec k[x,y]/(xy)$, the $x$- and $y$-axes inside $\A_k^2$, is a union of two
+$\A_k^1$s, so we want to call it reducible.
+
+\begin{lem}
+\label{fNgnil}
+Let  $Z\subseteq X$ be an irreducible component and $f$ be a function on $X$ with $f|_Z = 0$. Then there's a
+$g\in\Fun(X)$ with $g|_Z \ne 0$ and $f^Ng = 0$ for $N\gg 0$.
+\end{lem}
+\begin{proof}
+For $X$ affine, $Z$ is equivalent data to a prime ideal $\p$ because $Z$ is irreducible, and minimal because $Z$ is
+a component, and $f$ must be in $\p$. The localization $A_\p$ is a local ring with the image of $f$ contained in
+the maximal ideal, and $A_\p[f^{-1}] = 0$.
+
+In general, if you're localizing at a multiplicative set and obtain zero, then some element of the set is zero. We
+localized with respect to $sf^N$ for $N\ge 0$ and $s\not\in\p$, so we conclude that there's some $g\in
+A\setminus\p$ (so a global function on $X$ nonvanishing on $Z$), and such that $gf^N = 0$ for some $N$.
+\end{proof}
+\begin{rem}
+Localization has a geometric interpretation. Suppose $X = \Spec A$ and $B = A/\p$, so $B$ is an integral domain.
+Let $k$ denote its fraction field; if $Z = \Spec B$, then $\Spec k\inj Z$ is the \term{generic point} of $Z$, in
+the sense that in the Zariski topology, its closure contains all other points. This is perhaps a bit bizarre, but
+it allows for some useful constructions: the localization $\Spec A_\p$ admits the geometric description of the
+intersection\footnote{Well, actually an inverse limit, not an intersection. But in reasonable situations, these are
+the same thing.} of all opens $U\subseteq X$ which contain the generic point $\Spec k$.
+\end{rem}
+\begin{lem}
+Let $X$ be an affine Noetherian scheme and $Z\subseteq X$ be an irreducible component. Then there's a function $g$
+on $X$ with $g|_Z\ne 0$ and $g|_{X\setminus Z} = 0$.
+\end{lem}
+\begin{proof}
+Writing $X = \Spec A$, $Z$ corresponds to a prime ideal $\p$, necessarily finitely generated because $X$ is
+Noetherian: $\p = (f_1,\dotsc,f_r)$. By \cref{fNgnil}, we can choose an $N > 0$ and $g_1,\dotsc,g_r\in\Fun(X)$ such
+that $g_if_i^N = 0$ and $g_i|_Z \ne 0$. Letting $g = \prod g_i$, it's nonzero on $Z$, because $Z$ is Spec of a
+domain.
+
+We claim $g|_{X\setminus Z} = 0$. This is because $X\setminus Z$ is covered by $D(f_i) = \set{f_i\ne 0}_{i =
+1,\dotsc,r}$, so it's enough to see on each $D(f_i)$; since $gf_i^N = 0$, then $g|_{D(f_i)} = 0$.
+\end{proof}
+\begin{cor}
+\label{genericnotcomp}
+If $Z\subseteq X$ is an irreducible component, then $X\setminus Z$ isn't dense in $X$.
+\end{cor}
+\begin{proof}
+We can easily reduce to $X$ affine. Then pick a $g$ with $g|_Z\ne 0$ and $g|_{X\setminus Z} = 0$. This means
+$\overline{X\setminus Z}\subseteq\set{g = 0}\subsetneq X$, since its complement $D(g)$ is an open subscheme of $X$.
+\end{proof}
+\begin{cor}
+If $X$ is a Noetherian scheme, it has only finitely many irreducible components.
+\end{cor}
+\begin{proof}
+Let $\set{Z_i}_{i\in I}$ be the set of irreducible components of $X$, and let
+\begin{equation}
+	Y_i\coloneqq \overline{X\setminus (Z_1\many\cup Z_i)}.
+\end{equation}
+We claim $Z_i\subsetneq Y_i$ but $Z_{i+1}\subseteq Y_i$ --- we'll prove this in just a sec, but assuming the claim
+we obtain a decreasing sequence $Y_1\supsetneq Y_2\supsetneq\dotsb$ if closed subschemes, so since $X$ is
+Noetherian, $\abs I$ must be finite.
+
+Now the claim. We saw that the generic point of $Z_i$ isn't in $\overline{X\setminus Z_i}$ in
+\cref{genericnotcomp}, and by definition $\overline{X\setminus Z_i}\supseteq Y_i$. Since $Z_{i+1}\subseteq Y_i$ and
+\begin{equation}
+	Z_{i+1}\cap X\setminus\paren{Z_1\many\cup Z_i} \ne\varnothing,
+\end{equation}
+because the components $Z_i$ are distinct, then by irreducibility, $Z_{i+1}$ is contained in the closure of
+$X\setminus\paren{Z_1\many\cup Z_i}$.
+\end{proof}
+\begin{defn}
+The \term{Krull dimension} $\dim X$ of a scheme $X$ is the largest integer $d$ such that there is a chain
+$Z_0\subsetneq Z_1\subsetneq\dotsb\subsetneq Z_d$ of irreducible subschemes of $X$. If there is no such integer, we
+say the dimension is infinite.
+\end{defn}
+There's one main result in dimension theory.
+\begin{thm}
+\label{dimthm}
+Let $X$ and $Y$ be finite type, irreducible $k$-schemes. If $f\colon Y\to X$ is a morphism, then there's a dense
+open $U\subseteq X$ (equivalently, $U$ is nonempty), such that either $Y\times_X Y = \varnothing$ or for every
+field-valued point $x\in U$, $\dim f^{-1}(x) = \dim Y - \dim X$.
+\end{thm}
+Here $f^{-1}(x)\coloneqq Y\times_X\set x$, as usual. A \term{field-valued point} is data of a field $k$ and a map
+$x\colon \Spec k\to U$. We'll prove this next time, and spend the rest of today's lecture on some corollaries.
+\begin{cor}
+If $X$ is irreducible and $U\subseteq X$ is dense, then $\dim U = \dim X$.
+\end{cor}
+\begin{cor}
+If $X$ is irreducible and $f\colon Y\to X$ is dominant, then $\dim Y\ge\dim X$.
+\end{cor}
+Recall that dominant means it's injective on the level of functions. This means that when we tensor with the
+fraction field of $X$, we get something nonzero, and therefore the fiber over the generic point is nonempty.
+
+There are nice situations in which these theorems aren't true. For example, let $A$ be a discrete valuation ring,
+such as $k[t]_{(t)}$ or $k[[t]]$. Then $k\coloneqq A[t^{-1}]$ is the fraction field of $A$, and $\Spec k\inj \Spec
+A$ is a nonempty open which is zero-dimensional, but $\Spec A$ is one-dimensional. So we really have to use the
+fact that we're finite type over a field.

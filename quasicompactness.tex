@@ -1,0 +1,127 @@
+I was late to class and missed a few things.
+\begin{defn}
+A scheme $X$ is \term{quasicompact} if it has a finite affine open cover.
+\end{defn}
+Idea: this is about the same as compactness in topology.
+\begin{exm}
+$\P^n$ is quasicompact, since it has a cover by $n+1$ opens, as we saw on Friday.
+\end{exm}
+\begin{prop}
+If $A$ is a commutative ring and $I\subset A$ is an ideal, then $\Spec A\setminus \Spec(A/I)$ is quasicompact if
+$I$ is finitely generated.
+\end{prop}
+The converse is false.
+\begin{exm}
+Let $\A_k^\infty\coloneqq\Spec k[x_1,x_2,x_3,\dotsc]$. Then $\A_k^\infty\setminus 0$ is a scheme which is not
+quasicompact.
+\end{exm}
+\begin{rem}
+More generally, a morphism $f\colon X\to Y$ is said to be quasicompact if for all affine schemes $S$ and maps $S\to
+Y$, $X\times_Y S$ is quasicompact. This reduces to the notion of quasicompactness for schemes when $Y = \Spec\Z$,
+because a map to $\Spec\Z$ is no data at all.
+\end{rem}
+\begin{defn}
+A scheme $X$ is \term{quasiseparated} if the intersection of two affine opens in $X$ is quasicompact.
+\end{defn}
+Equivalently, the diagonal map $\Delta\colon X\to X\times X$ is a quasicompact morphism. Therefore one may more
+generally say a quasiseparated morphism $f\colon X\to Y$  is one for which the diagonal $\Delta_f\colon X\to
+X\times_Y X$ is quasicompact.
+\begin{exm}
+The idea is that quasiseparated is kind of like the Hausdorff property in topology. As such, we can import the
+standard counterexample, $\A^1$ with two origins. The idea is to take two copies of $\A^1$, say with coordinates
+$t$ and $u$, and glue them together along $\A^1\setminus 0$ via the identification $t\leftrightarrow u$. (This is
+different from $\P^1$, which is quasiseparated, where we identified $t\leftrightarrow u^{-1}$.)
+\end{exm}
+This next exercise is a 
+\begin{ex}
+Quasicompact, quasiseparated morphisms are exactly those where the pushforward of quasicoherent sheaves is
+well-behaved. Specifically, given a map $f\colon X\to Y$ and a quasicoherent sheaf $\sF$ on $X$, we define its
+pushforward $f_*\sF$ on $Y$ as follows: given an affine open subscheme $j\colon U \inj Y$, we specify
+\[j^*f_*\sF \coloneqq\Gamma(X\times_Y U, \sF|_{X\times_Y U}).\]
+Show that this is quasicoherent if $f$ is quasicompact and quasiseparated. (\TODO: converse?)
+\end{ex}
+Even when we restrict to quasicompact, quasiseparated things, we're still looking at extremely general objects,
+considerably moreso than are studied in classical algebraic geometry. So here are some more finiteness hypotheses.
+\begin{defn}
+Let $f\colon X\to Y$ be a map of schemes.
+\begin{enumerate}
+	\item Suppose $Y = \Spec A$. Then $f$ is \term{locally of finite type} (LFT) if for all affine opens $\Spec
+	B\subset X$, the induced map of rings $A\to B$ makes $B$ into a finitely generated algebra, i.e.\ $B\cong
+	A[x_1,\dotsc,x_n]/I$ for some ideal $I\subset A[x_1,\dotsc,x_n]$.
+	\item If in addition $X$ is quasicompact, then $f$ is called \term{finite type}.
+	\item For general $Y$, $f$ is \term{locally finite type} (resp.\ \term{finite type}) if for all affine opens
+	$V\subseteq Y$, the map $X\times_Y V\to V$ is locally finite type (resp.\ finite type).
+\end{enumerate}
+\end{defn}
+These properties roughly mean that you're covered by finite type algebras. It's not hard to prove that when $Y$ is
+affine, these definitions coincide.
+\begin{thm}[Hilbert's basis theorem]
+\label{hilbbasis}
+Suppose $A$ is a Noetherian ring amd $B$ is a finitely generated $A$-algebra. Then there is a fiber product square
+\[\xymatrix{
+	\Spec B\ar[r]\ar[d] & \A^n_A\ar[d]\\
+	0\ar[r] & \A_A^m.
+}\]
+Here $\A_A^k\coloneqq\Spec A[x_1,\dotsc,x_k]$.
+\end{thm}
+This will be highly noncanonical.
+\begin{rem}
+This is telling us that $\Spec B$ is the zero locus of $m$ polynomials in $n$ variables with coefficients in $A$,
+or that more generally, a finite type Noetherian scheme is exactly one which locally admits such a description.
+Since this was one of our motivations for studying algebraic geometry from the beginning, this is an excellent
+hypothesis to have.
+\end{rem}
+Though you've probably already seen the proof if you know what a Noetherian ring is, it's still good to go over.
+\begin{defn}
+Let $V$ be an abelian group. A \term{filtration} on $V$ is a sequence
+\begin{equation}
+	F_0V\subseteq F_1V\subseteq\dotsb\subseteq V,
+\end{equation}
+such that
+\begin{equation}
+	\bigcup_{n\ge 0} F_nV = V.
+\end{equation}
+The \term{associated graded} is a graded abelian group $\gr_\bullet(V)\coloneqq \bigoplus_{n\ge 0}\mathrm{gr}_n V$,
+where $\mathrm{gr}_nV \coloneqq F_nV/F_{n-1}V$, and we declare $F_{-1}V\coloneqq 0$.
+\end{defn}
+Filtrations are more general than gradings, but are really nice to have, and can make some arguments a lot cleaner.
+\begin{defn}
+If $(V, F_n)$ and $(W, F_n')$ are filtrations, a morphism of filtered abelian groups is a map $f\colon V\to W$ such
+that $f(F_nV)\subseteq F_n'W$.
+\end{defn}
+\begin{ex}
+\label{grsurj}
+Show that if $\gr_\bullet(f)\colon\gr_\bullet(V)\to\gr_\bullet(W)$ is injective (resp.\ surjective, resp.\
+bijective), then $f$ is injective (resp.\ surjective, resp.\ bijective).
+\end{ex}
+This is a major tool in working with filtrations, especially in the (common) case where the filtered objects are
+complicated, but their associated gradeds are simpler.
+\begin{defn}
+A \term{filtered algebra} is an algebra $A$ filtered as an abelian group such that multiplication carries
+$F_nA\times F_mA\subseteq F_{n+m}A$.
+\end{defn}
+\begin{exm}
+The algebra $A = k[x]$ is filtered by degree: we let $F_nA$ denote the polynomials of degree at most $n$.
+\end{exm}
+If $A$ is a filtered abelian group, $F_nA$ is also an abelian group, but if $A$ is an algebra, $F_nA$ is generally
+not a subalgebra, as in the above example.
+
+If $A$ is a filtered algebra, we can make sense of the notion of filtered $A$-modules, where the filtrations given
+by the $A$-action and the module are compatible in the least surprising way.
+\begin{lem}
+If $M$ is a filtered $A$-module and $\gr_\bullet(M)$ is a finitely generated $\gr_\bullet(A)$-module, then $M$ is a
+finitely generated $A$-module.
+\end{lem}
+\begin{proof}
+Let $\overline x_1,\dotsc,\overline x_n\in\gr_\bullet M$ be a generating set. We can assume they're
+\term{homogeneous}, i.e.\ each $\overline x_i$ lives in some $\gr_{k_i}M$. Lift $\overline x_i$ to some $x_i\in
+F_{i_k}M$; then the map $\vp\colon A^{\oplus n}\to M$ sending the standard basis element $e_i\mapsto x_i$ is
+surjective after passing to the associated graded, hence by \cref{grsurj} is surjective, and therefore
+$\set{x_1,\dotsc,x_n}$ generates $M$.
+\end{proof}
+\begin{proof}[Proof of \cref{hilbbasis}]
+By induction, it suffices to show that if $A$ is Noetherian, then $A[x]$ is too. Filter $A[x]$ by degree, and if
+$I\subseteq A$ is an ideal, let $F_nI\coloneqq I\cap F_nA[x]$.
+
+We claim $\gr_\bullet I$ is finitely generated over $\gr_\bullet A[x]$\dots{} \TODO: I missed the rest.
+\end{proof}

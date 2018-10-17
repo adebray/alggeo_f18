@@ -1,0 +1,82 @@
+\begin{thm}
+$\P^n$ is a scheme.
+\end{thm}
+\begin{proof}
+First we need to check that $\P^n$ is a Zariski sheaf. The basic idea is that line bundles glue: if you have line
+bundles on each open of an open cover, together with isomorphisms on intersections satisfying a cocycle condition,
+you can glue them.
+
+Next we need to cover it by affines. For $i = 0,\dotsc,n$, the locus $\set{s_i\ne 0}\subset\P^n$ is isomorphic to
+$\A^n$. We could say QED here, but let's explain what's going on.
+
+Let $U_i\coloneqq\set{s_i = 0}$ be defined by saying what it means for a map $S\to\P^n$ factors through $U_i$.
+Specifically, the map $S\to\P^n$ is equivalent to (an isomorphism class of) data of a line bundle $\sL$ on $S$ and
+a map $(s_0,\dotsc,s_{n+1})^{\mathrm T}\colon\sL\to\sO_S^{\oplus(n+1)}$ which is everywhere nonvanishing. Thus the
+map is described by $s_0^\vee,s_n^\vee$; we say the map factors through $U_i$ if $s_i^\vee$ is
+nonvanishing.\footnote{That is, the collection $(s_0,\dotsc,s_n)^{\mathrm T}$ is always nonvanishing, but we're
+asking specifically about $s_i$, which is stronger.}
+
+First let's check that for all $i$, $U_i\subset\P^n$ is open. Intuitively this makes sense: we're asking for
+something to not vanish, which is an open condition. More precisely, we want to show that for every affine scheme
+$S$ with a map $S\to\P^n$, the pullback $U_i\times_{\P^n}S\to S$ is open. So let $S\to\P^n$ be such a map (in
+particular, $S$ is affine). This is equivalent data to a line bundle $\sL$ on $S$ and
+$s_0,\dotsc,s_{n+1}\colon\sL\to\sO_S$. That is, there are sections of the map $\Theta(\sL^\vee)\to S$. Then you can
+check that $U_i = S\times_{\Theta(\sL^\vee)} \Theta(\sL^\vee)\setminus S$, where the first map
+$S\to\Theta(\sL^\vee)$ is by $s_i$ and the second map is by the zero section.
+
+The other claim we want to check is that $U_i\cong\A^n$. The proof is that a map $S\to U_i$ is equivalent data to
+the maps $s_0,\dotsc,s_{i-1},s_{i+1},\dotsc,s_n\colon\sL\to\sO_S$, since we know $s_i\colon\sL\to\sO_S$ is an
+isomorphism. Each $s_j$, $j\ne i$, is equivalent to a function on $S$: since $s_i$ is nonvanishing, there are no
+further conditions on the remaining maps. Thus a map to $U_i$ is equivalent to $n$ functions, and this is natural
+in $S$, so $U_i\simeq\A^n$.
+
+Finally, we need to show that $U_0,\dotsc,U_n$ is a cover of $\P^n$, i.e.\ that it pulls back to a Zariski open
+cover on all affines. So once again let $S\to\P^n$ be a map from an affine, so we have a line bundle $\sL$ and
+$(n+1)$ maps $s_0,\dotsc,s_n\colon\sL\to\sO_S$ which collectively are nonvanishing. Without loss of generality, we
+can assume $\sL$ is trivial, since it's locally trivial, and we can check that it's an open cover locally. So it
+suffices to show that $S\times_{\P^n} U_i$ is a Zariski open cover of $S$, which is more or less equivalent to
+$s_0,\dotsc,s_n$ being everywhere nonvanishing, in view of what we did last lecture.
+\end{proof}
+Typically, people only use functions, rather than sections of a line bundle, to provide a first naïve definition of
+$\P^n$. In this case, the Zariski sheaf property fails: you can glue trivial line bundles to obtain something
+nontrivial.
+\begin{cor}
+Let $\sE$ be a vector bundle on a scheme $X$. Then $P(\sE)$ is a scheme.
+\end{cor}
+\begin{proof}
+$X$ has an affine open cover $\fU$ such that $\sE|_U$ is trivial for all $U\in\fU$. Then $\P(\sE)\times_X U\cong
+\P^n\times U$ as schemes.
+\end{proof}
+$\P^n$ has an important line bundle called $\sO_{\P^n}(1)$ (sometimes just $\sO(1)$ if $\P^n$ is implicit).
+\begin{defn}
+The line bundle $\sO_{\P^n}(1)\in\QCoh(\P^n)$ is the line bundle which, given a map $f\colon S\to\P^n$ which is a
+line bundle $\sL$ on $S$ and the maps $s_0,\dotsc,s_n$, defines $f^*(\sO_{\P^n}(1))\coloneqq\sL^\vee$.
+
+For any $n\in\Z$, we define $\sO_{\P^n}(m)\coloneqq\sO_{\P^n}(1)^{\otimes m}$. If $m = 0$, we interpret the empty
+tensor product as $\sO_{\P^n}$, the sheaf of functions; if $m < 0$, we interpret this as
+$((\sO_{\P^n}(1))^\vee)^{\otimes(-m)}$.
+\end{defn}
+\begin{defn}
+Let $X$ be a scheme and $\sF\in\QCoh(X)$. The \term{sections} of $X$, denoted $\Gamma(X, \sF)$, is the abelian
+group $\Hom_{\QCoh(X)}(\sO_X, \sF)$.
+\end{defn}
+That is, a section is compatible data, for all affines $S$ and maps $x\colon S\to X$, of $\sigma_x\in x^*\sF$
+regarded as a module.
+
+The sections $\Gamma(X,\sO_X) = \Fun(X)$, and if $X = \Spec A$, $\Gamma(X, \sF)$ is canonically the $A$-module
+associated to $\sF$ (which we've just been calling $\sF$ again).
+\begin{defn}
+If $A$ is a commutative ring, we let $\P_A^n\coloneqq \P^n\times\Spec A$.
+\end{defn}
+\begin{prop}
+For $r\ge 0$, $\Gamma(\P_A^n, \sO(r))$ is the $A$-module of homogeneous degree-$r$ polynomials with $A$
+coefficients in $n+1$ variables.
+\end{prop}
+For $r = 1$, a map $A^{\oplus(n+1)}\to\Gamma(\P_A^n, \sO(1))$ is definedc by $n+1$ maps
+$\sO_{\P_A^n}\to\sO_{\P_A^n}(1)$, i.e.\ for all $f\colon S\to\P_A^n$, i.e.\ line bundles $\sL$ with
+$s_0,\dotsc,s_n$, compatible maps $\sO_S\to f^*(\sO(1))$ which identify $f^*(\sO(1))\cong\sL^\vee$, and the
+$i^{\mathrm{th}}$ section is identified with $s_i\in\sL^\vee$. Following your nose with the formal stuff provides a
+complete proof.
+
+Over the next few days we'll discuss finite conditions: the nicest possible schemes are smooth projective curves,
+and we'll discuss these soon.

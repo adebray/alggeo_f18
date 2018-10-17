@@ -1,0 +1,136 @@
+Office hours are Fridays from 11-1, in room 9.164 (at least for now). Today we'll talk about some questions (and
+some answers, too!) relating to algebraic geometry and why one might find it interesting. We're going to focus on
+concreteness.
+
+Broadly speaking, algebraic geometry studies zero sets of polynomials. These could be polynomials over $\Q$, or
+$\R$, or $\C$, or finite fields, or more. The first question you might ask is, \emph{are there solutions}? This is
+an \term{arithmetic question}: in arithmetic situations, there might not be solutions.
+\begin{exm}[Taylor-Wiles, 1994]
+If $n\ge 3$, the polynomial $x^n+y^n=1$ has no solutions over $\Q$ when $x,y\ne 0$.
+\end{exm}
+You might recognize this as a reformulation of Fermat's last theorem.
+
+Another form of the same question is \emph{can you parameterize solutions of the equation}? For example, let's try
+it with $x^2+y^2 = 1$, which we know has solutions. In this case, it is possible to parameterize solutions, via the
+one-parameter family
+\begin{equation}
+\label{pythparam}
+	x = \frac{\lambda^2-1}{\lambda^2+1}, \qquad\qquad y = \frac{2\lambda}{\lambda^2+1}.
+\end{equation}
+These kinds of questions are called \term{rationality questions}. One can also ask these questions over $\C$ (or
+over other algebraically closed fields), where they can feel a bit different.
+
+There is a general result that any quadric hypersurface with a rational point is rational. What this means is that
+if you assume the existence of one solution $(x_0,y_0)$ to a degree-2 polynomial in $x$ and $y$ over, say, $\Q$,
+then you can use that one solution to parameterize all other solutions. If you plot the solutions in the
+$xy$-plane, the parameter of another solution $(x_1,y_1)$ is the slope of the line between $(x_0,y_0)$ and
+$(x_1,y_1)$. Indeed, in~\eqref{pythparam}, the parameter $\lambda$ is this slope. Because the equation is a
+quadric, one expects such a line to intersect in exactly two points, the first solution and another one.  This is
+all extremely explicit, to the point that you could explain why you care to a middle schooler.
+
+There are a few other rationality results.
+\begin{thm}[Segre, 1940s; Manin, 1970s; Kollár, 2000]
+Smooth cubics in at least three variables are rational.
+\end{thm}
+So $x^2+y^2 = 1$ isn't rational, but $x^2+y^2+z^2 = 1$ is. However, this doesn't give you everything.
+\begin{thm}[Clemens-Griffiths, 1974]
+There are cubics in at least four variables which are unirational but not rational, i.e.\ that one cannot
+parameterize all solutions in a one-to-one manner.
+\end{thm}
+This was a hard theorem. How would you prove something like this?
+
+Recent work (2012-15) by many people (Voisin, Colliot-Thèlene, Pirutka, Totaro\footnote{If you like pictures of
+cats, check out Totaro's math blog: \url{https://burttotaro.wordpress.com/}.}) generalizes this.
+\begin{thm}
+For cubics in at least five variables, one can also not parameterize solutions in a one-to-one way, even by adding
+additional ``dummy variables.''
+\end{thm}
+For four-variables cubics, this is open.
+\subsection*{Schemes.}
+Though this result is stated completely explicitly, it was studied using some very abstract-looking machinery. In
+this course, we'll also work with this abstract machinery, namely the language of schemes. These are things like
+solutions to systems of polynomials, but not quite --- they encode among other things the equivalence of such
+systems under changes of coordinates, which doesn't really change the underlying geometry of the solution set.
+Classification problems with this perspective are a big area of research, and Birkar just won a Fields medal for
+work in this area from 2006.
+\subsection*{Algebraic geometry over $\C$.}
+A third thing you could care about is specific stuff about algebraic geometry over your favorite field (typically
+$\C$, but not always). In many cases (such as $\C$), you have topology around, and you can ask how it interacts
+with the algebraic geometry we've been talking about.
+
+For example, if $q\in\C^\times$ isn't a root of unity, then there's a cubic equation $y^2 = x^2+ax+b$ whose
+solutions are parameterized by $\C^\times/q\Z$. This may be a bit surprising, and indicates a way in which analytic
+or topological information can be useful: now we can learn about the universal cover of the solution space, and
+other topological invariants. Then you might ask whether something like this is true in positive characteristic,
+which tends to be harder.
+
+More generally, one can study the topology of algebraic varieties over $\C$.
+\begin{thm}
+The odd Betti numbers of smooth proper varieties are even.
+\end{thm}
+The proof uses the study of the Hodge Laplacian operator on a variety $X$. This needs a metric, but projective
+means that $X$ embeds in some $\CP^n$, and we can borrow its metric. There is a purely algebro-geometric proof of
+this, but first you need to come up with the right notion of Betti numbers (so étale cohomology, which is hard),
+and then invoke Deligne's proof of the Weil conjectures (also hard).  Nonetheless, it's true in characteristic $p$.
+
+More generally, the cohomology of a complex projective variety has more structure, and is much richer than that of
+a random manifold.\footnote{This doesn't require smoothness \latin{per se}, but it's more difficult to formulate in
+the singular case.}
+\begin{conj}[Hodge conjecture, imprecise statement]
+The differential topology of a projective algebraic variety over $\C$ knows everything about its algebraic
+geometry.
+\end{conj}
+This is a Millennium Prize problem, meaning it comes with a \$1 million reward. You can infer that it's hard.
+\subsection*{Algebraic geometry over $\Z$.}
+If you work over $\Z$ instead of over $\C$, meaning your polynomial has integer coefficients, then you can reduce
+mod $p$ and solve it there. This is the first thing anyone does in number theory, because it often simplifies the
+problem to a finite question. This naturally leads one to ask, \emph{how do the systems of equations at different
+primes $p$ relate to each other?}
+
+There's a lot to say about this, beginning with quadratic reciprocity, which is very classical yet a little weird,
+and continuing all the way to the Langlands program.
+
+Supposing $X$ encodes the system of solutions to your polynomial with $\Z$ coefficients. Then one can define a zeta
+function, reminiscent of the Riemann zeta function, as follows:
+\begin{equation}
+	\zeta_X(s)\coloneqq \prod_{\text{$p$ prime}}\exp\paren{\sum \frac{1}{n}(\text{number of solutions in
+	$\F_{p^n}$}) p^{-ns}}.
+\end{equation}
+For $X = \Spec\Z$, corresponding to solutions to an empty set of polynomials, this recovers the usual Riemann zeta
+function.
+
+For any particular $X$, one conjectures this is meromorphic (and almost entire, in some sense), and that the
+analogue of the Riemann hypothesis holds; for some $X$, this is known due to Deligne. There are some other related
+conjectures related to this known as Sato-Tate conjectures.
+\subsection*{Cohomology theories.}
+Over $\C$, you have topology, and therefore can invoke algebraic topology to compute cohomology of algebraic
+varieties. Over other fields or rings, you might not have these techniques, and there are several other
+approaches.
+\begin{itemize}
+	\item Over an algebraically closed field, one has \term{étale cohomology}, whose ideas are built from covering
+	space theory, has $\Z_\ell$ coefficients, where $\ell$ is a prime that's not the characteristic of the field.
+	\item Over any field $k$, there's \term{de Rham cohomology}, which uses the idea that $\d z/z$ understands
+	$\C^\times$ isn't simply connected (since $\oint \d z/z\ne 0$). This has coefficients in $k$.
+\end{itemize}
+There are others, too. One wants these to all be the same, or at least closely related; if $k = \Q_p$ and $\ell =
+p$ ($\Q_p$ has characteristic zero!), then these two are related by $p$-adic Hodge theory. This is related to deep
+and recent work by Fontaine, Scholze, and others, and relates to Scholze's Fields medal work. In 2016,
+Bhatt-Morrow-Scholze showed that one can sometimes interpolate between different cohomology theories. See Scholze's
+ICM address for more on this. The ultimate question in this corner of algebraic geometry is whether there's some
+universal cohomology theory interpolating between everything we have, and which is also the source of the
+$\zeta$-functions mentioned above.
+\subsection*{Degenerations.}
+We get additional power by studying solutions in families. For example, we can degenerate $x^2+y^2=1$ to
+$x^2+y^2=0$, which is much simpler. One asks questions such as, \emph{what invariants are preserved under
+degenerations?} Therefore one might be able to use a degeneration to reduce a harder problem to an easier problem.
+\subsection*{Computations.}
+This subfield of algebraic geometry tries to make these abstract invariants concrete, by writing good algorithms to
+compute these invariants for explicit systems of polynomials.
+\subsection*{Geometric complexity theory.}
+This is another way to relate algebraic geometry and computer science. The goal of this field is to approach
+another Millennium Prize problem, P vs.\ NP, using algebraic geometry techniques. This roughly involves studying
+certain varieties and analyzing whether they're as complicated as they seem. Algebraic geometry has lots of
+techniques which might help, but on the other hand they haven't yet.
+
+Probably the best way to learn algebraic geometry is to have an application or research focus in mind that you can
+apply the things you learn to. This method of learning tends to produce algebraic geometers.

@@ -1,0 +1,73 @@
+Today we'll continue deducing stuff from \cref{dimthm,NNorm}. For example, at the end of the last class, we showed
+that $\dim\A^n$ is $n$, so if $f\in k[x_1,\dotsc,x_n]$ is nonconstant, then $\set{f = 0}$ is $(n-1)$-dimensional,
+and this is true for all irreducible components of $X$.
+\begin{defn}
+An irreducible scheme $X$ is \term{caternary} if for all closed subschemes $Z\subsetneq X$, there's a closed
+subscheme $Z'\subseteq X$ containing $Z$ as a closed subscheme and such that $\dim Z' = \dim X - 1$.
+\end{defn}
+We basically proved the following while proving \cref{NNorm}.
+\begin{cor}
+$\A^n$ is catenary.
+\end{cor}
+\begin{rem}
+The word catenary comes from the word for ``chain'' in a Romance language (e.g.\ in Italian, it's \latin{catena}),
+presumably because it gives us chains of closed subschemes.
+\end{rem}
+More generally:
+\begin{cor}
+\label{catenary}
+If $X$ is an irreducible finite-type scheme over an infinite field $k$, then $X$ is catenary.
+\end{cor}
+\begin{proof}
+We can quickly reduce to the case where $X$ is affine. Noether normalization means we may choose a finite dominant
+map $\pi\colon X\to\A_k^n$; hence $\dim X = n$. Let $Z\subsetneq X$ be maximal under closed irreducible subschemes
+contained in $X$. We want to show $\dim Z = n-1$.
+
+The restriction $\pi|_Z\colon Z\to\overline{\pi(Z)}$ is also finite dominant, so it suffices to show
+$\dim\overline{\pi(Z)} = n-1$. If this is not the case, then since $\A_k^n$ is catenary, we can choose an
+$(n-1)$-dimensional irreducible $Z'\subset\A_k^n$ and strictly containing $\overline{\pi(Z)}$.
+
+The theory of finite morphisms (more specifically, going-up and going-down theorems applied to $X\to\A^n$), $Z$ is
+not an irreducible component of $\pi^{-1}(Z')$, which is a contradiction.
+\end{proof}
+This is an important result that's easy to take for granted --- it is one of the facts about dimension that is an
+ansatz about any theory of dimension in geometry: all $k$-points look the same in a variety over $k$. If something
+like this were not true, there would have to be a different theory of dimension. It's not so surprising it reduces
+to studying $\A_k^n$, with its large symmetry group.
+
+There are two major ways to induct on dimension for varieties over fields: project onto a lower-dimensional
+subscheme, and take the intersection with a hyperplane. We used the former for this proof.
+\begin{rem}
+The proof of \cref{catenary} strongly depends on the Nullstellensatz, and in particular, is not true over more
+general rings: if $A$ is a DVR, then $\Spec A[x]$ isn't catenary. But dimension is set up to behave well over
+fields, so maybe this isn't so sad.
+\end{rem}
+\begin{cor}
+If $X$ is irreducible and finite type over $k$, and $U\subseteq X$ is a nonempty open, then $\dim U = \dim X$.
+\end{cor}
+\begin{proof}[Proof sketch]
+Without loss of generality, we can assume $X = \Spec A$ is affine. Let $x \in U$ be a closed point, hence $\Spec
+k'$ for some extension $k\inj k'$, and we have data of a surjective map $A\to k'$ (and, if $U = \Spec B$, data of a
+surjective map $B\to k'$). There's a closed, irreducible subscheme $Z\subsetneq X$ containing $x$ and such that
+$\dim Z = \dim X - 1$.
+
+The intersection $Z\cap U$ is a nonempty, irreducible, proper closed subscheme of $U$, and is an open subscheme of
+$Z$. Inducting on $\dim X$,
+\begin{equation}
+	\dim Z\cap U = \dim Z = \dim X - 1,
+\end{equation}
+so $\dim U > \dim X - 1$, hence $\dim U\ge\dim X$. The other inequality is easy: take closures.
+\end{proof}
+\begin{lem}
+If $X$ is irreducible and $Y$ is a closed subscheme of $X\times\A^1$, then either
+\begin{itemize}
+	\item $Y$ is irreducible, or
+	\item there's a nonempty open $U\subseteq X$ such that $Y\times_X U\to U$ is finite.
+\end{itemize}
+\end{lem}
+\begin{proof}
+As usual we can assume $X = \Spec A$ is affine, so $Y = \Spec A[t]/I$ for an ideal $I\subseteq A[t]$. The first
+option is $I = 0$, so we assume $I \ne 0$, so there's a nonzero $f\in I$, and $f = \sum_{i=0}^d a_it^i$ for $a_i\in
+A$ with $a_d\ne 0$. If $U = \set{a_d\ne 0}$, then $U$ is a nonempty open subscheme of $X$. One can show that $I$
+contains a monic polynomial over $U$, and we saw this is equivalent to $Y\times_X U\to U$ being finite.
+\end{proof}

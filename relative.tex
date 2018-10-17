@@ -1,0 +1,117 @@
+One of the advantages of algebraic geometry is the ability to work relative to a given space, which generalizes
+choosing a base field (or ring).
+\begin{defn}
+Let $S$ be a space. A \term{scheme over $S$} is a space $X$ with a map $X\to S$, often just written $X/S$, such
+that for all affine schemes $T$ and maps $T\to S$, $X\times_S T$ is a scheme. A morphism of schemes over $S$ is a
+morphism of schemes which commutes with the two maps to $S$.
+\end{defn}
+In the same way one can define affine schemes over $S$. If $S = \Spec A$, for $A$ a ring, we might write $X/A$
+instead of $X/S$ and say schemes over $A$; often $A$ will be a field.
+
+We defined spaces as functors $\cat{CommRing}\to\Set$, and there's a similar description for schemes over $A$.
+\begin{prop}
+Let $A$ be a commutative ring. There's an equivalence of categories between spaces over $A$ and functors
+$\cat{CommAlg}_A\to\Set$ (where we ignore the zero algebra).
+\end{prop}
+\begin{proof}[Proof sketch]
+Given $X\colon\cat{CommAlg}_A\to\Set$, we can define a functor on all commutative rings by sending $B$ to the set
+of pairs of $(i,x)$ where $i\colon A\to B$ is an $A$-algebra structure on $B$ and $x\in X(B)$. Then the forgetful
+map $(i,x)\mapsto i$ defines the desired map to $\Spec A$.
+
+In the other direction, let $p\colon X\to\Spec A$ be a scheme over $A$. We'll define a functor on commutative
+$A$-algebras by sending $(B, i\colon A\to B)$ to the set of maps $\vp\colon \Spec B\to X$ for which the diagram
+\begin{equation}
+\gathxy{
+	& X\ar[d]^p\\
+	\Spec B\ar[r]^{i^*}\ar[ur]^\vp & \Spec A
+}
+\end{equation}
+commutes.
+\end{proof}
+\begin{exm}
+Complex conjugation is $\Z$-linear (and even $\R$-linear) but not $\C$-linear, and therefore induces a map of
+schemes $\Spec\C\to\Spec\C$ which is a map of schemes over $\R$, but not of schemes over $\C$.
+\end{exm}
+\begin{prop}
+\label{pullbackscheme}
+Let $X$, $Y$, and $Z$ be schemes together with maps $X\to Z$ and $Y\to Z$. Then $X\times_Z Y$ is a scheme.
+\end{prop}
+\begin{proof}
+If $X = \Spec A$, $Y = \Spec B$, and $Z = \Spec C$ are affine, this is certainly true: the pullback is $\Spec
+A\otimes_C B$. Now we'll show more general cases reduce to this one.
+
+If $Y$ and $Z$ are affine but $X$ isn't, then $X$ admits an open cover $\fU$ by affines, and $\set{U\times_Z Y\mid
+U\in\fU}$ is an affne open cover of $X\times_Z Y$. In the same way, we may assume only that $X$ and $Z$ are affine.
+
+Therefore if you only assume $Z$ is affine, you can pick affine open covers of $X$ and $Y$ called $\fU$ and
+$\mathfrak V$, respectively. Then $\set{U\times_Z V\mid U\in\fU, V\in\mathfrak V}$ is an affine open cover of
+$X\times_Z Y$.
+
+Next, we assume $X$ and $Y$ are affine, but $Z$ might not be.\footnote{From here, the proof was finished up in
+Friday's lecture.} Let $\mathfrak W$ be an affine open cover of $Z$, and $W\in\mathfrak W$. By definition, the map
+\begin{equation}
+	X\times_Z W\longrightarrow X
+\end{equation}
+is an open embedding, and this implies that $X\times_Z W$ is a scheme (we called these quasi-affine): it's the
+complement of a closed embedding $\Spec A/I\to X = \Spec A$, and is covered by $\set{D(f)}$ where $\set f$
+generates $I$. Anyways, then $X\times_Z Y$ is covered by
+\begin{equation}
+	\mathfrak W'\coloneqq \set{(X\times_Z W)\times_W (Y\times_Z W)\mid W\in\mathfrak W}.
+\end{equation}
+Since $W$ is affine, this is a scheme by one of the earlier cases. Therefore $X\times_Z Y$ is covered by schemes,
+so it must be a scheme (choose an affine cover of each element of $\mathfrak W'$, and check this is an affine open
+cover of $X\times_Z Y$).
+
+Finally, we assume none of them are affine. This is the same as the case where $X$ and $Y$ are affine, but now we
+can use the previous step to show that if $\fU$ is an open cover of $X$, $\mathfrak V$ is an open cover of $Y$,
+$U\in\fU$, and $V\in\mathfrak V$, then $U\times_Z V$ is a scheme.
+
+We've ignored the Zariski sheaf property, but it's relatively simple to show that it's preserved by fiber products.
+\end{proof}
+\begin{cor}
+\label{schemesoverschemes}
+If $S$ is a scheme, schemes over $S$ are the same thing as schemes with a map to $S$.
+\end{cor}
+\begin{proof}
+We can check the definition on an affine open cover of $S$; \cref{pullbackscheme} tells us that pulling back to $T$
+preserves scheminess.
+\end{proof}
+If $S$ is a space that's not a space, \cref{schemesoverschemes} isn't necessarily true.
+\subsection*{Quasicoherent sheaves and/or linear algebra.}
+In commutative algebra, one often studies a ring by studying its modules; these are linear-algebraic in nature,
+which can make them easier to reason about. The analogue for schemes is quasicoherent sheaves.
+\begin{defn}
+Let $X$ be a scheme. A \term{quasicoherent sheaf} (QC sheaf) $\sF$ on $X$ is data of, for all maps $f\colon \Spec
+A\to X$, an $A$-module $\sF_f$, and for every map $g\colon\Spec B\to\Spec A$, an isomorphism
+\begin{equation}
+	\alpha_{f,g}\colon \sF_{g\circ f} \overset\cong\to \sF_f\otimes_A B
+\end{equation}
+of $B$-modules, and such that a cocycle condition holds: given a triple
+\begin{equation}
+\xymatrix{
+	\Spec C\ar[r]^-h & \Spec B\ar[r]^-g & \Spec A\ar[r]^-f &X,
+}
+\end{equation}
+$\alpha_{f, g\circ h} = \alpha_{f\circ g, h}$ as maps $\sF_{f\circ g\circ h}\cong  (\sF_f\otimes_A B)\otimes_B C$,
+using the natural isomorphism $(\sF_f\otimes_A B)\otimes_B C\cong \sF_f\otimes_A C$.\footnote{The cocycle condition
+can be expressed more concisely by asking that $\sF$ is a functor from the category of affine schemes to abelian
+groups.} A morphism of quasicoherent sheaves $\sF\to\sG$ is data of maps of $A$-modules $\sF_f\to\sG_f$ for all
+$f\colon\Spec A\to X$, such that all induced diagrams commute. The category of QC sheaves on $X$ is denoted
+$\QCoh(X)$.
+\end{defn}
+\begin{rem}
+The word ``quasicoherent'' isn't really great unless you're playing Scrabble. It grew out of a generalization of
+coherent sheaves, which originally came from the analytic setting, where the name was more reasonable. You should
+think of analogues of modules when you hear QC sheaves.
+\end{rem}
+This is a lot of data! So we're going to find a way to express a quasicoherent sheaf with less data.
+\begin{prop}
+\label{QCequiv}
+If $X = \Spec A$, the functor $\Gamma\colon\QCoh(X)\to\Mod_A$ sending $\sF\mapsto\sF_\id$ is an equivalence of
+categories, with inverse sending an $A$-module $M$ to the sheaf $\sF_M$ defined by $(\sF_M)_f\coloneqq M\otimes_A
+B$ for all $f\colon\Spec B\to X$.
+\end{prop}
+\begin{exm}
+For any scheme $X$, there's a quasicoherent sheaf $\sO_X$, called the \term{structure sheaf} of $X$, defined to
+send $f\colon\Spec A\to X$ to $(\sO_X)_f = A$. The maps are what you think they are.
+\end{exm}

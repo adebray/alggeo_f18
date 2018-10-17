@@ -1,0 +1,194 @@
+The goal of today's lecture is to define a scheme, first heuristically and then rigorously.
+\begin{quotdefn}
+\label{firstschemedefn}
+A scheme is a ``space'' that is a Zariski sheaf which admits an ``open cover'' by affine schemes.
+\end{quotdefn}
+Of course, in order to do this, we need to know what all of these words --- spaces, Zariski sheaves, affine
+schemes, and open covers --- mean in this setting.
+\begin{rem}
+There's another approach to schemes using the formalism of \term{locally ringed spaces}, which is followed by
+Hartshorne, Vakil, and many others. It's more concrete, but it makes it harder to think about what a specific
+scheme, such as projective space, is supposed to be.
+\end{rem}
+The motivation for \cref{firstschemedefn} is that a scheme should be something which is locally defined by
+algebraic equations. For example, let's look at the \term{Fermat equation} $X_n = \set{x^n+y^n = z^n}$. Fermat was
+interested in solutions in $\Z$, but the set of solutions makes sense in any commutative ring. This suggests our
+definition of space, which is not the same as a topological space.
+\begin{defn}
+A \term{space} is a functor $X\colon\cat{CommRing}\to\Set$.
+\end{defn}
+Concretely, this means that for every ring $A$, we get a set $X(A)$, and for every map of commutative rings
+$f\colon A\to B$, we get a map of sets $X(f)\colon X(A)\to X(B)$, and these morphisms should compose well (meaning
+that $X(f\circ g) = X(f)\circ X(g)$ and $X(\id) = \id$). For example, we could let $X_n(A)$ denote the set of
+solutions to the Fermat equation in the ring $A$; then, if we've solved it in $A$, we can map the solution into $B$
+via $f\colon A\to B$, and we'll obtain a solution in $B$, so this defines a space $X_n$.
+
+We should also say how spaces interact.
+\begin{defn}
+A \term{morphism of spaces} $f\colon X\to Y$ is data of, for all commutative rings $A$, a map $f_A\colon X(A)\to
+Y(A)$ such that for all ring homomorphisms $g\colon A\to B$, the diagram
+\[\xymatrix{
+	X(A)\ar[r]^{f_A}\ar[d]^{X(g)} & Y(A)\ar[d]^{Y(g)}\\
+	X(B)\ar[r]^{f_B} & Y(B)
+}\]
+commutes.
+\end{defn}
+Schemes are special examples of spaces, in a way that feels surprisingly down-to-Earth.
+
+Our first example of a space is the solutions to the Fermat equation in $A$, as discussed above. Here's another
+example.
+\begin{exm}
+Let $A$ be a commutative ring. We'll define the space $\Spec A$ to be the functor $(\Spec A)(B) = \Hom(A, B)$;
+given a ring homomorphism $\vp\colon B\to C$, we use the map $\Hom(A,B)\to\Hom(A,C)$ given by postcomposition with
+$\vp$.
+\end{exm}
+\begin{defn}
+An \term{affine scheme} is a space of the form $\Spec A$ for some $A$.
+\end{defn}
+You don't have to be a commutative algebra expert to learn algebraic geometry, but you can see that commutative
+algebra is built into the definitions of algebraic geometry, so some commutative algebra knowledge is helpful.
+\begin{exm}
+The space $X_n$ sending $A$ to the solutions of the Fermat equation in $A$ is an affine scheme; explicitly,
+\[X_n\cong \Spec \Z[x,y,z]/(x^n+y^n-z^n).\]
+This is because a ring homomorphism $\Z[x,y,z]/(x^n+y^n-z^n)\to A$ is exactly the data of $x,y,z\in A$ satisfying
+the relation $x^n+y^n-z^n = 0$.
+\end{exm}
+\begin{lem}[Yoneda lemma]
+For all spaces $X$, $\Hom_{\cat{Spaces}}(\Spec A, X)\cong X(A)$.
+\end{lem}
+\begin{proof}[Proof sketch]
+First we define a map from $\Hom_{\cat{Spaces}}(\Spec A, X)$ to $X(A)$. Specifically, a map $f\colon\Spec A\to X$
+is the data of for all commutative rings $B$, $\Spec(A)(B)\to X(B)$. Take $B = A$; then, $\Spec(A)(A) = \Hom(A)$,
+so take the image of the identity. It remains to check this is an equivalence.
+\end{proof}
+\begin{cor}
+$\Hom_{\cat{Spaces}}(\Spec A, \Spec B)\cong\Hom_{\cat{CommRing}}(B, A)$.
+\end{cor}
+It's interesting that the direction reverses!
+\begin{proof}
+By the Yoneda lemma, $\Hom_{\cat{Spaces}}(\Spec A, \Spec B) = \Spec(B)(A) = \Hom(B,A)$.
+\end{proof}
+This tells you that as long as you make sure to reverse the arrows, anything you can do with commutative rings, you
+can do with affine schemes, and vice versa.
+\subsection*{Fiber products.}
+This is a categorical construction which we're going to use a lot.
+\begin{defn}
+Let $X$, $Y$, and $Z$ be sets and $f\colon X\to Z$ and $g\colon Y\to Z$ be set maps. Then the \term{fiber product}
+of $X$ and $Y$ over $Z$ is
+\begin{equation}
+	X\times_Z Y\coloneqq\set{(x,y)\in X\times Y\mid f(x) =g(y)}.
+\end{equation}
+If $X$, $Y$, and $Z$ are spaces, and $f$ and $g$ are maps of spaces, then the \term{fiber product} of $X$ and $Y$
+over $Z$ is the space defined by
+\begin{equation}
+	(X\times_Z Y)(A)\coloneqq X(A)\times_{Z(A)} Y(A).
+\end{equation}
+\end{defn}
+Technically, the notation should include $f$ and $g$, but in practice there's usually no ambiguity.
+\begin{exm}
+Suppose we're given commutative rings $A$, $B$, and $C$ and maps $\Spec B\to\Spec C$ and $\Spec A\to\Spec C$ (which
+are equivalent data to maps $\vp\colon C\to A$ and $\psi\colon C\to B$). Then
+\[\Spec A\times_{\Spec C}\Spec B \cong \Spec (A\otimes_C B),\]
+where $C$ acts on $A$, resp.\ $B$, through $\vp$, resp.\ $\psi$. It's worth working through this one on your own,
+though it's not extremely hard.
+\end{exm}
+We'll define some properties of affine schemes with geometric names, but the definitions will rest on algebraic
+properties of rings. One of the real miracles of algebraic geometry is that this really works to define geometry,
+and even extends geometric intuition to places such as finite fields that are otherwise very hard to reason about.
+\begin{defn}
+\label{closedemb}
+A morphism $\Spec B\to\Spec A$ is a \term{closed embedding} if the induced map $A\to B$ is surjective.
+\end{defn}
+Equivalently, $B = A/I$ for some ideal $I$ of $A$.
+
+The geometric idea behind defining $\Spec A$ is that geometric objects have a ring of functions on them, e.g.\ a
+smooth manifold $M$ has a ring $C^\infty(M)$ of smooth $\R$-valued functions, and a map of manifolds $M\to N$
+induces a map in the other direction by pullback: $C^\infty(N)\to C^\infty(M)$. Functional analysis results such as
+the Gelfand-Naimark theorem tell you what data you need to add to $C^\infty(M)$ to recover $M$ as a topological
+space, and we're trying to imitate this in a more abstract algebraic setting.
+
+This context allows us to explain why \cref{closedemb} deserves to be called a closed embedding: let $I =
+(f_1,f_2,\dotsc)$, so
+\begin{equation}
+	\Spec A/I = \set{f_i = 0\text{ for all } i} = \set{f = 0\text{ for all } f\in I}.
+\end{equation}
+So we think of $\Spec B$ as some kind of closed subspace of $\Spec A$, and $I$ as the ideal of functions on $\Spec
+A$ which vanish on $\Spec B$. This intuition can be turned into something precise.
+
+Using fiber products, we can extend this to all spaces.
+\begin{defn}
+\label{closedembsp}
+A map $X\to Y$ of spaces is a \term{closed embedding} if for all maps $\Spec A\to Y$, the ``pullback'' $\vp$ in the
+fiber product diagram
+\begin{equation}
+\label{fibclos}
+\gathxy{
+	\Spec A\times_Y X\ar[r]^-\vp\ar[d] & \Spec A\ar[d]\\
+	X\ar[r] & Y
+}
+\end{equation}
+is a closed embedding of affine schemes. In particular, we require $\Spec A\times_Y X$ to be an affine scheme,
+which is not always satisfied.
+\end{defn}
+For a quick consistency check, we should ask that \cref{closedemb,closedembsp} agree on affine schemes, and indeed,
+if $I\subset A$ is an ideal, and $\Spec B\to\Spec A$ is a closed embedding in the sense of \cref{closedemb},
+then~\eqref{fibclos} looks like
+\begin{equation}
+\gathxy{
+	\Spec(A/I\otimes_A B)\ar[r]\ar[d] & \Spec B\ar[d]\\
+	\Spec(A/I)\ar[r] & \Spec A,
+}
+\end{equation}
+and since $A/I\otimes_A B\cong B/BI$, this is a closed embedding in the more general sense as well.
+
+We'd also like to know what an open embedding is. We'd like to say that it's something whose complement is a closed
+embedding. Let's make this precise.
+\begin{defn}
+Let $Z\inj X$ be a closed embedding of spaces. The \term{complement} $X\setminus Z$ of $Z$ in $X$ is the space with
+$(X\setminus Z)(A)$ the set of $x\in X(A) = \Hom_{\cat{Spaces}}(\Spec A, X)$ such that the diagram
+\begin{equation}
+\label{emptyfib}
+\gathxy{
+	\varnothing\ar[r]\ar[d] & Z\ar[d]\\
+	\Spec A\ar[r]^-x & X
+}
+\end{equation}
+is a fiber product diagram. Here $\varnothing = \Spec(0)$, which sends every ring to the empty
+set.\footnote{Caution: this is only true if we work with functors on nonzero rings. However, $\varnothing = \Spec
+0$ still counts as affine. There are other ways to correct this issue, but this is among the fastest and cheapest.}
+\end{defn}
+\begin{defn}
+If $X = \Spec A$ is an affine scheme, an \term{open embedding} is a map of spaces $j\colon U\to X$ such that $U =
+X\setminus Z$ for some closed embedding $Z\inj X$.
+\end{defn}
+\begin{exm}
+Letting $X = \Spec A$, if $f\in A$ and $Z = \Spec(A/f)$, the map $A\surj A/f$ induces a closed embedding $Z\inj X$.
+Its complement is $\Spec A[f^{-1}]$, the \term{localization} of $A$ at $f$, so $\Spec A[f^{-1}]\to\Spec A$ is an
+open embedding.
+\end{exm}
+The intuition is that $f$ generates the ideal of functions that vanish precisely on the closed subset $Z$.
+Therefore on the complement of $Z$, they should be invertible, so we adjoin an inverse to $f$.
+\begin{lem}
+\label{factors_through}
+Let $X = \Spec A$ and $Z = \Spec A/I$. Then maps $\Spec B\to X\setminus Z$ correspond bijectively to maps $A\to B$
+such that $B\cdot I = B$.
+\end{lem}
+\begin{proof}
+The diagram~\eqref{emptyfib} specializes to
+\begin{equation}
+\gathxy{
+	\varnothing\ar[r]\ar[d] & \Spec(A/I)\ar[d]\\
+	\Spec B\ar[r] & \Spec A,
+}
+\end{equation}
+and this fiber product is $\Spec(B\otimes_A A/I) = \Spec(B/IB) = \varnothing$, which is equivalent to $IB = B$.
+\end{proof}
+\begin{exm}
+\term{Affine $n$-space} over $\Z$ is the affine scheme $\A_\Z^n\coloneqq\Spec \Z[x_1,\dotsc,x_n]$, and
+$0\inj\A_\Z^n$ is the closed embedding corresponding to the ideal $(x_1,\dotsc,x_n)$. The complement
+$\A_\Z^n\setminus 0$ is not affine for $n > 1$! We'll prove that later when we have more tools.
+\end{exm}
+\begin{ex}
+Show that $\A_\Z^n\setminus 0$ is the space which maps a ring $A$ to the set of $n$-tuples $(x_1,\dotsc,x_n)\in
+A^n$ such that the equation $\sum x_iy_i = 1$ has a solution.
+\end{ex}

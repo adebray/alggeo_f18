@@ -1,0 +1,83 @@
+It will be useful to have some examples to carry around.
+\begin{exm}
+The reason for irreducibility in the hypothesis of \cref{dimthm} is that dimension behaves poorly for reducible
+schemes: consider $Z = \set{xz = 0, yz = 0}\subset\A_k^3$. Geometrically, this is the union of the $xy$-plane and
+the $z$-axis, which clearly has two irreducible components, and $Z$ is two-dimensional. But $Z\setminus\set{xy =
+0}$ is open in $Z$ and has dimension 1. We would like the dimension of open subsets to be the same as that of the
+entire scheme, forcing us to consider irreducibility.
+\end{exm}
+\begin{exm}
+For a typical, useful example, consider the map $\A^2\to\A^2$ sending $(x,y)\mapsto (x,xy)$.\footnote{This is
+called the \term{blowup of the plane at $0$}, and fits into a more general theory of blowups.} The fiber at a
+field-valued point $(x,y)$ with $x\ne 0$ is a point. The fiber at $(0,y)$ is empty for $y\ne 0$, and at the origin,
+the fiber is an $\A^1$.
+
+So on $\A^2\setminus 0$, which is an open, dense set, we get that the fibers are either empty or have the correct
+dimension; otherwise they could be ``too big.''
+\end{exm}
+The main tool in our proof of \cref{dimthm} is the theory of finite morphisms, and in fact we'll end up reducing to
+Nakayama's lemma.
+\begin{ex}
+As a warm-up for this kind of argument, use Nakayama's lemma to show that if $\sF$ is a locally finitely generated
+QC sheaf on an irreducible scheme, then there exists a nonempty open $U$ such that $\sF|_U$ is a vector bundle.
+\end{ex}
+\begin{defn}
+A morphism of schemes $f\colon Y\to X$ is \term{finite} if it's affine and for every affine open $U = \Spec
+A\subseteq X$, if $Y\times_X U = \Spec B$, then $B$ is a finitely generated $A$-module.
+\end{defn}
+This is very strong: finite type was asking about finite generation as an algebra: $k[x]$ is a finitely-generated
+$k$-algebra but not a finitely generated $k$-module. Therefore $\A^1_k$ isn't finite over $\Spec k$!
+\begin{rem}
+If $f$ is an affine morphism, we showed that there's a sheaf of QC algebras $\sA$ with $X = \Spec_Y(\sA)$. Then,
+$f$ is finite iff $\sA$ is locally finitely generated as a quasicoherent sheaf
+\end{rem}
+\begin{comp}{exm}{enumerate}
+	\item The best example to have in mind is to fix a field $k$, and let $B$ be a finite-dimensional $k$-algebra.
+	Then $Y = \Spec B$ is finite over $\Spec k$. This implies $B$ is Artinian (which is a good exercise). So, for
+	example, $\Spec\C$ over $\Spec\R$, or the dual numbers or other nilpotent things.
+	\item A closed embedding is finite, because $A/I$ is generated as an $A$-module by $1_A$.
+	\qedhere
+\end{comp}
+\begin{prop}
+Let $A$ be a ring and $X\coloneqq\Spec A$. Let $Y\subset X\times\A^1_A$ be a closed subscheme, corresponding to an
+ideal $I$ of $A[x]$, let and $f\colon Y\to X$ be the restriction of the projection map. Then $f$ is finite iff $I$
+contains a monic polynomial.
+\end{prop}
+\begin{proof}
+First assume $f$ is finite, so there are $\vp_1,\dotsc,\vp_N\in A[t]$ which generate $A[t]/I$ as an $A$-module.
+Choose $d$ such that $d > \deg(\vp_i)$ for all $i$. Then there exist $a_1,\dotsc,a_N\in A$ such that
+\begin{equation}
+	t^d = \sum_{i=1}^N a_i\vp_i\bmod I,
+\end{equation}
+so
+\begin{equation}
+	t^d - \sum_{i=1}^N a_i\vp_i
+\end{equation}
+is in $I$ and is monic.
+
+The converse is basically the same logic, but in reverse order: take your monic polynomial and lift it to get
+generators.
+\end{proof}
+Finite morphisms are great because Nakayama's lemma applies to them. We'll see this in the proof of \cref{dimthm}.
+We'll also need another tool, Noether normalization.
+\begin{thm}[Noether normalization]
+\label{NNorm}
+Let $X\subsetneq \A_k^{n+1}$ be a closed subscheme. Then there's a finite field extension $k\inj k'$ and a
+projection map $\A_{k'}^{n+1}\to\A_{k'}^n$ such that the induced map $f\colon X_{k'}\to\A_{k'}^n$ is finite. If
+moreover $X$ is the zero locus of a single polynomial, then $f$ is dominant.
+\end{thm}
+Here $X_{k'}\coloneqq X\times_{\Spec k}\Spec k'$. By a projection, we mean a map induced by a linear surjection
+$(k')^{n+1}\to (k')^n$.
+\begin{rem}
+Suppose $k$ isn't a finite field. Then we don't need to pass to $k'$. (This will be evident from the proof.)
+\end{rem}
+\begin{exm}
+\label{1overx}
+For example, consider the map $\A^1\setminus 0\inj\A^2$ induced from the map $t\mapsto (t,t^{-1})$.  Algebraically,
+we get $k[t]\inj k[t,t^{-1}]$, which is not finite at the level of algebras (since we can take $t^{-N}$ for
+arbitrarily large $N$). Geometrically, you can use Nakayama's lemma to show that fibers of dominant maps over
+field-valued points must be nonempty, but the fiber over $0$ is empty.
+
+But you can project along any other line (except the $y$-axis), such as the diagonal, then the map is in fact
+finite.
+\end{exm}
