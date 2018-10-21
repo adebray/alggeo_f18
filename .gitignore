@@ -1,0 +1,14 @@
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+*.brf
+*.idx
+*.ilg
+*.ind
+m392c_Raskin_AG_notes.pdf
+Makefile

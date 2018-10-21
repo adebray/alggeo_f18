@@ -1,0 +1,102 @@
+\begin{quote}\textit{
+	``I'll stick to the party line.''
+}\end{quote}
+\begin{lem}
+Let $k$ be a field, $A$ be a $k$-algebra, and $f\in A$. If $j\colon U\inj X = \Spec A$ denotes the locus where
+$f\ne 0$, then restriction defines an isomorphism $j^*\Omega_X^1\overset\cong\to\Omega_U^1$.
+\end{lem}
+\begin{proof}
+Let $M$ be an $A[f^{-1}]$-module, which is the same thing as a quasicoherent sheaf on $U$. Thinking of $M$ as an
+$A$-module (i.e.\ $j^*M$), a derivation $\delta\colon A\to M$ is the same thing as a map $j^*\Omega_X^1\to M$ by
+adjunction. Then $\delta$ extends uniquely to a derivation $\widetilde\delta$ on $A[f^{-1}]$, because we know what
+it has to be on $f^{-1}$ by the Leibniz rule:
+\begin{equation}
+	\widetilde\delta(f^{-n}) = -n f^{-n-1}\widetilde\delta(f).
+\end{equation}
+This is a quick inductive argument: we know $\widetilde\delta(1) = 0$, so
+\begin{equation}
+	0 = \widetilde\delta(f^{-n}f^n) = f^n\widetilde\delta(f^{-n}) + f^{-n}\widetilde\delta(f^n) =
+	f^n\widetilde\delta(f^{-n}) + nf^{-1}\widetilde\delta(f).
+\end{equation}
+Now, given an arbitrary element $g/f^n\in A[f^{-1}]$, we define
+\begin{equation}
+	\widetilde\delta\paren{\frac{g}{f^n}} = g(-n)f^{-n-1}\delta(f) + f^{-n}\delta(g).
+\end{equation}
+It's fairly straightforward to check this is well-defined, and that it gives a derivation.
+\end{proof}
+As a corollary, we can define $\Omega_X^1$ as a quasicoherent sheaf on any $k$-scheme $X$: using Serre's theorem,
+it suffices to describe it on any open affine $j\colon U\inj X$, where it's just $\Omega_U^1$. The above lemma
+guarantees this behaves correctly on intersections.
+\begin{defn}
+\label{smoothdefn}
+A $k$-scheme $X$ is \term{smooth} if
+\begin{enumerate}
+	\item $X$ is locally of finite type over $k$,
+	\item $\Omega_X^1$ is a vector bundle, and
+	\item for all irreducible components $Z\subseteq X$, the rank of $\Omega_X^1|_Z$ is equal to $\dim Z$.
+\end{enumerate}
+\end{defn}
+\begin{rem}
+In practice, $X$ will generally be finite type.
+\end{rem}
+It is a nontrivial fact that if $X$ is smooth, every irreducible component is a connected component.
+\begin{rem}
+Our definition of irreducible is slightly more restrictive than the standard definition, which allows things such
+as $\Spec k[\e]/(\e^2)$. What we call irreducible is generally called integral. Fortunately, it doesn't make a
+difference in \cref{smoothdefn}, though this isn't obvious.
+\end{rem}
+\begin{comp}{exm}{enumerate}
+	\item $\A_k^n$ is smooth, because $\Omega_{\A_k^n}^1$ is free of rank $n$.
+	\item $\P_k^n$ is also smooth, because it has a cover by copies of $\A_k^n$, which is smooth.
+	\item If $n\ge 2$, then $X = \Spec k[t]/(t^n)$ is not smooth: it's zero-dimensional, but $\Omega_X^1\ne 0$.
+	\item Consider the coordinate axes in $\A_k^2$, $X \coloneqq \Spec A$, where $A \coloneqq k[x,y]/(xy)$. This is
+	not smooth.  It's one-dimensional, and as an $A$-module,
+	\begin{equation}
+		\Omega_X^1 = A[\d x, \d y]/(x\ud y + y\ud x).
+	\end{equation}
+	We have a resolution of this module defining generators and relations:
+\begin{equation}
+	\xymatrix@C=1.5cm{
+		A\ar[r]^-{1\mapsto x\ud y + y\ud x} & A^{\oplus 2}\ar[r]^-{(\d x,\d y)} & \Omega_X^1\ar[r] & 0.
+	}
+\end{equation}
+	Restricting to $(0,0)\in X$, we get
+\begin{equation}
+	\xymatrix{
+		k\ar[r]^-0 & k^{\oplus 2}\ar[r]^-\cong & \Omega_X^1|_{(0,0)}\ar[r] & 0,
+	}
+\end{equation}
+	so here it has rank 2, which is not the dimension of $X$. Therefore $X$ isn't smooth (it turns out $\Omega_X^1$
+	isn't a vector bundle, which is often the problem).
+	\item Let $f\in k[x]$ be a \term{separable} polynomial, meaning it has no repeated roots over the algebraic
+	closure $\overline k$ of $k$, and consider the scheme $X = \Spec k[x,y]/(y^2 - f(x))$.\footnote{If $\deg f \ge
+	5$, this is called a \term{hyperelliptic curve}.} From dimension theory, it's clear this is a curve (i.e.\
+	$1$-dimensional); we'll show it's smooth.
+
+	This time, in the resolution of $\Omega_X^1$
+	\begin{equation}
+		\xymatrix{
+			A\ar[r]^-f & A^{\oplus 2}\ar[r]^-g & \Omega_X^1\ar[r] & 0,
+		}
+	\end{equation}
+	$f(1) = \d(y^2-f(x)) = 2y\ud y - f'(x)\ud x$, so if we have a field $K$ and $x,y\in K$ satisfying $y^2 = f(x)$,
+	then if $2y\ud y = f'(x)\ud x$, then $y = 0$ and $f'(x) = 0$. Then $x$ is a root of $f$ and $f'$, but since we
+	assumed $f$ is separable, this cannot happen. Therefore $\Omega_X^1$ is a vector bundle.
+
+	The picture is that restricting the projection $\A^2\to\A^1$ sending $(x,y)\mapsto x$ to $X$ defines a map
+	whose fiber at $x\in\A^!$ is the square roots to $f(x)$ if $f(x)\ne 0$.
+	\item Our last example is an important pathology to be aware of. Suppose $k$ has characteristic $p > 0$, and
+	suppose $\lambda\in k$ is not a $p^{\mathrm{th}}$ power (in particular, $k$ is infinite; a typical example is
+	$k = \F_p(\lambda)$, the field of rational functions in $\lambda$). Let $k'\coloneqq k[t]/(t^p-\lambda)$,
+	adjoining a $p^{\mathrm{th}}$ root of $\lambda$; $t^p-\lambda$ is irreducible, so this is a field.
+
+	Then $\Spec k'$ is zero-dimensional over $k$, but $\Omega_{\Spec k'}^1\ne 0$, so this point is not smooth,
+	which is weird. This is because $\Omega_{\Spec k'}^1 = k'\cdot\d t/\d(t^p-\lambda)$, but $\d(t^p-\lambda) =
+	pt^{p-1} = 0$, so $\Omega_{\Spec k'}^1$ is one-dimensional.
+
+	$\Spec k'$ is, of course, smooth over itself, i.e.\ as a $k'$-scheme; smoothness is relative. The related
+	notion of relativity is intrinsic, but smoothness is always with respect to a base. Said a different way,
+	smoothness is a property of morphisms.
+	\qedhere
+\end{comp}
+

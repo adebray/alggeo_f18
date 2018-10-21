@@ -1,0 +1,101 @@
+\label{finiteness}
+Arun wasn't in class for this lecture; these notes were generously provided by Tom Gannon.
+\begin{defn}
+A scheme $X$ is \term{locally Noetherian} if it admits an open cover by affine open sets of the form $\Spec A$ for Noetherian $A$. If $X$ is also quasicompact, we say $X$ is \term{Noetherian}.
+\end{defn}
+
+\begin{rem}
+Note that if $U$ is a subset of a Noetherian scheme $X$, then $U$ is quasicompact. To see this, pick an affine open
+cover by Noetherian rings $\Spec A_i$ for $i \in \{1, \dotsc, m\}$; then $U^c$ is given by a finitely generated ideal. This also shows that $U$ is Noetherian. 
+\end{rem}
+
+\begin{lem}
+A scheme $X$ is Noetherian if and only if it is \term{topologically Noetherian}, that is, for all chains of closed
+$Z_i \subset X$, i.e. $Z_0 \supset Z_1 \supset\dots$, the $Z_i$ stabilize. 
+\end{lem}
+
+The affine case is just rewriting the definition, and the general case just follows from compactness (exercise!).
+This shows one odd feature of the Zariski topology --- we certainly don't have that $\C$ with the standard topology is Noetherian! An informal way of stating the above lemma is that taking a nontrivial closed subset is a big deal. 
+
+\begin{rem}
+The equivalent conditions above yield the increasing chain condition for open sets but the increasing chain condition on open sets does not imply $X$ is Noetherian (for example, $X = \Spec k[x_i]_{i \in \N} / (x_i^2)$). This example also shows that there is not a bijection between closed subschemes and open subschemes, although the dual numbers also shows this.
+\end{rem}
+
+\begin{defn}
+A scheme $X$ is \term{connected} if for all open covers $X = U \cup V$ such that $U \cap V = \emptyset$, either $U = X$ or $V = X$. 
+\end{defn}
+
+\begin{lem}
+If $X$ is a Noetherian scheme, then $X$ can be written as the disjoint union of finitely many \term{connected
+components} of $X$, i.e.\ open and closed connected subschemes.
+\end{lem}
+
+This involves writing the definition of a disjoint union of schemes $\coprod_{i = 1}^nX_i$, which we will leave as an exercise, but essentially any solution that isn't the functor $(\coprod_{i = 1}^nX_i) := \coprod_{i = 1}^nX_i(A)$ will likely work. 
+
+\begin{proof}
+If $x$ is a field valued point, then by Noetherianness there is a minimal $U_x \subset X$ which is closed and open and contains $x$. By minimality, $U_x$ is connected and $\{U_x\}_{x}$ is an open cover, where $x$ varies over all the field valued points, so because quasicompactness implies Zariski topology compactness (since every open cover of an affine admits a finite refinement), there are only finitely many $U_x$. 
+\end{proof}
+
+\begin{defn}
+For a quasicompact quasiseparated (qcqs) morphism $f: X \to Y$ (for example, $f$ finite type--most importantly this
+is the setting where pushforward is defined on quasicoherent sheaves), we obtain by adjunction a map $\sO_Y \to
+f_*\sO_X$ with some kernel $I$. This corresponds to a closed subscheme of $Y$, which we will denote
+$\overline{f(X)}$ and will call the \term{scheme-theoretic image}. 
+\end{defn}
+
+\begin{ex} If $X = \Spec A \to \Spec B = Y$ corresponds to a ring map $\phi: A \to B$, we can factor $\phi$ as a composite of a surjection and an injection $A \to \phi(A) \to B$. 
+\end{ex}
+
+The picture to have in mind here is that $X \to \overline{f(X)} \subset Y$, where $X \to \overline{f(X)}$ is \term{dominant}:
+
+\begin{defn}
+We say a qcqs morphism $f: X \to Y$ is \term{dominant} if $\overline{f(X)} = Y$. 
+\end{defn}
+
+Equivalently, $f$ is dominant if $\sO_Y \to f_*\sO_X$ is a monomorphism. The idea here is that if you have a point
+in the closure of the image there is a function realizing this, and we have a rough equivalent between a function
+being dominant and the associated map on functions being injective.
+
+\begin{exampx}
+The map $\A^1 \setminus 0 \to \A^1$ is dominant. 
+\end{exampx}
+
+\begin{defn}
+A quasicompact $U \subset X$ is \term{dense} if $\overline{U} = X$. 
+\end{defn}
+
+As an exercise, you can look up the relationship between density and \term{associated primes} for a ring $A$. 
+
+\begin{defn}
+A Noetherian scheme $X$ is \term{irreducible} if for every closed $Z \subset X$ with $Z \neq X$, $X \setminus Z$ is dense. 
+\end{defn}
+
+\begin{rem}
+Other textbooks often refer to this as a scheme being \term{integral}.
+\end{rem}
+
+\begin{exampx}
+The scheme $\Spec k[s,t]/(st)$ is not irreducible, which can be seen by setting $Z = \{t = 0\}$.
+\end{exampx}
+
+\begin{exampx}
+The scheme $\Spec k[\epsilon]/(\epsilon^2)$ is not irreducible since the closed subscheme $\Spec k$ has empty complement (which is in particular not dense). 
+\end{exampx}
+
+\begin{ex}
+We have that $\Spec A$ is irreducible if and only if $A$ is an integral domain.
+\end{ex}
+
+\begin{ex}
+If $X = \Spec A$, then the irreducible closed subschemes of $X$ correspond to primes of $A$. 
+\end{ex}
+
+\begin{defn}
+An \term{irreducible component} of $X$ is a maximal irreducible subscheme.
+\end{defn}
+
+\begin{lem}
+If $X$ is Noetherian, then there are only finitely many irreducible components and every field valued point factors through each one.
+\end{lem}
+
+We'll prove this next time. 
