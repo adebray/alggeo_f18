@@ -1,0 +1,92 @@
+\TODO: I may have missed stuff at the beginning. We're still proving the same theorem from last time.
+\begin{lem}
+Let $X\to\Spec k$ be a smooth scheme over a field $k$. If $k\inj L$ is any field extension, then $X_L\coloneqq
+X\times_{\Spec k}\Spec L$ is also smooth.
+\end{lem}
+\begin{proof}[Proof sketch]
+By Noether normalization, dimension is preserved under field extensions. If $\pi\colon X_L\to X$ is the map induced
+on the pullback, then
+\begin{equation}
+	\Omega_{X_L/L}^1\cong \pi^*\Omega_{X/k}^1\cong \Omega^1_{X/k}\otimes_k L. \qedhere
+\end{equation}
+\end{proof}
+Next we'll provide a useful criterion for separability.
+\begin{lem}
+Suppose $k\inj k'$ is a finite, inseparable field extension, and let $\overline k$ be the algebraic closure of $k$.
+Then $B\coloneqq k'\otimes_k \overline k$ isn't reduced.
+\end{lem}
+\begin{proof}
+Since $B$ is an Artinian $\overline k$-algebra, it's reduced iff it's a finite product of fields, which would mean
+\begin{equation}
+	B\cong \prod_{i=1}^{\dim_k k'} \overline k.
+\end{equation}
+Assuming this, the map $k'\to B\cong\prod \overline k$ gives $(\dim_k k')$-many distinct embeddings of $k'$ into
+$k$, which means $k'$ is separable over $k$.
+\end{proof}
+\begin{cor}
+If $\Spec k'$ isn't smooth as a scheme over $k$, then $(\Spec k')_{\overline k}$ isn't smooth over $\overline k$.
+\end{cor}
+In this setting, $(\Spec k')_{\overline k}$ is a product of Artinian rings which are not all fields (but their
+residue fields are all $\overline k$).
+
+Finally, now suppose $A$ is an Artinian local ring over $k$ with nonzero maximal ideal $\m$. We want to show that
+$\Omega_{A/k}^1\ne 0$. We've showed it already if $A/\m$ is separable over $k$; otherwise $\Omega_{A/k}^1$ surjects
+onto $\Omega_{(A/\m)/k}^1$, and we already know this is nonzero.
+
+\orbreak
+
+Now we'll study the local structure of smooth curves. The intuition is that, just like one-dimensional manifolds
+locally look like $\R$, a smooth curve over a field $k$ will locally look like $\A_k^1$.
+\begin{defn}
+A \term{curve} over a field $k$ is a one-dimensional, finite type scheme over $k$.
+\end{defn}
+We may add more hypotheses later. For now, let's throw in the assumptions that $X = \Spec A$ is affine and smooth.
+
+Here's a useful definition with somewhat weird notation, but everyone uses this notation, so it's worth getting
+used to.
+\begin{defn}
+Let $X = \Spec A$ be a smooth curve and $x$ be a closed point of $X$. Then the ideal sheaf of $x$ is denoted
+$\sO_X(-x)$.
+\end{defn}
+If $X = \Spec A$ is affine, $x = \Spec k'$ and the embedding determines a surjective map $A\surj k'$. In this case,
+$\sO_X(-x)$ is the module $\sM_x\coloneqq\ker(A\surj k')$.
+\begin{thm}
+\label{Oxxline}
+$\sO_X(-x)$ is a line bundle.
+\end{thm}
+\begin{rem}
+Assuming \cref{Oxxline}, we can define more line bundles $\sO_X(nx)\coloneqq\sO_X(-x)^{\otimes -n}$, i.e.\
+$(\sO_X(-x)^\vee)^{\otimes n}$.
+\end{rem}
+In particular, we have lots of line bundles on curves!
+
+If $X$ is a smooth curve, we know $\Omega_X^1$ is a lin bundle. Locally we can trivialize it.
+\begin{lem}
+For every $x\in X$, there's an open $U\subset X$ containing $X$ and a map $s\colon U\to\A_k^1$ such that
+$\theta_U\cdot\d s \cong \Omega_U^1$.
+\end{lem}
+\begin{proof}
+The general setup is to suppose $\sL$ is a line bundle on $Y$, and that we have sections
+$s_1,\dotsc,s_n\in\Gamma(Y,\sL)$ which define an epimorphism $\sO_Y^{\oplus n}\surj \sL$. Then $\set{s_i\ne
+0}_{i=1}^n$ is an open cover of $Y$.
+
+In our setting, we know there's a neighorhood $U_0$ containing $x$ on whiche $\Omega_X^1$ is trivial, generated say
+by some $\omega = \sum f_i\ud s_i$. As in the general case, there's an $i$ such that $\set{\d s_i\ne 0}$ is an open
+neighborhood of $x$. If $U = \set{\d s_i\ne 0}$, then $\d s_i$ generates $\Omega_U^1$.
+\end{proof}
+\begin{rem}
+If you want to apply this to higher-dimensional smooth schemes, you should replace $\Omega_X^1$ with
+$\Lambda^{\mathrm{top}}\Omega_X^1$.
+\end{rem}
+\begin{proof}[Proof of \cref{Oxxline}]
+The theorem is a local statement, so we can without loss of generality find an $s\colon X\to\A_k^1$ with $\d s$
+generating $\Omega_X^1$.
+
+If $k$ is algebraically closed, then $x$ is a $k$-point of $X$, so $s(x)\in\A_k^1 = k$, which means it's a
+``number,'' in that nothing weird could happen. In this case, $t\coloneqq s - s(x)\in\sO_X(-x)$ is a uniformizer:
+it trivializes this line bundle in an open neighborhood of $x$.\footnote{This is the same thing as a uniformizer in
+a DVR, which (\TODO) I have yet to puzzle out.}
+
+For more general $k$, $x\in X(k')$, where $k\inj k'$ is a finite field extension. In this case we compose with the
+minimal polynomial\dots
+\end{proof}
