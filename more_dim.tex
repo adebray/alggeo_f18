@@ -61,10 +61,13 @@ so $\dim U > \dim X - 1$, hence $\dim U\ge\dim X$. The other inequality is easy:
 \begin{lem}
 If $X$ is irreducible and $Y$ is a closed subscheme of $X\times\A^1$, then either
 \begin{itemize}
-	\item $Y$ is irreducible, or
+	\item $Y$ is $X\times\A^1$, or
 	\item there's a nonempty open $U\subseteq X$ such that $Y\times_X U\to U$ is finite.
 \end{itemize}
 \end{lem}
+
+The idea is best illuminated when working over a field and $X = \Spec k$. There, the lemma that closed subsets of $\A^1$ that aren't $\A^1$ are just finitely many points.
+
 \begin{proof}
 As usual we can assume $X = \Spec A$ is affine, so $Y = \Spec A[t]/I$ for an ideal $I\subseteq A[t]$. The first
 option is $I = 0$, so we assume $I \ne 0$, so there's a nonzero $f\in I$, and $f = \sum_{i=0}^d a_it^i$ for $a_i\in
