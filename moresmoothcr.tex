@@ -1,0 +1,123 @@
+Last time, we stated that over a perfect base field $k$, a curve is smooth iff it's normal iff it's regular.
+\begin{lem}
+\label{regsming}
+If $X$ is finite type over $k$, $k\inj k'$ is a separable field extension, and $x\in X(k')$ is a closed point
+corresponding to the maximal ideal $\m_x$, then the map $\m_x/\m_x^2\to x^*\Omega_X^1$ is an isomorphism.
+\end{lem}
+This map arises in the following way: we have a map $\d\colon\sO_X\to\Omega_X^1\to x^*\Omega_X^1$, and this map
+factors through a map $\sO_X/\m_x^2\to x^*\Omega_X^1$; then we precompose with the map
+$\m_x/\m_x^2\to\sO_X/\m_x^2$.
+\begin{rem}
+$\m/\m^2$ is called the \term{Zariski cotangent space}, and is often one's first definition of the cotangent space.
+However, the definition $x^*\Omega_X^1$ has better base change properties. Of course, by the lemma, they're
+equivalent.
+\end{rem}
+\begin{proof}[Proof of \cref{regsming}]
+The first step is to assume $X = \Spec A$ is affine. Since $k'$ is separable, $A/\m_x^2 = k'\oplus\m_x\oplus\m_x^2$
+is a square-zero extension, giving rise to a map $\delta\colon A\to\m_x/\m_x^2$; it's easy to check that $\delta$
+is a $k$-linear derivation. This gives rise to a map $\Omega_X^1\to\m_x/\m_x^2$, hence a map
+$x^*\Omega_X^1\to\m_x/\m_x^2$, and you can check this is the inverse map.
+\end{proof}
+Why does the lemma imply our claim about normal/regular implying smooth? Well, if we have a regular curve $X$, a
+finite extension $k\inj k'$, and $x\in X(k')$ closed, then $\m_x/\m_x^2$ is one-dimensional; since $k'$ is
+separable then $x^*\Omega_X^1$ is one-dimensional, so $X$ is smooth.
+\begin{exm}
+Separability isn't a very restrictive hypothesis: it holds in characteristic zero, as well as for all finite fields
+and all algebraically closed fields. But suppose $k$ is not a perfect field and $\lambda\in k$ isn't a
+$p^{\mathrm{th}}$ power. Then, consider the closed point $x = \set{t^p = \lambda}\subset\A_k^1$. If $k'$ is the
+residue field of $x$, then $k\inj k'$ is an inseparable field extension.
+
+The maximal ideal corresponding to $x$ is $\m_x = (t^p-\lambda)$. The map $(t^p-\lambda)/(t^p-\lambda)^2\to k'\cdot
+dt$ is $\d = 0$, so \cref{regsming} doesn't hold in this setting.
+\end{exm}
+It is nonetheless useful to consider imperfect fields. ``Experimental evidence'' suggests that if you care about
+varieties, you'll probably only define them over perfect fields. But sometimes you'll want to consider families of
+varieties parameterized by some data, which can be thought of as a variety over some function field, and this
+function field need not be perfect.
+
+Nevertheless, we now assume $k$ is perfect. We now give a construction of smooth projective curves. Start with a
+smooth affine curve $X\subseteq\A^n$. Choose one of the coordinate charts $\A^n\subseteq\P^n$; we can thus regard
+$X$ as a subscheme of $\P^n$ and take its closure $\overline X$. This is projective, but it might not be smooth.
+
+Thus we will take the \term{normalization} of $\overline X$, which will yield a smooth projective variety.
+\begin{rem}
+Let $Y = \Spec A$, where $A$ is an integral domain of finite type over $k$. Let $k(Y)$ denote the fraction field of
+$A$. If $\overline A$ denotes the integral closure of $A$ in $k(Y)$, let $Y^{\mathrm{nm}}\coloneqq\Spec(\overline
+A)$, which is called the \term{normalization} of $Y$.
+
+The normalization has a few nice properties (which we're not going to prove here): $Y^{\mathrm{nm}}$ is finite type
+over $k$, and hence the natural map $Y^{\mathrm{nm}}\to Y$ is finite, and an isomorphism on some open subscheme of
+$Y'$. Moreover, normalization localizes well on $Y$: if $U\subset Y$ is an affine open, then $U^{\mathrm{nm}} =
+Y^{\mathrm{nm}}\times_Y U$. Therefore normalization generalizes to irreducible $k$-schemes of finite type.
+\end{rem}
+So we can take the normalization $(\overline X)^{\mathrm{nm}}$, which is finite over $\overline X$. It's easy to
+see that the composition of a finite morphism then a projective morphism is projective: more generally, using the
+Segre embedding, one can show that the composition of two projective morphisms is projective.
+\begin{exm}
+Assume $\chr(k)\ne 2$ and let $f(t)\in k[t]$ be a separable polynomial. Let $X = \set{y^2 = f(t)}\subseteq\A^2$.
+Then $\overline X\subset\P^2$ is not smooth if $\deg f\ge 4$.
+\end{exm}
+Since we care more about $(\overline X)^{\mathrm{nm}}$ than about $\overline X$, we're going to make the
+normalization implicit.
+\begin{cor}
+If $X$ is a smooth affine curve over $k$, there's a smooth projective curve $\overline X$ and an embedding
+$X\inj\overline X$; this data is unique up to unique isomorphism.
+\end{cor}
+We sometimes call $\overline X$ the \term{compactification} of $X$.
+\begin{proof}
+Suppose $\overline X_1$ and $\overline X_2$ are both compactifications of $X$. Because $\overline X_1$ is smooth,
+it admits a map to $\overline X_2$ (\TODO: I think this is because we have a map $X\to\overline X_2$ and $X$ is a
+dense subscheme of $\overline X_1$), and in the same way we have a map $\overline X_2\to\overline X_1$. The
+compositions of these maps are the identity on a dense subscheme, hence must be the identity.
+\end{proof}
+\begin{rem}
+Another way to think of $\overline X$ is the initial projective scheme recieving a map from $X$. This follows by
+the valuative criterion.
+\end{rem}
+One reasonable question is to what extent this generalizes.
+\begin{defn}
+A scheme $S$ is \term{separated} if the diagonal map $\Delta\colon S\to S\times S$ is a closed embedding.
+\end{defn}
+This is the analogue of the Hausdorff condition in differential topology --- and, just as in differential topology,
+the standard counterexample is the line with two origins.
+\begin{exm}
+The line with two origins is the space $X$ whose functor of points assigns to $\Spec A$ the set of (isomorphism
+classes of) open covers $\set{U,V}$ of $\Spec A$ together with maps $f\colon U\to\A^1$ and $g\colon U\to\A^1$ such
+that $f$ and $g$ coincide when they're nonzero.
+
+If you figure out what the closed point are, there's one for every closed point of $\A^1$, except there are two
+points corresponding to the origin.
+\end{exm}
+Affine schemes are separated, because the multiplication map $m\colon A\otimes A\to A$ is surjective.
+\begin{exm}
+Show that $\P^n$ is separated. Or, more generally, any projective scheme (even any quasiprojective
+scheme\footnote{A scheme is \term{quasiprojective} if it's an open subscheme of a projective scheme.}) is
+surjective. Hint: you'll want to go back to the definition of $\P^n$.
+\end{exm}
+Separability is a global, not local condition. As such, it can be more subtle than one expects.
+\begin{lem}
+Suppose $S$ is a separated scheme and $f,g\colon T\rightrightarrows S$. Then the equalizer $\set{f = g}$ is closed
+in $T$.
+\end{lem}
+\begin{proof}
+$\set{f = g} = T\times_{S\times S} S$, and the inclusion from this to $T$ is the base change of the diagonal, and
+the pullback of a closed morphism is closed.
+\end{proof}
+\begin{cor}
+\label{sepopen}
+Suppose $S$ is an irreducible separated scheme with an open cover $\fU$, and $T$ is an affine scheme.\footnote{It might
+be possible to remove the affine hypothesis.} Suppose we have a map $S\to T$ such that for each $U\in\fU$, the
+induced map $U\to T$ is an open embedding. Then $S\to T$ is an open embedding.
+\end{cor}
+Again, the standard counterexample is the map from the affine line with two origins to $\A^1$.
+
+Assuming \cref{sepopen}, we can deduce a nice generalization of normalizations.
+\begin{cor}
+Let $X$ be a separable smooth curve over $k$. Then there's a smooth projective curve $\overline X$ together with an
+open embedding $X\inj\overline X$, and this data is unique up to unique isomorphism.
+\end{cor}
+\begin{proof}
+Cover $X$ by nonempty affines $U_i$; then we have embeddings $U_i\inj\overline U_i$; if $U_i$ and $U_j$ intersect,
+then $\overline{U_i} = \overline{U_i\cap U_j} = \overline{U_j}$. Therefore $\overline X = \overline U_i$ for any
+$i$. All of the map $U_i\to\overline X$ coincide on the intersection, so $X\inj\overline X$ is an open embedding.
+\end{proof}

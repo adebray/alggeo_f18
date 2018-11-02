@@ -1,0 +1,74 @@
+Last time, we showed that if $x\in X$ is a field-valued point, where $X$ is a smooth curve over a field $k$, then
+$\sO_X(-x)$ is a vector bundle.
+\begin{lem}
+\label{-nx}
+Let $x\in X$ be a closed point and $f\colon X\to\A^1$ be such that $f\in\bigcap_{n\ge 0} \sO(-n\cdot x)$. Then
+there is an open $U\subset X$ containing $x$ such that $f|_U = 0$.
+\end{lem}
+\begin{proof}
+Without loss of generality, we have a uniformizer $t$ for $\sO(-x)$ in a neighborhood of $X$: $\sO_X(-x)
+\cong\sO_X\cdot t$. Therefore, since $f\in\sO_X(-x)$, there's a unique $(f/t)\in\sO_X$ with $t\cdot (f/t) = f$.
+Applying this for all $n$, we recover a unique $f/t^n$ for each $n$, hence a sequence of ideals
+\begin{equation}
+	\paren f\subseteq\paren{\frac ft}\subseteq\paren{\frac{f}{t^2}}\subseteq\dots
+\end{equation}
+which must stabilize for some $n\gg 0$. Therefore $f/t^{n+1} = gf/t^n$, so $f(1-tg) = 0$. Let $U\coloneqq\set{1-tg
+\ne 0}$; then $x\in U$, and $U$ is the open neighborhood we wanted.
+\end{proof}
+\begin{cor}
+\label{locir}
+\TFAE:
+\begin{enumerate}
+	\item $X$ has an open cover by irreducible schemes.
+	\item Every connected component of $f$ is irreducible.
+\end{enumerate}
+\end{cor}
+\begin{defn}
+If either of the equivalent conditions in \cref{locir} holds, $X$ is called \term{locally irreducible}.
+\end{defn}
+\begin{proof}[Proof of \cref{locir}]
+Both of these are equivalent to the condition that, for all opens in $X$ and functions $f,g\colon X\to\A^1$ with
+$f\cdot g = 0$, there is an open cover $\fU$ of $X$ such that for all $U\in\fU$, $f|_U = 0$ or $g|_U = 0$.
+
+If $x\in X$ is a closed point, it suffices to show there's a neighborhood $U$ of $x$ such that $f|_U = 0$ or $g|_U
+= 0$, and we can assume there's a uniformizer $t$ near $x$. By \cref{-nx}, either $f$ equals $0$ in a neighborhood
+of $x$, or there's an $n$ such that $f\in\sO_X(-nx)$ and $f\not\in\sO_X(-(n+1)x)$. That is, $f = t^nf_0$, and
+$f_0(x)\ne 0$. Our desired open is $U\coloneqq\set{f_0\ne 0}$, which contains $x$, and $0 = fg = t^nf_0g$; since
+$t^n$ isn't a zerodivisor, $f_0g = 0$; since $f_0$ is a unit, then $g = 0$ on $U$.
+\end{proof}
+We will now adopt the convention that curves are smooth and irreducible (hence also connected).
+\begin{defn}
+If $X$ is a curve over $k$, the \term{field of rational functions} on $X$, denoted $k(X)$, is the fraction field of
+$A$, where $U = \Spec A$ any nonempty affine open in $X$.
+\end{defn}
+Think about why this is well-defined. On $\A_k^1$, this is $k(x)$, the field of rational functions in one variable,
+which is something you've seen before.
+
+If $x\in X$ is a closed point, we can define a map $v_x\colon k(X)^\times\to\Z$ called \term{valuation at $x$}:
+specifically, for all $f\in k(X)^\times$, there's a unique $v_x(f)\in\Z$ such that $t^{-v_x(f)}\cdot f\in
+A_{\m_x}^\times$, where $U = \Spec A$ is an affine open neighborhood of $x$ and $\m_x$ is the maximal ideal
+corresponding to the closed point $x$. This $v_x(f)$ is thought of as the order of vanishing of $x$: $v_x(t) = 1$,
+and $v_x(t^n) = n$ for all $t\in\Z$ (a pole corresponds to a negative order of vanishing). We will sometimes use
+the convention that $v_x(0) = \infty$.
+
+Here's why this is true. If $f\ne 0$, $f = g_1/g_2$ for $g_1,g_2\in \Fun(X)$, and such that $g_1\in\sO_X(-nx)$,
+$g_1\not\in\sO_X(-(n+1)x)$, $g_2\in\sO_X(-mx)$, and $g_2\not\in\sO_X(-(m+1)x)$. Then $v_x(f)\coloneqq n-m$. This
+behaves well with respect to localization, hence extends well to non-affine schemes.
+\begin{rem}
+A few properties of the valuation: $v_x(fg) = v_x(f) + v_x(g)$, and $v_x(f+g) \ge \min\set{v_x(f), v_x(g)}$.
+\end{rem}
+\begin{lem}
+If $f\in k(X)$, then $f\in\Fun(X)\subseteq k(X)$ iff $v_x(f)\ge 0$ for all closed points $x$ in $X$.
+\end{lem}
+The idea is that if $f$ has no poles, it's really a function.
+\begin{proof}
+Let $x\in X$ be an arbitrary closed point. It suffices to show that there's an open neighborhood $U$ of $x$ with
+$f\in\Fun(U)$. We may therefore assume $X = \Spec A$ is affine, so $f = g_1/g_2$ for $g_i\in\Fun(X)$, and $v_x(g_1)
+\ge v_x(g_2)$. We can assume $v_x(g_2) = 0$ by clearing out factors of the uniformizer $t$ near $x$; therefore
+$g_2(x)\ne 0$, so $x\in\set{g_2\ne 0}$, and $f$ is defined as a function on this open subset.
+\end{proof}
+We conclude with an important corollary.
+\begin{cor}
+If $X = \Spec A$ is affine, then $A$ is integrally closed in $k(X)$.
+\end{cor}
+(proof \TODO)

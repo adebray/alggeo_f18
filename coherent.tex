@@ -1,0 +1,98 @@
+Today we'll say some more nice things about curves.
+\begin{defn}
+A quasicoherent sheaf $\sE$ on a Noetherian scheme $X$ is \term{coherent} if it's locally finitely generated.
+Coherent sheaves form an abelian subcategory of $\QCoh(X)$ denoted $\cat{Coh}(X)$.
+\end{defn}
+% comm alg: flat => torsion-free.
+% nakayama =>coherent + flat is vector bundle
+\begin{lem}
+\label{cohlem}
+Let $X$ be a smooth curve and $\sE\in\cat{Coh}(X)$. Then $\sE$ is a vector bundle iff it's locally torsion-free,
+i.e.\ there is some cover $\fU$ of $X$ such that if $U\in\fU$, $s\in\Gamma(U, \sE)$, and $f\in\Gamma(U, \sO_U)$
+satisfy $f\cdot s = 0$, then $s= 0$ or $f = 0$.
+\end{lem}
+\begin{rem}
+One can prove this in a more general context: using commutative algebra, a torsion-free module is flat, and
+Nakayama shows that a flat coherent sheaf is a vector bundle. But we'll do a shorter proof.
+
+A general coherent sheaf might not feel like a sheaf of functions; sometimes your intuition is better spent
+thinking of it as a sheaf of measures, because of things such as delta ``functions'' in a sheaf.
+\end{rem}
+\begin{proof}[Proof of \cref{cohlem}]
+Let $x\in X$ be a closed point. Then $x^*\sE$ is a vector space, hence has a basis $\overline s_1,\dotsc,\overline
+s_n$. If $X$ is affine, which we can assume without loss of generality, these lift to
+$s_1,\dotsc,s_n\in\Gamma(X,\sE)$, and define a morphism
+\begin{equation}
+\label{Snt}
+	(s_1,\dotsc,s_n)^{\mathrm T}\colon\sO_X\longrightarrow\sE
+\end{equation}
+whose cokernel is $0$. Therefore by Nakayama's lemma, there's an affine open neighborhood $U$ of $x$ such that
+$s_1,\dotsc,s_n$ generate $\Gamma(U,\sE)$, and such that there's a uniformizer $t$ on $U$. We claim the restriction
+of~\eqref{Snt} to $U$, $\sO_U^{\oplus n}\to\sE|_U$ is an isomorphism. Clearly it's an epimorphism, so we prove it's
+a monomorphism.
+
+Suppose $f_1,\dotsc,f_n\in\Gamma(U, \sO_U)$ are such that $\sum f_is_i = 0$. Restricting to $x$,
+\begin{equation}
+	\sum_{i=1}^n f_i(x)\overline s_i = 0,
+\end{equation}
+but since the elements $\overline s_i$ are linearly independent, $f_i(x) = 0$ for all $i$, which is equialent to
+$f_i\in t\cdot \sO_U = \sO_U(-x)$. Therefore
+\begin{equation}
+	\sum_{i=1}^n t\paren{\frac{f_i}{t}}s_i = 0,
+\end{equation}
+so by torsion-freeness, $\sum (f_i/t)s_i = 0$. Iterating, we can show that each $f_i$ vanishes to infinite order,
+but that can only happen when $f_i = 0$.
+\end{proof}
+\begin{thm}[Valuative criterion of properness]
+\label{VCoP}
+Let $U\subseteq X$ be a nonempty open in an irreducible smooth curve $X$. Then any map $U\to\P^n$ extends uniquely
+to $X$.
+\end{thm}
+\begin{rem}
+This is very false in higher dimensions: for example, consider the map $\A^2\setminus\set 0\to\P^1$ which sends a
+point to the line it's on. There's no way to extend this to $\A^2$.
+\end{rem}
+\begin{proof}[Proof of \cref{VCoP}]
+By uniqueness, we can reduce to the case where $X = \Spec A$ and $U = \set{f\ne 0}\subset X$ for some $f\in A$. The
+map $U\to\P^n$ is equivalent to a line bundle $\sL_U$ on $U$, which is equivalent to an $A[f^{-1}]$-module, which
+we also denote $\sL_U$, together with $(n+1)$ sections $s_0,\dotsc,s_n$ everywhere nonzero, which correspond to
+generators over $A[f^{-1}]$.
+
+Now let $\sL_X\coloneqq A\cdot s_0 + \dotsb + A\cdot s_n\subseteq\sL_U$, which defines a quasicoherent sheaf on
+$X$, and since it's a submodule of $\sL_U$, it's torsion-free. Hence, by \cref{cohlem}, it's a vector bundle, and
+since it's rank 1 on a dense subset, it's a line bundle. Since it comes with generators $s_0,\dotsc,s_n$, we get a
+map $X\to\P^n$, which clearly extends the map from $U$.
+
+For uniqueness, suppose we have another extension, which is data of $\sL_X$ and nonvanishing sections
+$\sigma_0,\dotsc,\sigma_n$. Then $\sigma_i\mapsto s_i$ deifnes an isomorphism $\sL_X\cong j_*\sL_U$.
+\end{proof}
+\begin{rem}
+The argument formally extends to yield the same conclusion with $\P^n$ replaced with any \term{projective
+$k$-scheme}, i.e.\ a $k$-scheme $Z$ with a closed embedding to $\P^n$ for some $n$: compose with the map to $\P^n$,
+apply the theorem, then restrict to $Z$.
+\end{rem}
+Next we'll discuss some variations on smoothness.
+\begin{defn}
+A curve $X$ is \term{regular} if $\sO_X(-x)$ is a line bundle for every closed point $x$ of $X$.
+\end{defn}
+\begin{defn}
+An affine scheme $\Spec A$ is \term{normal} if $A$ is integrally closed in its fraction field.
+\end{defn}
+The point of normality is that a finite map $X'\to X$ which is generically an isomorphism is an isomorphism if $X$
+is normal. The counterexample to keep in mind is (\TODO picture).
+
+Last class we showed that (for curves) smooth implies regular, and then that regular implies normal.
+\begin{prop}
+For $X$ a curve, normal implies regular, and if the ground field $k$ is perfect, then smooth, normal, and regular
+are equivalent.
+\end{prop}
+It's crucial that we're in dimension 1.
+\begin{proof}
+We assume $A$ is integrally closed in its fraction field $k(X)$, and want to prove regularity. Choose a maximal
+ideal $\m\subset A$ (corresponding to some $\sO_{\Spec A}(-x)$, with $x\in\Spec A$ a closed point), and choose some
+$f\in\m\setminus\m^2$. Then $A/f$ is a zero-dimensional ring, and without loss of generality we may assume it's
+local. Therefore $\m^n = 0$ for some $n\gg 0$ in $A/f$, so $\m^n\subset(f)$ in $A$. We'll choose $n$ minimal, and
+will show $n = 1$ (maybe after a further localization).
+
+Hence, assume $n\ge 2$\dots \TODO
+\end{proof}
