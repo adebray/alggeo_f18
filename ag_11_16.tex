@@ -1,0 +1,68 @@
+Let $X$ be a smooth projective curve over $k$. We continue with the proof of the finite-dimensionality of cohomology of $X$ valued in a coherent sheaf. So far, we've showed that it holds for $\P^1$ and $\sO_{\P^1}$, and that $(X,\sL)$ satisfies it iff $(X,\sO_X)$ does (here $\sL$ is a line bundle).
+\begin{prop}
+\label{VBFD}
+If $(X,\sL)$ satisfies finite-dimensionality of cohomology for all line bundles $\sL$, then so does $(X,\sE)$ for all vector bundles $\sE$.
+\end{prop}
+Before we can prove this, we need a lemma.
+\begin{lem}
+\label{lbext}
+Let $X$ be a smooth curve, $\sE\to X$ be a vector bundle, and $U\subset X$ be a nonempty open. Suppose $\sL_U\to\sE|_U$ is a morphism of quasicoherent sheaves that is everywhere nonzero, where $\sL_U$ is a line bundle on $U$. Then there's a unique extension of $\sL_U$ to $X$ together with a nonvanishing map to $\sE$ (where uniqueness is up to isomorphism of this data).
+\end{lem}
+\begin{proof}
+Let $\P(\sE)$ be the projectivization of $\sE$; the natural map $\P(\sE)\to X$ is projective. The map $\sL_U\to \sE|_U$ defines a map $U\to\P(\sE)$; by the valuative criterion, this extends uniquely to $X$.
+\end{proof}
+Of course, since we're using the valuative criterion, this doesn't generalize to higher-dimensional schemes!
+\begin{proof}[Proof of \cref{VBFD}]
+We induct on the rank $r$ of $\sE$; for $r = 1$, $\sE$ is a line bundle, and we've already done this case.
+
+In general, choose a $U\subseteq X$ and an isomorphism $\sE|_U\cong\sO_U^{\oplus r}$. The first coordinate defines a map $\sO_U\to\sE|_U$, which by \cref{lbext} extends uniquely to an everywhere nonzero embedding $\sL\to\sE$ on $X$. Therefore $\sE/\sL$ is a vector bundle, and we have a short exact sequence
+\begin{equation}
+\label{inductshortexact}
+\shortexact{\sL}{\sE}{\sE/\sL}.
+\end{equation}
+Since $\sL$ is rank $1$ and $\sE/\sL$ is rank $r-1$, both have finite-dimensional cohomology, by the inductive assumption. Therefore $\sE$ must too, using the long exact sequence in cohomology associated to~\eqref{inductshortexact}.
+\end{proof}
+And here's the big fish.
+\begin{cor}
+If $(X,\sE)$ has finite-dimensional cohomology for every vector bundle $\sE\to X$, then $(X,\sF)$ does for all coherent sheaves $\sF$ on $X$.
+\end{cor}
+\begin{proof}
+Let $U = \Spec A$ be an affine open in $X$; then $\sF|_U$ is coherent, meaning it is a finitely generated $A$-module. Let $\sF_\tau\subseteq\sF$ be the maximal torsion module; explicitly,
+\begin{equation}
+    \sF_\tau = \set{s\in\sF\mid \text{There exists } f\in A\setminus 0\text{ such that } fs = 0.}
+\end{equation}
+Then $\sF/\sF_\tau$ is a vector bundle. We know that on curves, vector bundles are equivalent to torsion-free coherent sheaves. If $s\in\sF/\sF_\tau$ is a torsion element, there's an $f\in A\setminus 0$ with $fs = 0$, so lift $s$ to some $\widetilde s\in\sF$; then $fs\in\sF_\tau$, so there's a $g\in A\setminus 0$ with $fg\widetilde s = 0$. Then $fg\ne 0$, so $\widetilde s$ is torsion. This construction globalizes, hence makes sense for non-affines.
+
+Therefore we have a short exact sequence
+\begin{equation}
+\shortexact{\sF_\tau}{\sF}{\sF/\sF_\tau}.
+\end{equation}
+We know $\sF/\sF_\tau$ is a vector bundle, hence has finite-dimensional cohomology, so it suffices to show that $\sF_\tau$, which is a torsion coherent sheaf, has finite-dimensional cohomology. It's an exercise to show that a torsion coherent sheaf is isomorphic to a finite direct sum of skyscraper sheaves, namely those of the form $\sO_X/\sO_X(-nx)$ for $x\in X$ and $n\ge 0$; then you can check directly these have finite-dimensional cohomology, so we're done.
+\end{proof}
+\begin{ex}
+As suggested in the proof, show that a torsion coherent sheaf on $X$ is isomorphic to a finite direct sum of skyscraper sheaves $\sO_X/\sO_X(-nx)$ for $x\in X$. (On $\A^1$, this is the Jordan decomposition of a finitely generated $k[t]$-module.)
+\end{ex}
+The following exercise isn't directly necessary for the proof, but it's really good.
+\begin{ex}
+Let $S$ be a Noetherian scheme. Then a coherent sheaf $\sF\to S$ is flat iff it's a vector bundle. (Hint: Nakayama's lemma.)
+\end{ex}
+Now we can prove the general theorem.
+\begin{proof}[Proof of theorem TODO]
+We know the theorem for $\P^1$. If $X$ is a smooth projective curve, it has a finite, flat morphism $f\colon X\to\P^1$. Then $f_*\sO_X$ is a coherent sheaf on $\P^1$ (in fact, even a vector bundle by \cref{nakex}). Last time, we showed that for an affine morphism $f$, $R\Gamma(\P^1, f_*\sF)\cong R\Gamma(X,\sF)$, so the theorem follows for $\sO_X$ from the theorem for $f_*\sO_X$.
+\end{proof}
+Now, we will place an additional assumption on our curves $X$: that $k$ is algebraically closed in $k(X)$. That is, if $k'\subset k(X)$ is a finite extension of $k$, then $k' = k$. The idea is to rule out curves which really are over finite extensions of $k$. This condition is called \term{geometric irreducibility}, and is typically formulated differently, that if $\overline k$ is an algebraic closure of $k$, then $X\times_{\Spec k}\Spec\overline k$ is irreducible. This is a technical assumption you don't have to think too strongly about; when $X$ is smooth and projective, this is equivalent to asking that $H^0(X,\sO_X)$ (i.e.\ $\Fun(X)$) is isomorphic to $k$.
+\begin{ex}
+Show that if $k\inj k'$ is a finite extension and $\overline k$ is an algebraic closure of $k'$ (hence also of $k$), then $\Spec k'\times_{\Spec k}\Spec\overline k$ is a disjoint union of $n$ points, where $n = [k':k]$.
+\end{ex}
+\begin{defn}
+The \term{genus} of a smooth projective curve $X$, denoted $g = g(X)$, is $\dim H^1(X,\sO_X)$.
+\end{defn}
+\begin{exm}
+The genus of $\P^1$ is zero, because we showed $H^1(\P^1;\sO_{\P^1}) = 0$.
+\end{exm}
+\begin{cor}
+Let $X$ be a smooth projective curve and $x\in X$ be a closed point. Then $X\setminus x$ is affine.
+\end{cor}
+\begin{proof}
+Let $g\coloneqq g(X)$ and consider $H^0(X;\sO_X((g+1)x))$. These are functions with a pole of order at most $g$ at $x$, and has dimension at least $2$. (\TODO: I missed why.) This means it has at least one nonconstant function $f\colon X\setminus x\to\A^1$. By the valuative criterion, $f$ extends uniquely to a rational map $\widetilde f\colon \dashrightarrow \P^1$ with $f^{-1}(\A^1) = X\setminus x$. Since $f$ is affine, $f^{-1}(\A^1)$ is an affine scheme.
+\end{proof}

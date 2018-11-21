@@ -1,0 +1,65 @@
+% blind TeXing.
+% about divisors. Missed first ~12 minutes of class
+
+\TODO: about 10 to 12 minutes of divisor theory on curves. Everything today is explicitly over curves.
+\begin{rem}
+$\sO_X(D)$ is trivialized away from the \term{support} of $D$, i.e.\ the union of the $x_i$ with nonzero multiplicity in $D$, because $1\in\Gamma(X\setminus\supp(D), \sO_X(D))$.
+\end{rem}
+\begin{prop}
+This gives a bijection between the set of divisors on $X$ and the set of isomorpism classes of line bundles $\sL$ on $X$ together with nonzero section $s$ of $\sL|_{\eta_X}$, sending $D\mapsto (\sO_X(D), 1)$.
+\end{prop}
+\begin{proof}
+We'll construct the inverse: given a line bundle $\sL$ on $X$ with a nonzero $s\in\Gamma(\eta_X, \sL)$, we will define a divisor $D = \sum n_ix_i$, where $n_i$ is the order of the pole of $s$ at $x_i$.
+
+If $\sL$ is trivial, we can choose a trivialization $s$, which is the same as a nonzero rational function $f$ on $X$. Let $x_1,\dotsc,x_n$ be the zeros of $f$, and define
+\begin{equation}
+    D\coloneqq \sum_{i=1}^n v_{x_i}(f) x_i.
+\end{equation}
+This is independent of the choice of trivialization, because any two trivializations differ by an invertible function on $X$, which doesn't change valuations (the invertible function has no zeros and no poles).
+
+Since divisors are compatible with restriction, we can generalize this construction to nontrivial line bundles. Now you should check this is actually an inverse to the map defined in the proposition statement.
+\end{proof}
+\begin{cor}
+Any line bundle is of the form $\sO_X(D)$ for some divisor $D$.
+\end{cor}
+\begin{defn}
+A divisor $D$ is \term{principal} if $D$ is the divisor of some nonzero rational function $f$, i.e.\ $D = \sum v_{x_i}(f) x_i$.
+\end{defn}
+Equivalently, $\sO_X(D)$ is trivial.
+\begin{cor}
+The set of isomorphism classes of line bundles on $X$ is in bijection with the set of divisors on $X$ modulo principal divisors, is isomorphic to the cokernel of the map $k(X)^\times\to\mathrm{Div}(X)$.
+\end{cor}
+Remember, our broader-scope goal is to show that sheaf cohomology for smooth projective curves is finite-dimensional.
+\begin{prop}
+Suppose $(X,\sO_X)$ satisfies (*).\footnote{\TODO: what's (*)?} Then $(X,\sL)$ does for all line bundles $\sL$ on $X$.
+\end{prop}
+\begin{proof}
+By the divisor theory above, it suffices to prove this for $(X,\sL(x))$, where $\sL(x)\coloneqq
+\sL\otimes_{\sO_X}\sO_X(x)$. This is because if $D = 2x-y$ for distinct points $x,y\in X$, we'll show that the
+property for $(X,\sO_X)$ implies it for $(X,\sO_X(x))$, then $(X,\sO_X(2x))$, then $(X,\sO_X(D))$. This is because
+we have a short exact sequence
+\begin{equation}
+\label{ourSES}
+	\shortexact{\sL(-x)}{\sL}{\sL/\sL(-x)},
+\end{equation}
+where $\sL(-x)\coloneqq \m_x\otimes\sL$, and $\sL/\sL(-x)\cong i_{x*}i_x^I\sL = i_{x*}\sO_x$.
+
+A general fact about sheaf cohomology is that it preserves homotopy kernels and cokernels. In fact, it's difficult to write down functors that don't. Moreover, sheaf cohomology preserves quasi-isomorphisms, which isn't super surprising, and follows from the fact that it preserves acyclicity. Moreover, given a short exact sequence
+\begin{equation}
+	\shortexact[f][]{\sF}{\sG}{\sG/\sF},
+\end{equation}
+the natural map $\hCoker(f)\to\sG/\sF$ is a quasi-isomorphism (which you can check with the explicit formula). The upshot of all this is that we obtain a long exact sequence in cohomology:
+\begin{equation}
+\xymatrix{
+    0\ar[r] & H^0(X,\sF)\ar[r] & H^0(X,\sG)\ar[r] & H^0(X,\sG/\sF)\ar[r] & H^1(X,\sF)\ar[r] & H^1(X,\sG)\ar[r] H^1(X,\sG/\sF)\ar[r] & \dotsb
+}
+\end{equation}
+Now we apply this to \cref{ourSES}:
+\begin{equation}
+\xymatrix@C=0.4cm{
+    0\ar[r] & H^0(X,\sL(-x))\ar[r] & H^0(X,\sL)\ar[r] & H^0(X,\sL/\sL(-x))\ar[r] & H^1(X,\sL(-x))\ar[r] &
+	H^1(X,\sL)\ar[r] &H^1(X,\sL/\sL(-x))\ar[r] & 0
+}
+\end{equation}
+Let $k' \coloneqq\sO_X/\m_x$, which is a finite field extension of $k$; then $H^0(X,\sL/\sL(-x))\cong k'$. Moreover, $H^1(X,\sL/\sL(-x)) = 0$, because of another general fact about sheaf cohomology: if $f\colon X\to Y$ is affine, $R\Gamma (X,\sF)$ is quasi-isomorphic to $R\Gamma(Y, f_*\sF)$. One can prove this directly by pulling back an affine cover.
+\end{proof}

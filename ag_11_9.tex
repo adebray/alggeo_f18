@@ -1,0 +1,101 @@
+% again, TeXing blind. hopefully fixed soon
+
+Today we're doing more homological algebra. Some references can be found at \url{https://web.ma.utexas.edu/users/sraskin/cft/index.html}, specifically psets 5 and 6.
+
+Last time, we defined the homotopy cokernel $\hCoker(f)$ of a map $f\colon \sF\to\sG$ of chain complexes of abelian groups, which is universal for the data of a structure map $\sG\to\hCoker(f)$ and of a nullhomotopy of the composition $\sF\to\sG\to\hCoker(f)$. Explicitly, its $i^{\mathrm{th}}$ term is $\sG^i\oplus\sF^{i+1}$, and the differential sends $x\in\sG^i$ to $(x,0)\in\hCoker^i(f)$, and $y\in\sF^i$ to $(f(x), 0)$.
+
+Dually, we can define the \term{homotopy kernel} $\hKer(f)$ by a similar universal property: $\hKer(f)$ has a map $\hKer(f)\to\sF$ and a nullhomotopy of the composition $\hKer(f)\to\sF\to\sG$, and is universal for this data. Explicitly, $\hKer(f)^i = \sG^{i-1}\oplus\sF^i$, with some differential similar to that for $\hCoker(f)$.
+\begin{defn}
+Let $n\in\Z$. The \term{shift} of a complex $\sF$ by $n$, denoted $\sF[n]$, is the complex whose $i^{\mathrm{th}}$ abelian group is $\sF^{n+i}$, and whose maps are what you would expect.
+\end{defn}
+In this language, we have the following miracle:
+\begin{equation}
+	\hKer(f)[1] \cong \hCoker(f).
+\end{equation}
+\begin{exm}
+Let $f\colon A\to B$ be a map of abelian groups, regarded as a map of chain complexes in degree zero. Then its homotopy cokernel is
+\begin{equation}
+\xymatrix{
+	\dotsb\ar[r] {}_{-2} 0\ar[r] & {}_{-1} A\ar[r]^f & {}_0 B\ar[r] & {}_1 0\ar[r] & \dotsb
+}
+\end{equation}
+and the homotopy kernel is
+\begin{equation}
+\xymatrix{
+	\dotsb\ar[r] {}_{-1} 0\ar[r] & {}_{0} A\ar[r]^f & {}_1 B\ar[r] & {}_1 2\ar[r] & \dotsb
+}\qedhere
+\end{equation}
+\end{exm}
+One nice consequence of the miracle is that it makes commutative algebra nicer: there are lots of functors on abelian groups (or modules) which commute with kernels or cokernels, but not both. In this derived setting, there's not much of a difference between (homotopy i.e.\ better versions of) kernels and cokernels, so more things commute with each other up to a shift, which is nice.
+
+Now, given a map $f\colon\sF\to\sG$ of complexes, let $\pi\colon \sG\to\hCoker(f)$ be the induced map. We also have a nullhomotopy of the map $\pi\circ f\colon \sF\to\hCoker(f)$, so by the universal property obtain a map $\sF\to\hKer(\pi)$.
+\begin{ex}
+Show that this map $\sF\to\hKer(\pi)$ is a \term{homotopy equivalence}, i.e.\ there is a map $\hKer(\pi)\to\sF$ such that the compositions in both directions are homotopic to the identity.
+\end{ex}
+This is also a very important fact.
+
+Recall that an element of a complex $\sF$ is an element $x\in\sF^0$ with $dx = 0$.
+\begin{defn}
+The \term{zeroth homology group} of $\sF$, denoted $H^0(\sF)$, is the abelian group of elements of $\sF$ modulo homotopy, i.e.\ $\ker(d^0)/\Im(d^{-1})$.
+\end{defn}
+\begin{lem}
+\label{longdifflem}
+If $f\colon\sF\to\sG$ is a map of complexes, then the sequence
+\begin{equation}
+\xymatrix{
+    H^0(\hKer(f))\ar[r] & H^0(\sF)\ar[r] & H^0(\sG)
+}
+\end{equation}
+is exact.
+\end{lem}
+That is, the image of the first map is exactly the kernel of the second. Figuring out the details of this exercise is a good way to become more familiar with cohomology.
+\begin{cor}
+\label{LESlem}
+If $f\colon\sF\to\sG$ is a map of complexes, the following sequence is long exact:
+\begin{equation}
+\xymatrix{
+    \dotsb\ar[r] & H^{-1}(\hCoker(f))\ar[r] & H^0(\sF)\ar[r] & H^0(\sG)\ar[r] & H^0(\hCoker(f))\ar[r] &
+	H^1(\sF)\ar[r] & H^1(\sG)\ar[r] &\dotsb
+}
+\end{equation}
+Here $H^i(\sF)\coloneqq H^0(\sF[i])$ for any $i\in\Z$.
+\end{cor}
+\begin{proof}[Proof sketch]
+We can produce this sequence by gluing together sequences from \cref{longdifflem}: the first few terms come from the observation that $H^{-1}(\hCoker(f)) = H^0(\hKer(f))$; then we invoke \cref{longdifflem}. The next three terms come from the fact that $\sF$ is canonically homotopic to the homotopy kernel of the map $\sG\to\hCoker(f)$, then applying the lemma again. Then we apply that again and again to shifts of $\sF$ and $\sG$.
+\end{proof}
+In addition to homotopy equivalence of complexes, there's another notion of equivalence.
+\begin{defn}
+A \term{quasi-isomorphism} (sometimes abbreviated qis) of chain complexes is a map $f\colon\sF\to\sG$ such that the induced map $f_*\colon H^i(\sF)\to H^i(\sG)$ is an isomorphism for all $i\in\Z$.
+\end{defn}
+\begin{rem}
+This is equivalent to asking for $\hCoker(f)$ to be \term{acyclic}, i.e.\ to have trivial cohomology groups. This follows from \cref{LESlem}.
+\end{rem}
+Importantly, a quasi-isomorphism need not have an inverse map, unlike a homotopy equivalence. For example, consider the map of complexes
+\begin{equation}
+\gathxy{
+    \dotsb\ar[r] & 0\ar[r]\ar[d] & \Z\ar[d]\ar[r]^{\cdot 2} & \Z\ar[d]\ar[r] & 0\ar[r] & \dotsb\\
+    \dotsb\ar[r] & 0\ar[r] & 0\ar[r] & \Z/2\ar[r] & 0\ar[r] & \dotsb.
+}
+\end{equation}
+You can check this is a quasi-isomorphism, but clearly there can be no map in the other direction. This is weird, especially because there are many contexts in which quasi-isomorphism is the right notion of equivalence. We have a weaker statement, which is that if $f\colon\sF\to\sG$ is a quasi-isomorphism, there must exist a suitable inverse map $\sH\to\sF$ and a quasi-isomorphism $\sH\to\sG$.
+\subsection*{Sheaf cohomology.}
+We now have all of the homological background needed to define sheaf cohomology. Specifically, given a complex $\sF$ of quasicoherent sheaves on a quasicompact separated scheme $X$, we will define a complex of abelian groups $R\Gamma(X,\sF)$, well-defined up to canonical quasi-isomorphisms. Here the notation $R$ means this will have cohomology only in nonnegative degrees (``to the right'' of zero).
+
+This complex isn't completely well-defined --- we will need to make choices, and then argue that it doesn't really
+depend on those choices in a precise sense. So let $\fU$ be a finite affine open cover of $X$, which exists because
+$X$ is quasicompact; because $X$ is separated, $U\cap V$ is affine for all $U,V\in\fU$, and this extends to
+higher-fold intersections.
+
+Now we inductively define the complex $R\Gamma((X, \fU), \sF)$, inducting on $n \coloneqq\abs\fU$. When $n = 1$, $X
+= \Spec A$ is affine, so we define $R\Gamma(X, \sF)\coloneqq\Gamma(X, \sF)$, using the fact that $\sF$ is in
+particular a complex of $A$-modules, hence abelian groups.
+
+When $n = 2$ and $\fU = \set{U,V}$, we define
+\begin{equation}
+    R\Gamma((X, \fU), \sF)\coloneqq R\Gamma(U, \sF|_U)\times^h_{R\Gamma(U\cap V, \sF|_{U\cap V})} R\Gamma(V, \sF|_V).
+\end{equation}
+Here, the notation $\times^h$ denotes the \term{homotopy fiber product} of complexes: given maps $f\colon\sF_1\to\sF_3$ and $g\colon\sF_2\to\sF_3$,
+\begin{equation}
+    \sF_1\times^h_{\sF_3}\sF_2\coloneqq \hKer(f-g\colon\sF_1\oplus\sF_2\to\sF_3).
+\end{equation}
+This is universal with respect to data of a homotopy between the two maps from this homotopy fiber product to $\sF_3$ going through $\sF_1$ and $\sF_2$.

@@ -1,0 +1,62 @@
+Let $k$ be a perfect field and $X$ be a smooth curve over $k$. Last time we saw that $X$ is separable iff it's
+quasiprojective (i.e.\ an open subscheme of a projective scheme). More specifically, we constructed a smooth
+projective curve $\overline X$ and an open embedding $X\inj\overline X$.
+
+Today, we'll discuss morphisms over curves.
+\begin{prop}
+\label{curvesarefield}
+Let $X$ and $Y$ be smooth, projective curves with function fields $k(X)$, resp.\ $k(Y)$. Then the natural map
+$\mathrm{Isom}_{\Sch/k}(X,Y)\to \mathrm{Isom}_{\Alg_k}(k(X), k(Y))$ is an isomorphism.
+\end{prop}
+An isomorphism $k(X)\to k(Y)$ is (equivalent data to) what's called a birational equivalence $X\dashrightarrow Y$;
+this says that all birational equivalences of curves come from actual isomorphisms. This fails drastically in
+higher dimensions, largely because the valuative criterion doesn't generalize.
+\begin{proof}
+Let's construct an inverse map. Let $\iota\colon k(X)\to k(Y)$ be an isomorphism. By the valuative criterion, \TODO
+(I missed this part).
+
+Now, choose $V = \Spec A\subseteq X$ to be an affine open. Then $A\subseteq k(X)\cong k(Y)$. We claim that there's
+an open affine $U = \Spec B\subseteq Y$ such that $A\subseteq B$ under this isomorphism. (\TODO: therefore we're
+done? I didn't follow)
+\end{proof}
+\begin{prop}
+Let $X$ be a separated, smooth curve. Then the map $U\mapsto\Fun(U)$ is an injective map from from nonempty open
+affine subschemes of $X$ to integrally closed, infinite-dimensional, finitely generated $k$-subalgebras $A\subseteq
+k(X)$ with field of fractions $k(X)$ is injective. If furthermore $X$ is projective, this map is a bijection.
+\end{prop}
+\begin{proof}
+We'll prove the statement for projective curves. Let $A\subseteq k(X)$ and $U\coloneqq\Spec A$. We claim $U$ is a
+smooth curve over $k$: it's clearly finite type, and is irreducible, because $A$ is an integral domain. To see that
+$U$ is a curve, notice that its field of functions is $k(X)$ again. It's smooth because $k$ is perfect and $A$ is
+integrally closed.
+
+Therefore we have a unique smooth projective curve $\overline U$ containing $U$ as an open subscheme. Then
+$k(\overline U)\cong k(X)$ canonically, so there's a canonical isomorphism $X\cong\overline U$, so we get an open
+embedding $U\inj X$.
+\end{proof}
+\begin{defn}
+Let $X$ and $Y$ be finite-type schemes over $k$. A map $f\colon X\to Y$ is \term{constant} if its scheme-theoretic
+image is a closed point of $Y$.
+\end{defn}
+That is, we want there to be a finite field extension $k\inj k'$ and $f$ to factor through maps $X\to\Spec k'$ and
+$\Spec k'\to Y$.\footnote{In fact, the Nullstellensatz implies that $k\inj k'$ is finite.}
+\begin{prop}
+If $X$ and $Y$ are smooth projective curves, a map $f\colon X\to Y$ is either constant or dominant.
+\end{prop}
+\begin{proof}
+The scheme-theoretic image of $f$ is a closed, irreducible subscheme of $Y$, hence either a closed point or all of
+$Y$.
+\end{proof}
+\begin{prop}
+\TODO (I missed this)
+\end{prop}
+\begin{proof}
+We can assume $Y$ is affine, by replacing it with any affine open; then we can replace $X$ by any affine open. The
+map $X\to Y$ is still dominant, so the induced map $\Fun(Y)\inj\Fun(Y)$ is injective.
+\end{proof}
+Now we can generalize \cref{curvesarefield}.
+\begin{prop}
+Let $X$ and $Y$ be smooth projective curves. The map from the set of nonconstant functions $f\colon X\to Y$ to
+$\Hom_{\Alg_k}(k(Y), k(X))$ is an isomorphism.
+\end{prop}
+The proof is the same, using the valuative criterion.

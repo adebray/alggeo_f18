@@ -1,0 +1,85 @@
+% again, blind TeXing, missed some stuff b/c 12m late
+
+Recall that we were defining sheaf cohomoloy $R\Gamma(\fU, \sF)$ inductively, where $\sF$ is a finite affine open cover of a quasicompact separated scheme $X$ and $\sF\in\QCoh(X)$. For $n = 1$, $\sF$ is a module over $A$ if $X = \Spec A$, and we let $R\Gamma = \Gamma$ in degree $0$ and $0$ elsewhere. The general definition is \TODO.
+\begin{lem}
+\label{muchniceropencover}
+If $X$ is affine and $\fU$ is a finite open cover of $X$ by affines with $U_1\in\fU$ equal to $X$, then the natural map
+\begin{equation}
+	\Gamma(X,\sF) = R\Gamma(X,\sF)\longrightarrow R\Gamma(\fU, \sF)
+\end{equation}
+is a homotopy equivalence.
+\end{lem}
+\begin{proof}
+We'll induct on $n$; for $n = 1$ this is vacuous. If $n > 1$, let $\fU' = \fU\setminus U_1$; then
+\begin{equation}
+	R\Gamma(\fU, \sF)\coloneqq R\Gamma(\fU',\sF)\times^h_{R\Gamma(\set{V\cap U_1\mid V\in\fU'}, \sF)} R\Gamma(U_1, \sF),
+\end{equation}
+which is just
+\begin{equation}
+	R\Gamma(X,\sF)\times^h_{R\Gamma(U_1, \sF)} R\Gamma(U_1,\sF),
+\end{equation}
+which is homotopy equivalent to $R\Gamma(X,\sF)$.
+\end{proof}
+Now let's remove the hypothesis that $X\in\fU$.
+\begin{prop}
+\label{affineaffinecech}
+Let $X$ be an affine scheme and $\fU$ a finite cover by affines. Then $\e\colon R\Gamma(X,\sF)\to R\Gamma(\fU, \sF)$ is a quasi-isomorphism.
+\end{prop}
+\begin{proof}
+Let $X = \Spec A$, so that both sides are complexes of $A$-modules. For each $U\in\fU$, write $U = \Spec B_U$; we therefore have maps $A\to B_U$ for each $U$. We claim that $\e$ is a quasi-isomorphism iff it is one after tensoring with $B_U$ for all $U\in\fU$. Certainly, since each $B_U$ is flat over $A$, tensor product with $B_U$ preserves quasi-isomorphisms, and in fact, from Serre's theorem,
+\begin{equation}
+	H^j(X,\sF)\otimes_A B_i\cong H^j(\sF\otimes_A B_i).
+\end{equation}
+Moreover a complex of $A$-modules is acyclic iff it's acyclic after tensor product with $B_i$ for all $i$. So it suffices to prove the proposition on each $U\in\fU$, but there it reduces to \cref{muchniceropencover}.
+\end{proof}
+Acyclicity is closely related to quasi-isomorphisms: $\e$ is a quasi-isomorphism iff its homotopy cokernel is acyclic.
+\begin{cor}
+Let $\fU$ and $\mathfrak V$ be finite open covers by affines of a quasicompact, separated scheme $X$. Then there is a canonical quasi-isomorphism $R\Gamma(\fU, \sF)\to R\Gamma(\mathfrak V, \sF)$.
+\end{cor}
+Therefore as long as we only care about its definition up to quasi-isomorphism, we'll let $R\Gamma(X,\sF)\coloneqq R\Gamma(\fU,\sF)$ for any finite affine open cover $\fU$ of $X$. Then we will let $H^i(X,\sF)\coloneqq H^i(R\Gamma(X,\sF))$.
+\begin{proof}
+Given a $U\in\fU$ and $V\in\mathfrak V$, let $W_{UV} \coloneqq U\cap V$, and let $\mathfrak W\coloneqq\set{W_{UV}}$. We therefore have two open covers $R\Gamma(\fU,\sF)\to R\Gamma(\mathfrak W,\sF)$ and $R\Gamma(\mathfrak V,\sF)\to R\Gamma(\mathfrak W,\sF)$. Both of these are quasi-isomorphisms, which follows from \cref{affineaffinecech} and the fact that homotopy fiber products preserve quasi-isomorphisms.
+\end{proof}
+It's a good exercise to work out the details of the proof that a refinement induces a quasi-isomorphism on cohomology in the case where $\fU$ and $\mathfrak V$ each have two opens.
+\begin{rem}
+There are definitions of cohomology for a scheme which isn't separated or even quasicompact, but they're less nice, ultimately requiring some sort of infinite construction. Thanks to our hypotheses, we only need to take a finite number of cones, allowing for these nice inductive proofs.
+\end{rem}
+\begin{exm}
+Let $\sF$ be an abelian group regarded as a complex in degree zero. Then $H^0(X,\sF) = \Gamma(X,\sF)$.
+\end{exm}
+\begin{thm}
+Let $X$ be a smooth, separated curve and $\sF\in\QCoh(X)$ be a complex concentrated in degree zero. Then
+\begin{enumerate}
+    \item $H^i(X,\sF) = 0$ for $i\ne 0,1$.
+    \item If $\sF$ is coherent and $X$ is projective, then $H^i(X,\sF)$ is a finite-dimensional vector space over $k$.
+\end{enumerate}
+\end{thm}
+Projectivity is really important for the second point! For example,
+\begin{equation}
+    R\Gamma(\A^1, \sO_X) = k[t].
+\end{equation}
+\begin{proof}[Proof of (1)]
+We'll first show that any smooth curve $X$ has a cover by two open affines. Choose a (the) smooth compactification $\overline X$ and let $\overline f\colon \overline X\to\P^1$ be a nonconstant map; then let $f\coloneqq \overline f|_{X}$. Then $\overline f$ is finite, hence affine.
+
+The embedding $j$ is also affine: there are closed points $x_1,\dotsc,x_n$ such that $X = \overline X\setminus\set{x_1,\dotsc,x_n}$, and therefore
+\begin{equation}
+    \sO_{\overline X}(x_1 + \dotsb + x_n)\coloneqq\bigotimes_{i=1}^n \sO_{\overline X}(x_i)
+\end{equation}
+has a section, namely $1$, and $X$ is precisely the nonvanishing locus of this section.
+
+Now, $\P^1$ has an open cover by two affines, namely $\A^1 = \P^1\setminus\infty$ and $\A^1 = \P^1\setminus 0$; pull these back via $f$, which is affine, to recover an affine open cover of $X$.
+\end{proof}
+The second part is more complicated, so we'll start with an example (and probably give the general proof next time).
+\begin{prop}
+We claim $H^0(\P^1;\sO_{\P^1}) = k$ and $H^1(\P^1;\sO_{\P^1}) = 0$. That is, the map $k\to R\Gamma(\P^1,\sO_{\P^1})$ is a quasi-isomorphism.
+\end{prop}
+\begin{proof}
+Let $\set{U, V}$ be our favorite affine open cover of $\P^1$. Then we can just calculate
+\begin{equation}
+\begin{aligned}
+    R\Gamma(\P^1,\sO_{\P^1}) &= \hKer\paren{\Gamma(U,\sO_U)\oplus\Gamma(V, \sO_V)\longrightarrow \Gamma(U\cap V,\sO_{U\cap V})}\\
+    &= \hKer\paren{(f,g)\mapsto f-g\colon k[t]\oplus k[t^{-1}]\to k[t,t^{-1}]}.
+\end{aligned}
+\end{equation}
+So in degree $0$ we get the kernel, given by the constant functions in both factors, and in degree $1$ we get the cokernel. This map is surjective, though, since any Laurent polynomial is a sum of a polynomial in $t$ and a polynomial in $t^{-1}$.
+\end{proof}
