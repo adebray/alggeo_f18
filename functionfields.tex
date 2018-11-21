@@ -1,0 +1,61 @@
+Today, let $X$ be a smooth, separated (equivalently, a smooth quasiprojective) curve over a perfect field $k$. Recall our convention that all curves are irreducible by definition. 
+
+Last class, we saw that there is a unique up to unique isomorphism smooth projective curve $\overline{X}$ containing $X$ as an open subset by taking any embedding of $X$ into projective space and then taking the normalization of the embedded curve. 
+
+\begin{prop}
+If $X, Y$ are smooth projective curves then the map $Isom_k(X, Y) \to Isom_{k-alg}(k(X), k(Y))$ is an isomorphism.
+\end{prop}
+
+This is related to \textit{birational equivalence} and the statement is false if you remove the smoothness or projectivity assumption. Further, this statement is false in higher dimensions and the associated field is known as the \textit{minimal model program}.
+
+\begin{proof}
+The inverse map is given as follows. Given some isomorphism $\iota : k(X) \to k(Y)$, there is a unique map $Y \to X$ which restricts to $\iota$ on the generic point. This can be proven by slightly modifying the proof of the valuative criterion for properness (which related to extending by open sets) to apply to the generic point. 
+\end{proof}
+
+\begin{prop}
+If $X$ is a smooth projective curve then the map $\{\emptyset \neq U \subset X\ : U$ is open\}$ \to \{$integrally closed, finitely generated $k$ subalgebras $A\subset k(X)$ such that $k(A) = k(X)\}$ given by $U \to Fun(U)$ is a bijection.
+\end{prop}
+
+\begin{rem}
+If $X$ is separated but not necessarily projective, then the map is still injective. The point of this proposition is that curves are completely recoverable from their function field and this proposition tells you how to recover the topology in a way that only has to do with the field itself. 
+\end{rem}
+
+\begin{proof}
+We construct an inverse as follows. Given such an $A \subset k(X)$, let $U = \Spec A$. We know that $U$ is smooth over $k$ as integrally closed curves are smooth curves for perfect fields. We also know $U$ is finite type by assumption and is irreducible since $A \subset k(X)$ is an integral domain. By Noether normalization and the fact $A \subset k(X)$, $U$ has dimension $0$ or $1$, but as the field of fractions of $A$ is $k(X)$ itself, the dimension must be exactly one.
+
+Now we must construct a map $U \to X$. We could use valuative criterion here but it's not clear why that map is an open embedding. Instead, we will take the unique smooth projective curve $\overline{U}$ for which $U$ embeds. But we have canonical isomorphisms of fraction fields $K(U) \cong K(\overline{U}) \cong K(X)$, so by composing with the associated map of curves we obtain an open embedding $U \to X$.
+\end{proof}
+
+\begin{defn}
+A map between qcqs schemes $f:X \to Y$ is said to be constant if $\overline{f(X)}$ is a closed point of $Y$.
+\end{defn}
+Equivalently, $f$ factors as $X \to Spec(k') \to Y$ where $k'/k$ is a finite field extension (by Nullsellensatz). Note that any map of smooth irreducible curves $X \to Y$ as above is either constant or dominant as $\overline{f(X)}$ is closed and irreducible in $Y$. Furthermore, any nonconstant map of curves induces a map on function fields, which can be seen by checking affine locally.
+
+\begin{prop}
+The map $\{$nonconstant $f:X \to Y\} \to Hom_{k-alg}(K(Y), K(X))$ is an isomorphism for smooth projective irreducible curves $X, Y$. 
+\end{prop}
+\begin{proof}
+This is the same proof as above using the valuative criterion for generic points.
+\end{proof}
+
+Since constant maps are negligible, this says morphism of curves are basically field extensions.
+
+\begin{thm}
+Any nonconstant morphism of smooth projective irreducible curves is finite.
+\end{thm}
+
+Note that in particular this says that any nonconstant morphism of smooth projective irreducible curves is affine, which isn't obvious. 
+
+\begin{rem}
+The projectivity assumption can't be removed--consider the map $\mathbb{A}^1\setminus 0 \to \mathbb{A}^1$. Similarly, the separatedness is also essential--the map from $\mathbb{P}^1$ with the doubled origin to $\mathbb{P}^1$ shows this. 
+\end{rem}
+
+\begin{proof}
+Given a nonconstant morphism $f:X \to Y$ of smooth projective curves, let $U = \Spec A$ be an affine open subset of $Y$. Then define $B$ to be the integral closure of $A$ in the fracition field $K(X)$. We claim that $\Spec B = f^{-1}(U)$ and that $Frac(B) = K(X)$. Assuming these two claims, latter gives that $\Spec B$ is an affine open subset of $X$ and there's a general fact from commutative algebra which implies that $B$ is a finite $A$ module, which shows that $f$ is finite.
+
+To see that $\Spec B = f^{-1}(U)$, note that for any affine open $i: \Spec C \subset X$ where $fi$ factors through $U$, we obtain a map of rings $A \to C$ to an integrally closed subring of $K(X)$. This implies there's a unique map of rings $B \to C$, which implies the claim.
+
+To see that $Frac(B) = K(X)$, first note that $K(X)/K(Y)$ is a finite extension, which is a fact about dominant morphisms between irreducible finite type $k$ schemes of the same dimension, which can be proven by generic finiteness or the \lq base times $\mathbb{A}^1$ or finite argument\rq{}, noting that the former would increase dimension.
+
+Now assume $f \in K(X)$. By above, we have an equation $f^n + a_{1}f^{n-1} + ... + a_n = 0$ for $a_i \in K(Y)$. Since $Frac(A) = K(Y)$, we can choose a nonzero $g \in A$ for which $ga_i \in A$ for all $i$. But this implies that $(gf)^n + ga_1(gf)^{n-1} + ... + g^na_n = 0$, so $gf \in B$ (the integral closure of $A$ in $K(X)$), so $f \in Frac(B)$. 
+\end{proof}

@@ -1,0 +1,50 @@
+\label{mainthm}
+I wasn't in class for this lecture; these notes were generously provided by Tom Gannon.
+
+Today, we'll prove the main theorem of dimension theory.
+
+\begin{proof}
+By taking an affine open subset of $X$ realizing its dimension, we can assume that $X$ is affine. Similarly, we may then take an affine open subset of $Y$ and assume that $Y$ is also an irreducible affine scheme. Then by our finite type assumptions we may write $Y$ as a closed subscheme of $X \times \A^n$ for some $n$. 
+
+
+Define $p_i\colon X \times \A^i \to X \times \A^{i-1}$ to be projection onto the first factor, $Y_n \coloneqq Y$,
+and for $i \in \{0, ... , n-1\}$ iteratively take $Y_i \coloneqq \overline{p_{i + 1}(Y_{i + 1})}$ and $\pi_i\colon Y_i \to Y_{i - 1}$. This is summarized in the commutative diagram below, which made me have new found respect for Arun because I am reasonably sure he could have produced this during class:
+
+\[\xymatrix{
+	Y = Y_n \ar@{^(->}[r]^{}\ar[d]^{\pi_n} & X \times \A^n\ar[d]^{p_n}\\
+	Y_{n-1}\ar@{^(->}[r]^{}\ar[d]^{\pi_{n-1}} & X \times \A^{n-1}\ar[d]^{p_{n-1}} \\
+	\vdots\ar[d]^{\pi_1} & \vdots\ar[d]^{p_1} \\
+	X = Y_0\ar@{^(->}[r]^{} & X
+}\]
+
+Note that $\pi_i\colon Y_i \to Y_{i - 1}$ embeds into the situation of the lemma. Descending inductively, we will set
+$U_i \subset Y_i$ with the property that $Y = Y_n \to Y_i$ has fibers of the expected dimension over $U_i$. Then
+taking $U = U_0$ we will be done, once we show that such $U_i$ exist. Note by the irreducibility of $Y$, we can
+take our ``base case'' $U_n 
+= Y$.
+
+floop
+
+\TODO Finish this proof. (This is also proven in Ravi Vakil's notes--Theorem 11.4.1)
+\end{proof}
+
+\begin{rem}
+The idea here is to make our map $Y \to X$ as a close as possible to the projection map $X \times \A^1 \to X$, a situation we can study well. A key step here is that each open has the correct dimension. 
+\end{rem}
+
+\begin{rem}
+It is also true (Chevalley) that if $f\colon Y \to X$ is a dominant map between irreducible finite type $k$
+-schemes and $x$ is a field valued point then $\dim(Y_x) \geq dim(Y) - \dim(X)$. We saw this in our $(x, y) \to (x, xy)$ example. Furthermore, if $f$ is \term{flat} (the algebro-geometric generalization of a flat morphism of rings), all nonempty fibers are nonempty dimension. There is even a converse when $X$ and $Y$ are smooth. We will discuss what smoothness means now.
+\end{rem}
+
+The idea behind smoothness is that we can formally compute derivatives of polynomials over any field. In other words, calculus and differentials make sense formally, although some strange things occur. One main thing that comes up is that $\frac{d}{dt}t^p = 0$ in characteristic $p$. 
+
+\begin{defn}
+For an $A$ module $M$, a \term{($k$-linear) derivation} is a $k$-linear map $\delta\colon A \to M$ satisfying the product rule.
+\end{defn}
+
+\begin{exm}
+If $A = k[t]$, then $\dfr{}{t}\colon A \to A$ is a derivation. More generally, $\dfr{}{t_i}\colon  k[t_1, ... , t_n] \to k[t_1, ... , t_n]$ is a derivation.
+\end{exm}
+
+These derivations are best thought of as derivations along some vector field, at least when $M = A$. In general, it's not a terrible simplification to think of $M$ as a vector bundle and that a derivation can produce vector fields. 

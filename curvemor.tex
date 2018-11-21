@@ -1,3 +1,4 @@
+\label{morecurves}
 Let $k$ be a perfect field and $X$ be a smooth curve over $k$. Last time we saw that $X$ is separable iff it's
 quasiprojective (i.e.\ an open subscheme of a projective scheme). More specifically, we constructed a smooth
 projective curve $\overline X$ and an open embedding $X\inj\overline X$.
@@ -10,14 +11,11 @@ $\mathrm{Isom}_{\Sch/k}(X,Y)\to \mathrm{Isom}_{\Alg_k}(k(X), k(Y))$ is an isomor
 \end{prop}
 An isomorphism $k(X)\to k(Y)$ is (equivalent data to) what's called a birational equivalence $X\dashrightarrow Y$;
 this says that all birational equivalences of curves come from actual isomorphisms. This fails drastically in
-higher dimensions, largely because the valuative criterion doesn't generalize.
-\begin{proof}
-Let's construct an inverse map. Let $\iota\colon k(X)\to k(Y)$ be an isomorphism. By the valuative criterion, \TODO
-(I missed this part).
+higher dimensions, largely because the valuative criterion doesn't generalize. The associated field is known as the
+\term{minimal model program}. It also fails if you remove the hypotheses on smoothness or projectivity.
 
-Now, choose $V = \Spec A\subseteq X$ to be an affine open. Then $A\subseteq k(X)\cong k(Y)$. We claim that there's
-an open affine $U = \Spec B\subseteq Y$ such that $A\subseteq B$ under this isomorphism. (\TODO: therefore we're
-done? I didn't follow)
+\begin{proof}
+The inverse map is given as follows. Given some isomorphism $\iota \colon k(X) \to k(Y)$, there is a unique map $Y \to X$ which restricts to $\iota$ on the generic point. This can be proven by slightly modifying the proof of the valuative criterion for properness (which related to extending by open sets) to apply to the generic point.
 \end{proof}
 \begin{prop}
 Let $X$ be a separated, smooth curve. Then the map $U\mapsto\Fun(U)$ is an injective map from from nonempty open
@@ -47,16 +45,42 @@ If $X$ and $Y$ are smooth projective curves, a map $f\colon X\to Y$ is either co
 The scheme-theoretic image of $f$ is a closed, irreducible subscheme of $Y$, hence either a closed point or all of
 $Y$.
 \end{proof}
-\begin{prop}
-\TODO (I missed this)
-\end{prop}
-\begin{proof}
-We can assume $Y$ is affine, by replacing it with any affine open; then we can replace $X$ by any affine open. The
-map $X\to Y$ is still dominant, so the induced map $\Fun(Y)\inj\Fun(Y)$ is injective.
-\end{proof}
+Furthermore, any nonconstant map of curves induces a map on function fields, which can be seen by checking affine-locally.
+%\begin{proof}
+%We can assume $Y$ is affine, by replacing it with any affine open; then we can replace $X$ by any affine open. The
+%map $X\to Y$ is still dominant, so the induced map $\Fun(Y)\inj\Fun(Y)$ is injective.
+%\end{proof}
+
 Now we can generalize \cref{curvesarefield}.
 \begin{prop}
+\label{nonconst}
 Let $X$ and $Y$ be smooth projective curves. The map from the set of nonconstant functions $f\colon X\to Y$ to
 $\Hom_{\Alg_k}(k(Y), k(X))$ is an isomorphism.
 \end{prop}
 The proof is the same, using the valuative criterion.
+\begin{thm}
+\label{nonconstaff}
+Any nonconstant morphism of smooth projective irreducible curves is finite.
+\end{thm}
+In particular, this says that any nonconstant morphism of smooth projective irreducible curves is affine, which isn't obvious.
+\begin{rem}
+The projectivity assumption can't be removed--consider the map $\A^1\setminus 0 \to \A^1$. Similarly, the separatedness is also essential--the map from $\P^1$ with the doubled origin to $\P^1$ shows this. 
+\end{rem}
+Since constant maps are negligible, this says morphism of curves are basically field extensions.
+\begin{proof}[Proof of \cref{nonconstaff}]
+Given a nonconstant morphism $f\colon X \to Y$ of smooth projective curves, let $U = \Spec A$ be an affine open
+subset of $Y$. Then define $B$ to be the integral closure of $A$ in the fraction field $k(X)$. We claim that $\Spec
+B = f^{-1}(U)$ and that $\mathrm{Frac}(B) = k(X)$. Assuming these two claims, latter gives that $\Spec B$ is an affine open subset of $X$ and there's a general fact from commutative algebra which implies that $B$ is a finite $A$ module, which shows that $f$ is finite.
+
+To see that $\Spec B = f^{-1}(U)$, note that for any affine open $i\colon \Spec C \subset X$ where $fi$ factors
+through $U$, we obtain a map of rings $A \to C$ to an integrally closed subring of $k(X)$. This implies there's a unique map of rings $B \to C$, which implies the claim.
+
+To see that $\mathrm{Frac}(B) = k(X)$, first note that $k(X)/k(Y)$ is a finite extension, which is a fact about
+dominant morphisms between irreducible finite type $k$-schemes of the same dimension, which can be proven by
+generic finiteness or the ``base times $\A^1$ or finite argument,'' noting that the former would increase dimension.
+
+Now assume $f \in k(X)$. By above, we have an equation $f^n + a_{1}f^{n-1} + \dotsb + a_n = 0$ for $a_i \in k(Y)$.
+Since $\mathrm{Frac}(A) = k(Y)$, we can choose a nonzero $g \in A$ for which $ga_i \in A$ for all $i$. But this
+implies that $(gf)^n + ga_1(gf)^{n-1} + \dotsb + g^na_n = 0$, so $gf \in B$ (the integral closure of $A$ in
+$k(X)$), so $f \in \mathrm{Frac}(B)$.
+\end{proof}

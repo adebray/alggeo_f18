@@ -1,0 +1,97 @@
+% late to class + taking notes without pdflatex b/c my computer is having issues
+% may be more typos than usual
+
+We have left over to prove the following lemma: \TODO.
+\begin{proof}
+First, $k(X)/k(Y)$ is a finite extension. This is a general fact about dominant morphisms between irreducible finite type $k$-schemes of the same dimension; dimension theory guarantees the map is generically finite, for example.
+
+\TODO: missed what comes next.
+
+Anyways, we get that
+\begin{equation}
+	(gf)^n + ga_1(gf)^{n-1} + \dotsb + g^na_0 = 0,
+\end{equation}
+with each $g^ia_i\in A$, so $gf$ is integral over $A$. Therefore $gf\in B$, so $f\in B[1/g]\subseteq\mathrm{Frac}(B)$.
+\end{proof}
+\begin{rem}
+It also follows that any nonconstant map $f\colon X\to Y$ of smooth projective curves is flat. This is because we can check locally, where it boils down to a question about $k$-algebras: if we've reduced to $\Spec A\subseteq Y$ with scheme-theoretic inverse image $\Spec B\subseteq X$ (guaranteed because we know $f$ is affine), then $B$ is an integral domain, so $B$ is a torsion-free $A$-module. This means it's projective, hence flat.
+\end{rem}
+Since $f$ is affine, $f_*\sO_X$ is a vector bundle on $Y$.
+\begin{cor}
+Any smooth projective curve admits a finite flat map to $\A^1$.
+\end{cor}
+\begin{proof}
+Let $U\subseteq X$ be an open affine and $f\colon U\to\A^1$ be a finite map (though we only really need it to be nonconstant). Therefore there exists a unique map $g\colon X\to\P^1$ by (I think?) Noether normalization which extends $U\to\A^1$, and since $f$ is nonconstant, $g$ is necessarily finite and flat.
+\end{proof}
+So morphisms of smooth projective curves are really nice. One great example is the map $\A^1\to\A^1$ induced from multiplication by $n$; of course $\A^1$ isn't projective, but you can turn this into a map $\P^1\to\P^1$
+
+\orbreak
+
+Our next goal is the Riemann-Roch theorem; we will therefore need some sheaf cohomology. This is a lot of structure to take in, and we don't need all of it, so there will be a crash course in the homological algebra that we need.
+\begin{defn}
+A \term{complex of abelian groups} $\sF$ (also $\sF^\bullet$) is data of an abelian group $\sF^i$ for each $i\in\Z$ together with maps $d^i\colon\sF^i\to\sF^{i+1}$ such that $d^{i+1}d^i = 0$ (usually written $d^2 = 0$).
+\end{defn}
+For example, an abelian group $A$ defines a complex $\sF$ ``concentrated in degree zero'' i.e.\ with $\sF^0 = A$ and $\sF^i = 0$ for all nonzero $i$.
+
+We will adopt the principle that an ``element'' of $\sF$ is an $x\in\sF^0$ with $d(x) = 0$.
+\begin{rem}
+Though these look and feel like abelian groups so far, they behave very differently, in a manner reminiscent of category theory or homotopy theory. In the same way that it would be weird to ask whether two vector spaces are equal, but instead you'd want to exhibit an isomorphism between them, given elements $x$ and $y$ of $\sF$ (i.e.\ in $\ker(d^0)$), a \term{homotopy} between them is an element $h\in\sF^{-1}$ with $d(h) = x-y$.
+\end{rem}
+Now we define a few useful constructions.
+\begin{defn}
+Let $\sF$ and $\sG$ be chain complexes. Their \term{tensor product} $\sF\otimes\sG$ is the chain complex with
+\begin{equation}
+	(\sF\otimes\sG)^i\coloneqq \bigoplus_{j\in\Z} \sF^j\otimes \sG^{i-j},
+\end{equation}
+together with the differential
+\begin{equation}
+	d^i(x\otimes y) = dx\otimes y + (-1)^{i-\abs x}x\otimes dy.
+\end{equation}
+Here we need to explain this definition: every element of $(\sF\otimes\sG^i)$ is a finite sum of homogeneous pure tensors $x\otimes y$, where $x\in\sF^i$ and $y\in\sF^j$; then we write $\abs x = i$ and $\abs y = j$ (the \term{degrees} of these elements). We define the differential on such elements and use linearity to extend it to all elements.
+\end{defn}
+\begin{ex}
+Show that $d^2 = 0$, and that the sign factor is necessary: if $d'(x\otimes y) = dx\otimes y + x\otimes dy$, then $(d')^2\ne 0$.
+\end{ex}
+For example, regarding $\Z$ as a complex concentrated in degree zero, $\sF\otimes\Z\cong \sF$.
+\begin{ex}
+Exhibit a canonical isomorphism $\sF\otimes\sG\cong\sG\otimes\sF$.
+\end{ex}
+\begin{lem}
+Let $\sF$ and $\sG$ be complexes. Then there is a complex $\underline{\Hom}(\sF,\sG)$, unique up to unique isomorphism, such that for all complexes $\sH$,
+\begin{equation}
+    \Hom_{\cat{Cpx}(\Ab)}(\sH, \underline{\Hom}(\sF,\sG))\cong\Hom_{\cat{Cpx}(\Ab)}(\sF\otimes\sH, \sG),
+\end{equation}
+and this isomorphism is functorial in $\sH$.
+\end{lem}
+We haven't defined morphisms of complexes, but they are what you would think they are: maps $\sF^i\to\sG^i$ that commute with differentials.
+
+We're not going to prove this lemma, but here's the explicit construction:
+\begin{equation}
+    \underline{\Hom}^i(\sF,\sG) = \prod_{j\in\Z} \Hom_\Ab(\sF^j, \sG^{i+j}),
+\end{equation}
+so maps which increase the degree by $j$ (though there's nothing about differentials yet).
+\begin{ex}
+Given an $f\in\underline{\Hom}^0(\sF,\sG)$, show that $f$ defines a map of complexes iff $df = 0$ in $\underline{\Hom}^1(\sF,\sG)$.
+\end{ex}
+The idea is to express $df = 0$ as $f$ commuting with the differential. You have to figure out what the differential is, but it's uniquely characterized by this property.
+\begin{cor}
+An element of $\underline{\Hom}(\sF,\sF)$ is a morphism of complexes.
+\end{cor}
+\begin{defn}
+Therefore we define a \term{homotopy} between two maps $f,g\rightrightarrows \sF\to\sG$ is an element $h\in\underline{\Hom}^{-1}(\sF,\sG)$ such that $dh = f-g$.
+\end{defn}
+You can define a homotopy between homotopies by iterating this, producing an element in degree $-2$, and can interate this construction further and have a lot of fun.
+
+We will think of two maps of complexes to be ``the same'' if there is a homotopy between them. But that doesn't mean the homotopy itself is unimportant.
+
+Next we'd like to define something like kernels and cokernels, but more homotopically.
+\begin{defn}
+Let $f\colon \sF\to\sG$ be a map of complexes. Then there is a complex $\hCoker(f)$, the \term{homotopy cokernel} of $f$, such that for all complexes $\sH$, $\Hom_{\cat{Cpx}(\Ab)}(\hCoker(f), \sH)$ is equal to the set of pairs $(g,H)$ where $g\colon\sG\to\sH$ is a map of complexes and $H$ is a nullhomotopy of $gf$. Then $\hCoker(f)$ is unique up to unique isomorphism.
+\end{defn}
+The idea is that we don't want to take things which are equal to zero, but instead things which are homotopic to zero, and encode this homotopy as part of the data.
+
+Again, we will provide the construction instead of the proof: $\hCoker(f)^i = \sG^i\oplus\sF^{i+1}$, and the differential is
+\begin{equation}
+    \begin{pmatrix} d_\sG & f\\ 0 & -d_\sF\end{pmatrix},
+\end{equation}
+and using this data, you can check what data of a map to $\sH$ is, and why the extra data gives a nullhomotopy of the composition
